@@ -32,7 +32,7 @@ class Cell implements Comparable<Cell> {
     }
 
     public Color getToken() {
-	return this.token.getColor();
+	return this.token;
     }
     
     public boolean isEmpty() {
@@ -43,6 +43,26 @@ class Cell implements Comparable<Cell> {
 	Cell suiv = new Cell();
 	suiv = this.getNeighbor(d);
 
+	if (suiv == this.outOfBoundCell) {
+	    return count;
+	}
+	else {
+	    return suiv.numberOfSameNeighbor(d, count+1);
+	}
+    }
+
+    public int numberOfSameNeighbor(Direction d1, Direction d2, count) {
+	Cell suiv1;
+	Cell suiv;
+
+	tmp = this.getNeighbor(d1);
+
+	if (tmp == this.outOfBoundCell) {
+	    return count;
+	}
+	
+	suiv = suiv1.getNeighbor(tmp);
+	
 	if (suiv == this.outOfBoundCell) {
 	    return count;
 	}
