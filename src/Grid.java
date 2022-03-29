@@ -4,8 +4,8 @@ class Grid {
     private Cell [] arrayEmptyCell; // contient la référance vers la prochaine case vide de chaque colonne
     private Cell [][] globalCell; // map entiere
 
-    public Grid grid(){
-        this.arrayEmptyCell = new Cell[HEIGHT][WEIGHT];
-        this.globalCell = new Cell[this.wrigh  t]
+    public Grid(){
+        this.arrayEmptyCell = new Cell[HEIGHT];
+        this.globalCell = new Cell[WEIGHT][HEIGHT];
     }
 }
