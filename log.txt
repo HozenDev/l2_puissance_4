@@ -1,12 +1,8 @@
-mardi 29 mars 2022, 07:59:37 (UTC+0200)
+mardi 29 mars 2022, 10:45:16 (UTC+0200)
 ------Compile---------------
-javac -d ./build/ -cp ./src/ src/Cell.java
-src/Cell.java:6: error: <identifier> expected
-    private isEmpty = true;
-                   ^
-src/Cell.java:13: error: ';' expected
-	this.neighborhood.put(requireNonNull(d), requireNonNull(c))
-	                                                           ^
-2 errors
-Makefile:15: recipe for target 'build/Cell.class' failed
-make: *** [build/Cell.class] Error 1
+javac -d ./build/ -cp ./src/ src/Main.java
+javac -d ./build/ -cp ./src/ src/Player.java
+javac -d ./build/ -cp ./src/ src/Save.java
+------Java_code-------------
+------Compile Cleaner-------
+rm ./build/*.class

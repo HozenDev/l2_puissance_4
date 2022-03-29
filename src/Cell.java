@@ -31,7 +31,7 @@ class Cell implements Comparable<Cell> {
 	this.isEmpty = false;
     }
 
-    public Color getToken() {
+    public Token getToken() {
 	return this.token;
     }
     
@@ -50,10 +50,10 @@ class Cell implements Comparable<Cell> {
 	    return suiv.numberOfSameNeighbor(d, count+1);
 	}
     }
-
-    public int numberOfSameNeighbor(Direction d1, Direction d2, count) {
+    /*
+    public int numberOfSameNeighbor(Direction d1, Direction d2, int count) {
 	Cell suiv1;
-	Cell suiv;
+	Cell tmp;
 
 	tmp = this.getNeighbor(d1);
 
@@ -61,15 +61,15 @@ class Cell implements Comparable<Cell> {
 	    return count;
 	}
 	
-	suiv = suiv1.getNeighbor(tmp);
+	tmp = suiv1.getNeighbor(tmp);
 	
-	if (suiv == this.outOfBoundCell) {
+	if (tmp == this.outOfBoundCell) {
 	    return count;
 	}
 	else {
-	    return suiv.numberOfSameNeighbor(d, count+1);
+	    return tmp.numberOfSameNeighbor(d1, d2, count+1);
 	}
-    }
+	}*/
 
     @Override
     public int compareTo(Cell other) {
