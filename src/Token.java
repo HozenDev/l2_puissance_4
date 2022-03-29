@@ -1,10 +1,10 @@
 class Token {
     private final Color colorToken;
 
-    private Token(Color c) {
+    public Token(Color c) {
         this.colorToken = c;
     }
-    private Color getColor(){
+    public Color getColor(){
         return this.colorToken;
     }
 
