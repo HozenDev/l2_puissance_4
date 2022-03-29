@@ -1,4 +1,5 @@
 public enum Color {
     RED,
-    YELLOW;
+    YELLOW,
+    EMPTY
 }

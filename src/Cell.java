@@ -3,14 +3,14 @@ import java.util.EnumMap;
 
 class Cell implements Comparable<Cell> {
 
-    public final static Cell outOfBoundCell = new Cell();
+    public final static Cell outOfBoundCell = new Cell(new Token(Color.EMPTY));
 
     private Token token;
     private EnumMap<Direction, Cell> neighborhood;
-    private boolean isEmpty = true;
     
-    public Cell() {
+    public Cell(Token token) {
 	this.neighborhood = new EnumMap<>(Direction.class);
+	this.token = token;
     }
 
     public void setNeighbor(Cell c, Direction d) {
@@ -27,8 +27,10 @@ class Cell implements Comparable<Cell> {
     } 
     
     public void setToken(Token t) {
+	if (this.token.getColor() != Color.EMPTY) {
+	    throw new IllegalArgumentException("Token of the cell not empty");
+	}
 	this.token = requireNonNull(t);
-	this.isEmpty = false;
     }
 
     public Token getToken() {
@@ -36,11 +38,11 @@ class Cell implements Comparable<Cell> {
     }
     
     public boolean isEmpty() {
-	return this.isEmpty;
+	return this.token.toString() == "EMPTY";
     }
 
     public int numberOfSameNeighbor(Direction d, int count) {
-	Cell suiv = new Cell();
+	Cell suiv = new Cell(new Token(Color.EMPTY));
 	suiv = this.getNeighbor(d);
 
 	if (suiv == this.outOfBoundCell) {

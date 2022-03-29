@@ -1,3 +1,5 @@
+import static java.util.Objects.requireNonNull;
+
 class Grid {
     public static final String ANSI_RED = "\u001B[31m";     // RED
     public static final String ANSI_YELLOW = "\u001B[33m";  // YELLOW
@@ -5,77 +7,104 @@ class Grid {
     
     private static final int WIDTH = 7;
     private static final int HEIGHT = 6;
-    private Cell [] arrayNextEmptyCell; // contient la référance vers la prochaine cellule vide de chaque colonne
-
+    private Cell[] arrayNextEmptyCell; // contient la référance vers la prochaine cellule vide de chaque colonne
 
     public Grid(){
         this.arrayNextEmptyCell = new Cell[WIDTH];
     }
 
-
     public void initGridEmpty(){
 	Cell[][] tempGrid2D = new Cell[HEIGHT][WIDTH];
-
+	
 	for(int i = 0; i < HEIGHT; i++) {
 	    for(int j = 0; j < WIDTH; ++j) {
-		tempGrid2D[i][j] = new Cell();
+		tempGrid2D[i][j] = new Cell(Token.emptyToken);
 	    }
 	}
 	
 	for(int i = 0; i < HEIGHT; i++) {
 	    for(int j = 0; j < WIDTH; ++j) {
-		if(i != HEIGHT-1) {
-		    tempGrid2D[i][j].setNeighbor(tempGrid2D[i+1][j], Direction.UP);
+		if (i > 0) {
+		    tempGrid2D[i][j].setNeighbor(tempGrid2D[i-1][j], Direction.UP);
 		}
-		if(i != 0) {
-		    tempGrid2D[i][j].setNeighbor(tempGrid2D[i-1][j], Direction.DOWN);
+		if (i < HEIGHT-1) {
+		    tempGrid2D[i][j].setNeighbor(tempGrid2D[i+1][j], Direction.DOWN);
 		}
-		if(j != 0) {
-		    tempGrid2D[i][j].setNeighbor(tempGrid2D[i][j-1], Direction.LEFT);
+		if (j > 0) {
+		    tempGrid2D[i][j].setNeighbor(tempGrid2D[i][j-1], Direction.LEFT);		    
 		}
-		if(j != WIDTH-1) {
+		if (j < WIDTH-1) {
 		    tempGrid2D[i][j].setNeighbor(tempGrid2D[i][j+1], Direction.RIGHT);
 		}
 	    }
 	}
 
 	for(int j = 0; j<WIDTH ; ++j) {
-	    this.arrayNextEmptyCell[j] = tempGrid2D[0][j] ;
+	    this.arrayNextEmptyCell[j] = tempGrid2D[HEIGHT-1][j] ;
 	}
     }
 
+    private void printNextEmptyCells() {
+	for(int j = 0; j<WIDTH ; ++j) {
+	    System.out.print(this.arrayNextEmptyCell[j] + " | ");
+	}
+	System.out.println();
 
-    public void printGrid(){
+    }
 
-	System.out.println("****************************");
+    private int valideColumn(int column) {
+	if (column < 0 || column >= WIDTH) {
+	    throw new IllegalArgumentException("column outOfBound");
+	}
+	return column;
+    }
+
+    private Cell getNextEmptyCellAt(int column) {
+	return this.arrayNextEmptyCell[valideColumn(column)];
+    }
+
+    private void UpToNextEmptyCellAt(int column) {
+	this.arrayNextEmptyCell[valideColumn(column)] =
+	    this.getNextEmptyCellAt(column).getNeighbor(Direction.UP);
+    }
+
+    private Cell getTopCell(int column) {
+	// Parcours jusqu'à la dernière cellule haute de la colonne i
+	Cell top = this.getNextEmptyCellAt(column);
+	while (top.getNeighbor(Direction.UP) != Cell.outOfBoundCell){
+	    top = top.getNeighbor(Direction.UP);
+	}
+	return top;
+    }
+
+
+    public void printGrid() {
 
 	char[][] tempArray = new char[HEIGHT][WIDTH];
 
-	for(int i=0; i<WIDTH; ++i) {
+	for(int i=0; i < WIDTH; ++i) {
 	    Cell cellTemp = this.arrayNextEmptyCell[i];
-		
-	    while (cellTemp.getNeighbor(Direction.UP) != Cell.outOfBoundCell){ // on se trouve sur la dernière cellule de la grille, la plus basse
-		cellTemp = cellTemp.getNeighbor(Direction.UP);
-		//System.out.println(cellTemp + " " + cellTemp.getNeighbor(Direction.UP));
-	    }
 
-	    int j =0; //////////
-	    while(cellTemp.getNeighbor(Direction.DOWN) != Cell.outOfBoundCell){ // on remplie le tableau jusqu'à avoir plus de jetons de couleur
-	    	if(cellTemp.getToken() == null){
+	    cellTemp = getTopCell(i);
+	    
+	    int j = 0;
+	    // Parcours jusqu'à la dernière cellule basse de la colonne i
+	    while (cellTemp != Cell.outOfBoundCell) {
+		if (cellTemp.getToken().getColor() == Color.RED) {
+		    tempArray[j][i] = 'r';
+		}
+		else if (cellTemp.getToken().getColor() == Color.YELLOW) {
+		    tempArray[j][i] = 'y';
+		}
+		else if (cellTemp.getToken().getColor() == Color.EMPTY) {
 		    tempArray[j][i] = ' ';
-	    	}
-	    	else if(Color.RED == cellTemp.getToken().getColor()){
-	    	    tempArray[j][i] = 'r';
-	    	}
-	    	else {
-	    	    tempArray[j][i] = 'y';
-	    	}
-	    	++j;
-	    	cellTemp = cellTemp.getNeighbor(Direction.DOWN);
+		}
+		++j;
+		cellTemp = cellTemp.getNeighbor(Direction.DOWN);
 	    }
 	}
-
-
+	
+	
 	for(int i=0; i<HEIGHT; ++i) {
 	    System.out.print("|");
 	    for(int j=0; j<WIDTH; ++j) {
@@ -95,12 +124,21 @@ class Grid {
     }
 
 
-    public boolean play(Token token, int column) {
-	if(token == null) {
-	    throw new IllegalArgumentException("Token is null");
+    public boolean playAToken(Token token, int column) {
+	if (token == Token.emptyToken) {
+	    throw new IllegalArgumentException("You can't play an empty Token");
 	}
-	this.arrayNextEmptyCell[column].setToken(token);
-        this.arrayNextEmptyCell[column] = this.arrayNextEmptyCell[column].getNeighbor(Direction.UP);
+	if (this.getNextEmptyCellAt(column).getToken() != Token.emptyToken) {
+	    System.out.println("La colonne est pleine");
+	    return false;
+	}
+	
+	this.getNextEmptyCellAt(column).setToken(requireNonNull(token));
+
+	if (this.getNextEmptyCellAt(column).getNeighbor(Direction.UP) != Cell.outOfBoundCell) {
+	    this.UpToNextEmptyCellAt(column);     
+	}
+
 	return true;
     }
 }

@@ -1,15 +1,18 @@
 class Token {
-    private final Color colorToken;
 
+    public static final Token emptyToken = new Token(Color.EMPTY);
+    
+    private final Color colorToken;
+    
     public Token(Color c) {
-        this.colorToken = c;
+	this.colorToken = c;
     }
 
     public Color getColor(){
         return this.colorToken;
     }
     
-    public String toString(){
-        return this.colorToken.toString(); // delegation a la fonction toString de Color qui est par default son nom de var donc RED ou YELLOW
-    }
+    // public String toString(){
+    //     return this.colorToken.toString(); // delegation a la fonction toString de Color qui est par default son nom de var donc RED ou YELLOW
+    // }
 }

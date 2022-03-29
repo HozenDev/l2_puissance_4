@@ -1,8 +1,2 @@
-mardi 29 mars 2022, 10:45:16 (UTC+0200)
-------Compile---------------
-javac -d ./build/ -cp ./src/ src/Main.java
-javac -d ./build/ -cp ./src/ src/Player.java
-javac -d ./build/ -cp ./src/ src/Save.java
+mer. 30 mars 2022 00:37:52 CEST
 ------Java_code-------------
-------Compile Cleaner-------
-rm ./build/*.class

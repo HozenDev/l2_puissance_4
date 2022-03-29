@@ -1,0 +1,16 @@
+#!/bin/sh
+
+date > ./log.txt
+
+echo '------Java_code-------------' >> ./log.txt
+
+cd ./build/
+
+java Main 2>> ../log.txt
+
+if [ $? -ne 0 ] #-ne = not equal -eq = equal
+then
+    echo 'Error in java : results in log.txt'
+    cd ../    
+    exit 1 #exit in main fonction : return don't work
+fi
