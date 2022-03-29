@@ -2,7 +2,7 @@ class Player{
     private final String pseudo;
     private final Color colorPlayer;
 
-    public Player(String pseudo, int indexPlayer) {                 // indexPlayer == 0 alors premier joueur donc color RED
+    public Player(String pseudo, int indexPlayer) {// indexPlayer == 0 alors premier joueur donc color RED
         if      (1 == indexPlayer) this.colorPlayer = Color.RED;
         else if (0 == indexPlayer) this.colorPlayer = Color.YELLOW;
         else throw new IllegalArgumentException("indexPlayer must equal 0 if first  player else 1.");

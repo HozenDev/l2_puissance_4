@@ -10,7 +10,7 @@ class Cell{
     }
 
     public void setNeighbor(Cell c, Direction d) {
-	this.neighborhood.put(requireNonNull(d), requireNonNull(c))
+	this.neighborhood.put(requireNonNull(d), requireNonNull(c));
     }
     
     public void setToken(Token t) {
