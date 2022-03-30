@@ -2,9 +2,9 @@ import static java.util.Objects.requireNonNull;
 import java.util.EnumMap;
 
 class Grid {
-    public static final String ANSI_RED    = "\u001B[31m";     // RED
-    public static final String ANSI_YELLOW = "\u001B[33m";  // YELLOW
-    public static final String ANSI_WHITE  = "\u001B[37m";   // WHITE
+    private static final String ANSI_RED    = "\u001B[31m";     // RED
+    private static final String ANSI_YELLOW = "\u001B[33m";  // YELLOW
+    private static final String ANSI_WHITE  = "\u001B[37m";   // WHITE
     
     private static final int WIDTH = 7;
     private static final int HEIGHT = 6;
@@ -12,6 +12,15 @@ class Grid {
 
     public Grid(){
         this.arrayNextEmptyCell = new Cell[WIDTH];
+	this.initGridEmpty();
+    }
+
+    public int getWidth() {
+	return this.WIDTH;
+    }
+
+    public int getHeight() {
+	return this.HEIGHT;
     }
 
     public void initGridEmpty(){
@@ -53,7 +62,7 @@ class Grid {
 
     }
 
-    private int valideColumn(int column) {
+    public int valideColumn(int column) {
 	if (column < 0 || column >= WIDTH) {
 	    throw new IllegalArgumentException("column outOfBound");
 	}
