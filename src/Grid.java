@@ -5,6 +5,8 @@ class Grid {
     private static final String ANSI_RED    = "\u001B[31m";     // RED
     private static final String ANSI_YELLOW = "\u001B[33m";  // YELLOW
     private static final String ANSI_WHITE  = "\u001B[37m";   // WHITE
+    private static final String ANSI_BLUE   = "\u001B[36m";
+    private static final String ANSI_GREEN  = "\u001B[32m";
     
     private static final int WIDTH = 7;
     private static final int HEIGHT = 6;
@@ -88,7 +90,7 @@ class Grid {
     }
 
 
-    public void printGrid() {
+    private void printGrid() {
 
 	char[][] tempArray = new char[HEIGHT][WIDTH];
 
@@ -113,23 +115,62 @@ class Grid {
 		cellTemp = cellTemp.getNeighbor(Direction.DOWN);
 	    }
 	}
-	
+
+	System.out.print(ANSI_BLUE);
 	
 	for(int i=0; i<HEIGHT; ++i) {
+	    for(int j=0; j<WIDTH; ++j) {
+		System.out.print("+---");
+	    }
+	    System.out.println("+");
 	    System.out.print("|");
 	    for(int j=0; j<WIDTH; ++j) {
 		if(tempArray[i][j] == 'r') {
-		    System.out.print(ANSI_RED + "O" + ANSI_WHITE);
+		    System.out.print(ANSI_RED + " O " + ANSI_BLUE);
 		}
 		else if (tempArray[i][j] == 'y') {
-		    System.out.print(ANSI_YELLOW + "O" + ANSI_WHITE);
+		    System.out.print(ANSI_YELLOW + " O " + ANSI_BLUE);
 		}
 		else {
-		    System.out.print(" ");
+		    System.out.print("   ");
 		}
 		System.out.print("|");
 	    }
-	    System.out.println();
+	    System.out.println();	    
 	}
+	for(int j=0; j<WIDTH; ++j) {
+	    System.out.print("+---");
+	}
+	System.out.println("+" + ANSI_WHITE);
+    }
+
+    private void printAvailableColumn() {
+
+	System.out.print(ANSI_BLUE);
+
+	for(int j=0; j<WIDTH; ++j) {
+	    System.out.print("+-^-");
+	}
+	System.out.println("+");
+	
+	for(int j=0; j<WIDTH; ++j) {
+	    System.out.print("| " + ANSI_GREEN + (j+1) + ANSI_BLUE + " ");
+	}
+	System.out.println("|");
+
+	for(int j=0; j<WIDTH; ++j) {
+	    System.out.print("+---");
+	}
+	System.out.println("+" + ANSI_WHITE);
+    }
+
+    public void print() {
+
+	System.out.println();	
+	this.printGrid();
+	System.out.println();	
+	this.printAvailableColumn();
+	System.out.println();	
+     
     }
 }

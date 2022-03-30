@@ -11,7 +11,7 @@ class Player{
     }
     @Override
     public String toString(){
-        return String.format("%s, color : %s", this.pseudo, this.getColor());
+        return String.format("%s (%s)", this.pseudo, this.getColor());
     }
 
     public Color getColor() {
@@ -20,5 +20,9 @@ class Player{
 
     public Token getToken() {
 	return this.token;
+    }
+
+    public String getUsername() {
+	return this.pseudo;
     }
 }

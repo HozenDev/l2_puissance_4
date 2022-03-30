@@ -2,8 +2,13 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 import static java.util.Objects.requireNonNull;
 import java.util.EnumMap;
+import java.lang.Math;
 
 class Game {
+
+    private static final String ANSI_WHITE  = "\u001B[37m";   // WHITE
+    private static final String ANSI_RED    = "\u001B[31m";     // RED    
+
     private OptionGame optionGame;
     private Player[] arrayPlayer;
     private Grid grid;
@@ -12,6 +17,8 @@ class Game {
 
     private final static int numberOfPlayers = 2;
     private final static int numberOfTokenToWin = 4;
+
+    private int iteration;
     
     public Game() {
 	welcomeMessage();
@@ -38,6 +45,7 @@ class Game {
 	//************************//		
 
 	this.end = false;
+	this.iteration = 0;
     }
 
 
@@ -115,35 +123,54 @@ class Game {
 	return this.arrayPlayer[id];
     }
 
+    private Player nextPlayer(Player current) {
+	int i;
+	for (i=0; i<this.numberOfPlayers; i++) {
+	    if (current == this.getPlayerFromId(i)) break;
+	}
+	return this.getPlayerFromId((i+1)%2);
+    }
+
     private void play() {
 
-	int currentPlayer = 0;
 	boolean playerHasPlay;
+	Player currentPlayer = this.getPlayerFromId((int) Math.round(Math.random()));
 	
 	while (!this.end) {
 
-	    this.grid.printGrid();
+	    this.iteration += 1;
+	    
+	    this.grid.print();
 
-	    playerHasPlay = false;	    
-	    currentPlayer = (currentPlayer+1)%this.numberOfPlayers;
-
-	    int columnChosen = this.askForColumn();
+	    playerHasPlay = false;;
 	    
 	    while (!playerHasPlay) {
-		playerHasPlay = this.playAToken(this.getPlayerFromId(currentPlayer).getToken(),
-						columnChosen);
+		System.out.print(currentPlayer + ", ");
+		int columnChosen = this.askForColumn();
+		playerHasPlay = this.playAToken(currentPlayer.getToken(), columnChosen);
 	    }
+
+	    if (!this.end) currentPlayer = nextPlayer(currentPlayer);
 	}
-	System.out.println("Game Ended.");
-	System.out.println("*************************");	
-	this.grid.printGrid();
+
+	this.grid.print();
+
+	// Print game ended
+	System.out.println("*****************************");
+	System.out.println("*" + ANSI_RED + "         Game Ended        " + ANSI_WHITE + "*");
+	System.out.println("*****************************");
+
+	// Print the winner of if pat
+	if (this.iteration == this.grid.getWidth()*this.grid.getHeight())
+	    System.out.println("Egalité");
+	else System.out.println("Le gagnant est : " + currentPlayer);	
     }
 
     private int askForColumn() {
 	int column = 0;
 	while (true) {
 	    try {
-		System.out.println("Chosir une colonne : ");
+		System.out.print("choisissez une colonne : ");
 		Scanner input = new Scanner(System.in);
 		column = valideColumn(input.nextInt()-1);
 		break;
@@ -172,68 +199,38 @@ class Game {
 	
 	this.grid.getNextEmptyCellAt(column).setToken(requireNonNull(token));
 
-	switch (this.hasWin(this.grid.getNextEmptyCellAt(column))) {
-	case 1:
-	    this.end = true;
-	    Player winner = this.arrayPlayer[0]; 
-	    for (int i=0;i<this.numberOfPlayers;i++) {
-		if (token.getColor() == this.arrayPlayer[i].getColor()) {
-		    winner = this.arrayPlayer[i];
-		}
-	    }
-	    System.out.println("Gagnant est : " + winner);
-	    break;
-	case 0:
-	    System.out.println("Egalité");
-	    this.end = true;
-	    break;
-	}
+
+	// Test if game ended by playing
+	this.end = this.isEnd(this.grid.getNextEmptyCellAt(column));
 	
 	if (this.grid.getNextEmptyCellAt(column).getNeighbor(Direction.UP) != Cell.outOfBoundCell) {
 	    this.grid.UpToNextEmptyCellAt(column);     
 	}
-
 	return true;
     }
 
-    private int hasWin(Cell lastPlayed) {
-
-	// -1 : Nobody win
-	// 0 : Egality
-	// 1 : Someone win
+    private boolean isEnd(Cell lastPlayed) {
 	
 	if (lastPlayed == Cell.outOfBoundCell) {
 	    System.out.println("-1");
-	    return -1;
+	    return false;
 	}
 
 	// Test egality
-	
-	boolean sat = true;
-	
-	for (int i = 0 ; i < this.grid.getWidth() ; i++) {
-	    if (this.grid.getNextEmptyCellAt(i) != Cell.outOfBoundCell) {
-		sat = false;
-		break;
-	    }
-	}
-
-	if (sat) return 0;
+	if (this.iteration == this.grid.getWidth()*this.grid.getHeight()) return true;
 
 	// Test Win in 8 directions
-	
 	EnumMap<Direction, Direction> diagonales = Direction.getDiagonales();
 	
 	for (Direction d: Direction.values()) {
 	    if (lastPlayed.numberOfSameNeighbor(d, 1) >= this.numberOfTokenToWin) {
-		return 1;
+		return true;
 	    }
 	    if (lastPlayed.numberOfSameNeighbor(d, diagonales.get(d), 1) >=
 		this.numberOfTokenToWin) {
-		return 1;
+		return true;
 	    }
 	}
-
-	return -1;
+	return false;
     } 
 }
