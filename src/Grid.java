@@ -60,16 +60,16 @@ class Grid {
 	return column;
     }
 
-    private Cell getNextEmptyCellAt(int column) {
+    public Cell getNextEmptyCellAt(int column) {
 	return this.arrayNextEmptyCell[valideColumn(column)];
     }
 
-    private void UpToNextEmptyCellAt(int column) {
+    public void UpToNextEmptyCellAt(int column) {
 	this.arrayNextEmptyCell[valideColumn(column)] =
 	    this.getNextEmptyCellAt(column).getNeighbor(Direction.UP);
     }
 
-    private Cell getTopCell(int column) {
+    public Cell getTopCell(int column) {
 	// Parcours jusqu'à la dernière cellule haute de la colonne i
 	Cell top = this.getNextEmptyCellAt(column);
 	while (top.getNeighbor(Direction.UP) != Cell.outOfBoundCell){

@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
-
+import static java.util.Objects.requireNonNull;
+import java.util.EnumMap;
 
 class Game {
     private OptionGame optionGame;
@@ -9,7 +10,7 @@ class Game {
 
     private boolean end;
 
-    private final static numberOfPlayers = 2;
+    private final static int numberOfPlayers = 2;
     
     public Game() {
 	welcomeMessage();
@@ -119,12 +120,12 @@ class Game {
 	
 	this.grid.getNextEmptyCellAt(column).setToken(requireNonNull(token));
 
-	int win = this.grid.hasWin(this.grid.getNextEmptyCellAt(column));
+	int win = this.hasWin(this.grid.getNextEmptyCellAt(column));
 	if (win == 1) {
 
 	    this.end = true;
 
-	    Player winner; 
+	    Player winner = this.arrayPlayer[0]; 
 	    
 	    for (int i=0;i<this.numberOfPlayers;i++) {
 		if (token.getColor() == this.arrayPlayer[i].getColor()) {
@@ -166,5 +167,5 @@ class Game {
 	}
 	System.out.println("-1");
 	return -1;
-    }    
+    } 
 }
