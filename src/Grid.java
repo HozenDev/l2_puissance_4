@@ -1,4 +1,5 @@
 import static java.util.Objects.requireNonNull;
+import java.util.EnumMap;
 
 class Grid {
     public static final String ANSI_RED    = "\u001B[31m";     // RED
@@ -135,10 +136,41 @@ class Grid {
 	
 	this.getNextEmptyCellAt(column).setToken(requireNonNull(token));
 
+	int win = this.hasWin(this.getNextEmptyCellAt(column));
+	if (win == 1) {
+	    System.out.println("Gagnant est : " + token.getColor());
+	}
+	
 	if (this.getNextEmptyCellAt(column).getNeighbor(Direction.UP) != Cell.outOfBoundCell) {
 	    this.UpToNextEmptyCellAt(column);     
 	}
 
 	return true;
+    }
+
+    private int hasWin(Cell lastPlayed) {
+	if (lastPlayed == Cell.outOfBoundCell) {
+	    System.out.println("-1");
+	    return -1;
+	}
+
+	/***********************************/
+	/** Vérifier si partie égalité !! **/
+	/***********************************/
+
+	EnumMap<Direction, Direction> diagonales = Direction.getDiagonales();
+	
+	for (Direction d: Direction.values()) {
+	    if (lastPlayed.numberOfSameNeighbor(d, 1) >= 4) {
+		System.out.println("1");
+		return 1;
+	    }
+	    if (lastPlayed.numberOfSameNeighbor(d, diagonales.get(d), 1) >= 4 ) {
+		System.out.println("diago 1");
+		return 1;
+	    }
+	}
+	System.out.println("-1");
+	return -1;
     }
 }

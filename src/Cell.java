@@ -28,7 +28,7 @@ class Cell implements Comparable<Cell> {
     
     public void setToken(Token t) {
 	if (this.token.getColor() != Color.EMPTY) {
-	    throw new IllegalArgumentException("Token of the cell not empty");
+	    throw new IllegalArgumentException("You can't set an empty token");
 	}
 	this.token = requireNonNull(t);
     }
@@ -42,36 +42,34 @@ class Cell implements Comparable<Cell> {
     }
 
     public int numberOfSameNeighbor(Direction d, int count) {
-	Cell suiv = new Cell(new Token(Color.EMPTY));
-	suiv = this.getNeighbor(d);
 
-	if (suiv == this.outOfBoundCell) {
+	Cell suiv = this.getNeighbor(d);
+
+	if (suiv == this.outOfBoundCell || this.getToken() != suiv.getToken()) {
 	    return count;
 	}
 	else {
 	    return suiv.numberOfSameNeighbor(d, count+1);
 	}
     }
-    /*
+    
     public int numberOfSameNeighbor(Direction d1, Direction d2, int count) {
-	Cell suiv1;
-	Cell tmp;
 
-	tmp = this.getNeighbor(d1);
+	Cell suiv = this.getNeighbor(d1);
 
-	if (tmp == this.outOfBoundCell) {
+	if (suiv == this.outOfBoundCell) {
 	    return count;
 	}
 	
-	tmp = suiv1.getNeighbor(tmp);
+	suiv = suiv.getNeighbor(d2);
 	
-	if (tmp == this.outOfBoundCell) {
+	if (suiv == this.outOfBoundCell || this.getToken() != suiv.getToken()) {
 	    return count;
 	}
 	else {
-	    return tmp.numberOfSameNeighbor(d1, d2, count+1);
+	    return suiv.numberOfSameNeighbor(d1, d2, count+1);
 	}
-	}*/
+    }
 
     @Override
     public int compareTo(Cell other) {
