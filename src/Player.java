@@ -14,6 +14,10 @@ class Player{
         return String.format("%s, color : %s", this.pseudo, this.colorPlayer);
     }
 
+    public Token getColor() {
+	return this.colorPlayer;
+    }
+
     public static void main(String [] args){
         Player thibault = new Player("Thibault" , 1);
         System.out.println(thibault);
