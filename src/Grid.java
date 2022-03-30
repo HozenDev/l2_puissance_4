@@ -1,9 +1,9 @@
 import static java.util.Objects.requireNonNull;
 
 class Grid {
-    public static final String ANSI_RED = "\u001B[31m";     // RED
+    public static final String ANSI_RED    = "\u001B[31m";     // RED
     public static final String ANSI_YELLOW = "\u001B[33m";  // YELLOW
-    public static final String ANSI_WHITE = "\u001B[37m";   // WHITE
+    public static final String ANSI_WHITE  = "\u001B[37m";   // WHITE
     
     private static final int WIDTH = 7;
     private static final int HEIGHT = 6;
