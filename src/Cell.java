@@ -3,7 +3,7 @@ import java.util.EnumMap;
 
 class Cell implements Comparable<Cell> {
 
-    public final static Cell outOfBoundCell = new Cell(new Token(Color.EMPTY));
+    public final static Cell outOfBoundCell = new Cell(Token.emptyToken);
 
     private Token token;
     private EnumMap<Direction, Cell> neighborhood;
@@ -19,16 +19,16 @@ class Cell implements Comparable<Cell> {
 
     public Cell getNeighbor(Direction d) {
 	Cell get;
-	get = this.neighborhood.get(d);
+	get = this.neighborhood.get(requireNonNull(d));
 	if (get == null) {
 	    get = this.outOfBoundCell;
 	}
 	return get;
-    } 
+    }
     
     public void setToken(Token t) {
 	if (this.token.getColor() != Color.EMPTY) {
-	    throw new IllegalArgumentException("You can't set an empty token");
+	    throw new IllegalArgumentException("There is already a token to this cell");
 	}
 	this.token = requireNonNull(t);
     }
@@ -85,8 +85,8 @@ class Cell implements Comparable<Cell> {
 	return this.compareTo((Cell) other) == 0;
     }
 
-    // @Override
-    // public String toString() {
-    // 	return "Je suis une cellule";
-    // }
+    @Override
+    public String toString() {
+	return this.getToken().getColor().toString();
+    }
 }

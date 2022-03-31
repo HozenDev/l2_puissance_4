@@ -80,7 +80,7 @@ class Grid {
 	    this.getNextEmptyCellAt(column).getNeighbor(Direction.UP);
     }
 
-    public Cell getTopCell(int column) {
+    public Cell getTopCellAt(int column) {
 	// Parcours jusqu'à la dernière cellule haute de la colonne i
 	Cell top = this.getNextEmptyCellAt(column);
 	while (top.getNeighbor(Direction.UP) != Cell.outOfBoundCell){
@@ -97,7 +97,7 @@ class Grid {
 	for(int i=0; i < WIDTH; ++i) {
 	    Cell cellTemp = this.arrayNextEmptyCell[i];
 
-	    cellTemp = getTopCell(i);
+	    cellTemp = this.getTopCellAt(i);
 	    
 	    int j = 0;
 	    // Parcours jusqu'à la dernière cellule basse de la colonne i
@@ -172,5 +172,46 @@ class Grid {
 	this.printAvailableColumn();
 	System.out.println();	
      
+    }
+
+    @Override
+    public String toString() {
+
+	StringBuilder s = new StringBuilder();
+
+	Cell c;
+	
+	for (int i=0; i<WIDTH; i++) {
+	    c = this.getTopCellAt(i);
+
+	    for(int j=0; j<HEIGHT; j++) {
+		
+		s.append(c.toString()+";");
+		c = c.getNeighbor(Direction.DOWN);		
+	    }
+	}
+
+	return s.toString();
+    }
+
+    public void initGrid(String stringGrid) {
+	this.initGridEmpty();
+
+	Cell c;
+
+	String[] stringCells = stringGrid.split(";");
+
+
+	for (int i=0; i<WIDTH; i++) {
+	    c = this.getTopCellAt(i);
+
+	    for (int j=0; j<HEIGHT; j++) {
+		if (!stringCells[j+i*HEIGHT].equals("EMPTY")) {
+		    c.setToken(new Token(Color.colorOf(stringCells[j+i*HEIGHT])));
+		    this.UpToNextEmptyCellAt(i);
+		}
+		c = c.getNeighbor(Direction.DOWN);
+	    }
+	}
     }
 }

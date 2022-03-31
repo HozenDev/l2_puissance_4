@@ -19,6 +19,8 @@ class Game {
     private final static int numberOfTokenToWin = 4;
 
     private int iteration;
+
+    private final Save sauvegarde;
     
     public Game() {
 	welcomeMessage();
@@ -39,6 +41,15 @@ class Game {
 	//************************//	
 	
 	this.grid = new Grid();
+	this.playAToken(new Token(Color.RED), 0);
+	this.playAToken(new Token(Color.RED), 0);
+	this.playAToken(new Token(Color.RED), 2);
+
+	this.sauvegarde = new Save("../sauv");
+	this.sauvegarde.write(this.grid, this.arrayPlayer[0], this.arrayPlayer[1]);
+	String test = this.sauvegarde.read();
+	this.grid.initGrid(test);
+	this.initFromASauv(test);
 
 	//************************//
 	// Init Game State //
@@ -46,6 +57,29 @@ class Game {
 
 	this.end = false;
 	this.iteration = 0;
+    }
+
+    private void initFromASauv(String s) {
+
+	/*****************/
+	/** A finir     **/
+	/*****************/
+	
+	StringBuilder gridTemplate = new StringBuilder();
+	StringBuilder players = new StringBuilder();
+	StringBuilder nextPlayerToPlay = new StringBuilder();
+
+	String[] sSplit = s.split(";");
+
+	int sizeGrid = this.grid.getWidth()*this.grid.getHeight();
+
+	for (int i=0; i<sizeGrid; i++) {
+	    gridTemplate.append(sSplit[i]);
+	}
+
+	for (int i=sizeGrid; i<sizeGrid+this.numberOfPlayers; i++) {
+	    players.append(sSplit[i]);
+	}	
     }
 
 
@@ -140,7 +174,7 @@ class Game {
 
 	    this.iteration += 1;
 	    
-	    this.grid.print();
+	    this.grid.print();	    
 
 	    playerHasPlay = false;;
 	    

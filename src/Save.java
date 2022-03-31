@@ -12,13 +12,13 @@ public class Save {
 	this.filename = filename;
     }
 
-    public void write(Object o) {
-	String s = o.toString();
-	
+    public void write(Object... src) {
 	try {
 	    FileWriter myWriter = new FileWriter(this.filename);
-	    myWriter.write(o.toString());
-	    myWriter.write("\n");
+	    for (Object o: src) {
+		myWriter.write(o.toString());
+	    }
+	    //myWriter.write("\n");
 	    myWriter.close();
 	    System.out.println("Successfully wrote to the file.");
 	} catch (IOException e) {
@@ -27,18 +27,22 @@ public class Save {
 	}
     }
 
-    public void read() {
+    public String read() {
+	StringBuilder s = new StringBuilder();
 	try {
+	    
 	    File myObj = new File(this.filename);
 	    Scanner myReader = new Scanner(myObj);
 	    while (myReader.hasNextLine()) {
 		String data = myReader.nextLine();
-		System.out.println(data);
+		// System.out.println(data);
+		s.append(data);
 	    }
 	    myReader.close();
 	} catch (FileNotFoundException e) {
 	    System.out.println("An error occurred.");
 	    e.printStackTrace();
-	}	
+	}
+	return s.toString();
     }
 }
