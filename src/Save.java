@@ -12,19 +12,29 @@ public class Save {
 	this.filename = filename;
     }
 
-    public void write(Object... src) {
+    public void write(boolean verbose, String... src) {
+	this.write(src);
+	if (verbose) System.out.println("Successfully wrote to the file.");
+    }
+
+    public void write(String... src) {
 	try {
 	    FileWriter myWriter = new FileWriter(this.filename);
-	    for (Object o: src) {
-		myWriter.write(o.toString());
+	    for (String s: src) {
+		myWriter.write(s+"&");
 	    }
 	    //myWriter.write("\n");
 	    myWriter.close();
-	    System.out.println("Successfully wrote to the file.");
 	} catch (IOException e) {
 	    System.out.println("An error occurred.");
 	    e.printStackTrace();
 	}
+    }
+
+    public String read(boolean verbose) {
+	String result = this.read();
+	System.out.println("Succesfully read the file.");
+	return result;
     }
 
     public String read() {
@@ -44,5 +54,23 @@ public class Save {
 	    e.printStackTrace();
 	}
 	return s.toString();
+    }
+
+    public void delete(boolean verbose) {
+	this.delete();
+	if (verbose) System.out.println("Successfully wrote to the file.");
+    }
+    
+    public void delete() {
+	try {
+	    new FileWriter(filename, false).close();
+	} catch (IOException e) {
+	    System.out.println("An error occurred.");
+	    e.printStackTrace();
+	}
+    }
+
+    public boolean isEmpty() {
+	return this.read().equals("");
     }
 }

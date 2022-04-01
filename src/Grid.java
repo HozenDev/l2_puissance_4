@@ -14,7 +14,7 @@ class Grid {
 
     public Grid(){
         this.arrayNextEmptyCell = new Cell[WIDTH];
-	this.initGridEmpty();
+	this.initGrid();
     }
 
     public int getWidth() {
@@ -25,7 +25,12 @@ class Grid {
 	return this.HEIGHT;
     }
 
-    public void initGridEmpty(){
+    public int getSize() {
+	return this.getWidth()*this.getHeight();
+    }
+
+    public void initGrid(){
+	
 	Cell[][] tempGrid2D = new Cell[HEIGHT][WIDTH];
 	
 	for(int i = 0; i < HEIGHT; i++) {
@@ -33,6 +38,7 @@ class Grid {
 		tempGrid2D[i][j] = new Cell(Token.emptyToken);
 	    }
 	}
+
 	
 	for(int i = 0; i < HEIGHT; i++) {
 	    for(int j = 0; j < WIDTH; ++j) {
@@ -54,14 +60,6 @@ class Grid {
 	for(int j = 0; j<WIDTH ; ++j) {
 	    this.arrayNextEmptyCell[j] = tempGrid2D[HEIGHT-1][j] ;
 	}
-    }
-
-    private void printNextEmptyCells() {
-	for(int j = 0; j<WIDTH ; ++j) {
-	    System.out.print(this.arrayNextEmptyCell[j] + " | ");
-	}
-	System.out.println();
-
     }
 
     public int valideColumn(int column) {
@@ -88,7 +86,6 @@ class Grid {
 	}
 	return top;
     }
-
 
     private void printGrid() {
 
@@ -154,7 +151,12 @@ class Grid {
 	System.out.println("+");
 	
 	for(int j=0; j<WIDTH; ++j) {
-	    System.out.print("| " + ANSI_GREEN + (j+1) + ANSI_BLUE + " ");
+	    if (this.getNextEmptyCellAt(j).getColor() != Color.EMPTY) {
+		System.out.print("| X ");
+	    }
+	    else {
+		System.out.print("| " + ANSI_GREEN + (j+1) + ANSI_BLUE + " ");		
+	    }
 	}
 	System.out.println("|");
 
@@ -194,23 +196,27 @@ class Grid {
 	return s.toString();
     }
 
-    public void initGrid(String stringGrid) {
-	this.initGridEmpty();
+    public void loadGrid(String schema, Token[] tokenOfPlayers) {
 
-	Cell c;
+	this.initGrid();
 
-	String[] stringCells = stringGrid.split(";");
+	Cell current;
 
+	String[] cells = schema.split(";");
 
 	for (int i=0; i<WIDTH; i++) {
-	    c = this.getTopCellAt(i);
+	    current = this.getTopCellAt(i);
 
 	    for (int j=0; j<HEIGHT; j++) {
-		if (!stringCells[j+i*HEIGHT].equals("EMPTY")) {
-		    c.setToken(new Token(Color.colorOf(stringCells[j+i*HEIGHT])));
-		    this.UpToNextEmptyCellAt(i);
+		for (int k=0; k<Color.values().length; k++) {
+		    if (tokenOfPlayers[k].getColor() == Color.colorOf(cells[j+i*HEIGHT]))
+		    {
+			current.setToken(tokenOfPlayers[k]);
+			if (tokenOfPlayers[k] != Token.emptyToken) this.UpToNextEmptyCellAt(i);
+			break;
+		    }
 		}
-		c = c.getNeighbor(Direction.DOWN);
+		current = current.getNeighbor(Direction.DOWN);
 	    }
 	}
     }

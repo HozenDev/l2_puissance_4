@@ -10,7 +10,7 @@ class Cell implements Comparable<Cell> {
     
     public Cell(Token token) {
 	this.neighborhood = new EnumMap<>(Direction.class);
-	this.token = token;
+	if (token.getColor() == Color.EMPTY) this.token = Token.emptyToken;
     }
 
     public void setNeighbor(Cell c, Direction d) {
@@ -45,7 +45,8 @@ class Cell implements Comparable<Cell> {
 
 	Cell suiv = this.getNeighbor(d);
 
-	if (suiv == this.outOfBoundCell || this.getToken() != suiv.getToken()) {
+	if (suiv == this.outOfBoundCell ||
+	    this.getToken() != suiv.getToken()) {
 	    return count;
 	}
 	else {
@@ -63,12 +64,17 @@ class Cell implements Comparable<Cell> {
 	
 	suiv = suiv.getNeighbor(d2);
 	
-	if (suiv == this.outOfBoundCell || this.getToken() != suiv.getToken()) {
+	if (suiv == this.outOfBoundCell ||
+	    this.getToken() != suiv.getToken()) {
 	    return count;
 	}
 	else {
 	    return suiv.numberOfSameNeighbor(d1, d2, count+1);
 	}
+    }
+
+    public Color getColor() {
+	return this.getToken().getColor();
     }
 
     @Override
