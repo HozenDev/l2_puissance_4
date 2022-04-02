@@ -12,18 +12,15 @@ public class Save {
 	this.filename = filename;
     }
 
-    public void write(boolean verbose, String... src) {
+    public void write(boolean verbose, Object src) {
 	this.write(src);
 	if (verbose) System.out.println("Successfully wrote to the file.");
     }
 
-    public void write(String... src) {
+    public void write(Object src) {
 	try {
 	    FileWriter myWriter = new FileWriter(this.filename);
-	    for (String s: src) {
-		myWriter.write(s+"&");
-	    }
-	    //myWriter.write("\n");
+	    myWriter.write(src.toString());
 	    myWriter.close();
 	} catch (IOException e) {
 	    System.out.println("An error occurred.");

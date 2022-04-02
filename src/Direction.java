@@ -12,4 +12,18 @@ public enum Direction {
 	diagonales.put(Direction.RIGHT, Direction.UP);
 	return diagonales;
     }
+
+    public static Direction getOpposite(Direction d) {
+	switch (d) {
+	case UP:
+	    return DOWN;
+	case DOWN:
+	    return UP;
+	case RIGHT:
+	    return LEFT;
+	case LEFT:
+	    return RIGHT;
+	}
+	return UP;
+    }
 }

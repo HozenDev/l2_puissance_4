@@ -7,7 +7,7 @@ class Cell implements Comparable<Cell> {
 
     private Token token;
     private EnumMap<Direction, Cell> neighborhood;
-    
+
     public Cell(Token token) {
 	this.neighborhood = new EnumMap<>(Direction.class);
 	if (token.getColor() == Color.EMPTY) this.token = Token.emptyToken;
@@ -25,7 +25,7 @@ class Cell implements Comparable<Cell> {
 	}
 	return get;
     }
-    
+
     public void setToken(Token t) {
 	if (this.token.getColor() != Color.EMPTY) {
 	    throw new IllegalArgumentException("There is already a token to this cell");
@@ -36,41 +36,50 @@ class Cell implements Comparable<Cell> {
     public Token getToken() {
 	return this.token;
     }
-    
+
     public boolean isEmpty() {
 	return this.token.toString() == "EMPTY";
     }
 
-    public int numberOfSameNeighbor(Direction d, int count) {
+    public boolean check() {
+	EnumMap<Direction, Direction> diagonales = Direction.getDiagonales();
+	int count;
 
-	Cell suiv = this.getNeighbor(d);
+	for (Direction d: Direction.values()) {
+	    /* Horizontal and vertical check */
+	    count = this.numberOfSameNeighbor(d);
+	    count += this.numberOfSameNeighbor(Direction.getOpposite(d));
+	    count ++; // Pour compter le pion actuel
 
-	if (suiv == this.outOfBoundCell ||
-	    this.getToken() != suiv.getToken()) {
-	    return count;
+	    if (count >= Game.numberOfTokenToWin) return true;
+
+	    /* Diagonales check */
+	    count = this.numberOfSameNeighbor(d, diagonales.get(d));
+	    count += this.numberOfSameNeighbor(Direction.getOpposite(d),
+					       Direction.getOpposite(diagonales.get(d)));
+	    count ++;
+
+	    if (count >= Game.numberOfTokenToWin) return true;
 	}
-	else {
-	    return suiv.numberOfSameNeighbor(d, count+1);
-	}
+	return false;
     }
-    
-    public int numberOfSameNeighbor(Direction d1, Direction d2, int count) {
 
-	Cell suiv = this.getNeighbor(d1);
+    public int numberOfSameNeighbor(Direction d) {
+	Cell next = this.getNeighbor(d);
+	if (next == this.outOfBoundCell ||
+	    this.getToken() != next.getToken()) {
+	    return 0;
+	}
+	else return 1 + next.numberOfSameNeighbor(d);
+    }
 
-	if (suiv == this.outOfBoundCell) {
-	    return count;
+    public int numberOfSameNeighbor(Direction d1, Direction d2) {
+	Cell next = this.getNeighbor(d1).getNeighbor(d2);
+	if (next == this.outOfBoundCell ||
+	    this.getToken() != next.getToken()) {
+	    return 0;
 	}
-	
-	suiv = suiv.getNeighbor(d2);
-	
-	if (suiv == this.outOfBoundCell ||
-	    this.getToken() != suiv.getToken()) {
-	    return count;
-	}
-	else {
-	    return suiv.numberOfSameNeighbor(d1, d2, count+1);
-	}
+	else return 1 + next.numberOfSameNeighbor(d1, d2);
     }
 
     public Color getColor() {
@@ -82,7 +91,7 @@ class Cell implements Comparable<Cell> {
 	if (this.getToken() == other.getToken()) return 0;
 	return 1;
     }
-    
+
     @Override
     public boolean equals(Object other) {
 	if (other == null) return false;

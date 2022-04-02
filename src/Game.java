@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 import static java.util.Objects.requireNonNull;
@@ -6,47 +7,47 @@ import java.lang.Math;
 
 class Game {
 
-    private OptionGame optionGame;
+    // const
+    
+    public final static int numberOfPlayers = 2;
+    public final static int numberOfTokenToWin = 4;
+
+    // Gameplay attributs
+    
     private Player[] arrayPlayer;
     private Grid grid;
 
-    private boolean end;
-
-    private final static int numberOfPlayers = 2;
-    private final static int numberOfTokenToWin = 4;
-
-    private int iteration;
-
+    // Save
+    
     private final Save save;
 
+    // Game state attributs
+    
+    private boolean end;
+    private int iteration;
+    private String gameplay; // IA or LOCAL    
+    
     private int currentPlayerId;
-    private Cell lastCellPlayed;
+    private int lastMove; // represent the last column played
 
     private Game() {
+	// Welcom message
 	this.welcomeMessage();
 
+	// Init Player physical representation
 	this.arrayPlayer = new Player[numberOfPlayers];
 
-	//************************//
-	// Init Grid //
-	//************************//
-
-	this.lastCellPlayed = Cell.outOfBoundCell;
+	// Init Grid
 	this.grid = new Grid();
 
-	//************************//
-	// Init Save //
-	//************************//
-
+	// Init random first Player
 	this.currentPlayerId = (int) Math.round(Math.random());
 
+	// Init Save 
 	this.save = new Save("../sauv");
 	this.askForLoadSave();
 
-	//************************//
-	// Init Game State //
-	//************************//
-
+	// Init Game State
 	this.end = false;
 	this.iteration = 0;
     }
@@ -55,7 +56,7 @@ class Game {
 	if (!this.save.isEmpty()) {
 	    boolean done = false;
 	    while (!done) {
-		System.out.println("Une sauvegarde est existante, voulez-vous la charger ?");
+		System.out.println("Sauvegarde est existante, voulez-vous la charger ?");
 		System.out.println("[1:Oui][2:Non][3:Supprimer]");
 		Scanner input = (new Scanner(System.in));
 		try {
@@ -87,9 +88,9 @@ class Game {
     }
 
     private void askForPlayers() {
-	this.initPlayer(0) ;  // premier joueur toujours humain
-	if(this.optionGame == OptionGame.LOCAL) initPlayer(1);
-	else createPlayer("Ordinateur", 1);
+	this.initLocalPlayer(0) ;  // premier joueur toujours humain
+	if(this.gameplay.equals("LOCAL")) initLocalPlayer(1);
+	else createPlayer("Ordinateur", 1, Entity.IA);
     }
 
     private void loadSave(String s) {
@@ -104,8 +105,9 @@ class Game {
 	// Initialise the players //
 
 	for (int i=0; i<this.numberOfPlayers; i++) {
-	    String playerName = sSplit[i+1].split(" ")[0];
-	    this.createPlayer(playerName, i);
+	    Entity og = Entity.of(sSplit[i+1].split(" ")[0]);
+	    String playerName = sSplit[i+1].split(" ")[1];
+	    this.createPlayer(playerName, i, og);
 	}
 
 	// Initialise the current player //
@@ -125,8 +127,14 @@ class Game {
 	this.grid.loadGrid(sSplit[0], tokenArray);
     }
 
-    private void createPlayer(String name, int id) {
-	this.arrayPlayer[id] = new Player(name, id);
+    private void initLocalPlayer(int position) {
+	System.out.println("Veuillez saisir le pseudo du joueur " + position + " :");
+	String username = (new Scanner(System.in)).nextLine();
+	this.createPlayer(username, position, Entity.LOCAL);
+    }    
+
+    private void createPlayer(String name, int id, Entity og) {
+	this.arrayPlayer[id] = new Player(name, id, og);
     }
 
     //**************************************************************//
@@ -148,13 +156,14 @@ class Game {
 	System.out.println("*****************************");
 
 	// Print the winner or if pat
-	if (this.isPat()) {
+	if (this.isTie()) {
 	    this.save.delete();
 	    System.out.println("Egalité");
 	}
 	else if (this.hasWin()) {
 	    this.save.delete();
-	    System.out.println("Le gagnant est : " + this.getPlayerFromId(this.currentPlayerId));
+	    System.out.println("Le gagnant est : " +
+			       this.getPlayerFromId(this.currentPlayerId));
 	}
     }
 
@@ -164,45 +173,31 @@ class Game {
 	System.out.println("-[2] 1 VS 1 contre une IA\n");
     }
 
-    private void correctInput() throws IllegalArgumentException {
-	Scanner input = new Scanner(System.in);
-	int option ;
-	printPartyChoice();
-	System.out.println("A quel mode de jeu voulez-vous jouer ? ");
-	option = input.nextInt();
-	if ( option != 1 && option != 2)
-	    throw new IllegalArgumentException();
-	else {
-	    if (option == 1)  {
-		this.optionGame = OptionGame.LOCAL;
-	    }
-	    else {
-		this.optionGame = OptionGame.IA;
-	    }
-	}
+    // Gameplay initialisation
+
+    private int valideGameOption(int option) {
+	if (option < 0 || option >= 2) throw new IllegalArgumentException();
+	return option;
     }
 
     private void setOptionGame() {
-
 	while (true) {
 	    try {
-		correctInput();
+		printPartyChoice();
+		System.out.println("A quel mode de jeu voulez-vous jouer ? ");
+		int option = valideGameOption((new Scanner(System.in)).nextInt());
+		if (option == 1) this.gameplay = "LOCAL";
+		else this.gameplay = "IA";   
 		break;
 	    }
 	    catch (IllegalArgumentException e) {
-		System.out.println("Erreur lors de la saisie, veuillez saisir l'entier '1' ou '2'\n");
+		System.out.println("Ce mode de jeu n'existe pas.\n");
 	    }
 	    catch (InputMismatchException e) {
-		System.out.println("Erreur lors de la saisie, veuillez saisir l'entier '1' ou '2'\n");
+		System.out.println("Erreur lors de la saisie," +
+				   "veuillez saisir l'entier '1' ou '2'\n");
 	    }
 	}
-    }
-
-    private void initPlayer(int position) {
-	Scanner inputPseudo = new Scanner(System.in);
-	System.out.println("Veuillez saisir le pseudo du joueur " + position + " :");
-	String pseudo = inputPseudo.nextLine();
-	this.createPlayer(pseudo, position);
     }
 
     // Fonction de démarrage
@@ -227,10 +222,11 @@ class Game {
     }
 
     private void printCurrentPlayer() {
-	System.out.println(Color.ansiColorOf(this.getPlayerFromId(this.currentPlayerId).getColor())
-			   + "["
-			   + this.getPlayerFromId(this.currentPlayerId) + "]"
-			   + Color.ansiColorOf("WHITE"));
+	System.out.println(
+	    Color.ansiColorOf(this.getPlayerFromId(this.currentPlayerId).getColor())
+	    + "["
+	    + this.getPlayerFromId(this.currentPlayerId) + "]"
+	    + Color.ansiColorOf("WHITE"));
     }
 
     // Fonction pricipale
@@ -249,7 +245,7 @@ class Game {
 	    while (!playerHasPlay) {
 		this.printCurrentPlayer();
 		System.out.println("[m: Menu]");
-		int columnChosen = this.askForInput();
+		int columnChosen = chooseAColumn(); 
 		if (this.end) break;
 		playerHasPlay = this.playAToken(currentPlayer.getToken(),
 						columnChosen);
@@ -267,9 +263,17 @@ class Game {
 
     // fonction du menu
 
+    private int chooseAColumn() {
+	if (this.getPlayerFromId(this.numberOfPlayers-1).whatIs() == Entity.IA) {
+	    if (this.currentPlayerId == this.numberOfPlayers-1) {
+		return (new Random()).nextInt(7);		
+	    }
+	}
+	return this.askForInput();
+    }
+
     private void menu() {
 	boolean done = false;
-
 	while (!done) {
 	    System.out.println("[1:Continuer][2:Sauvegarder][3:Quitter le jeu]");
 	    System.out.print("Choississez une option : ");
@@ -280,10 +284,7 @@ class Game {
 		    done = true;
 		    break;
 		case 2:
-		    this.save.write(this.grid.toString(),
-				    this.arrayPlayer[0].toString(),
-				    this.arrayPlayer[1].toString(),
-				    String.valueOf(this.currentPlayerId));
+		    this.save.write(this);
 		    break;
 		case 3:
 		    done = true;
@@ -294,12 +295,10 @@ class Game {
 		    break;
 		}
 	    }
-	    catch (Exception e) {
+	    catch (InputMismatchException e) {
 		System.out.println("Ce choix n'existe pas.");
 	    }
 	}
-	System.out.println("Vous avez quitté le menu.");
-
     }
 
     // Fonctions de demande de saisi
@@ -319,7 +318,7 @@ class Game {
 		    column = valideColumn(Integer.parseInt(sInput)-1);
 		    break;
 		}
-		catch (Exception e) {
+		catch (IllegalArgumentException e) {
 		    System.out.println("Colonne invalide, un entier en 1 et " +
 				       this.grid.getWidth());
 		}
@@ -328,9 +327,7 @@ class Game {
 	return column;
     }
 
-    private int valideColumn(int column) {
-	return this.grid.valideColumn(column);
-    }
+    private int valideColumn(int column) {return this.grid.valideColumn(column);}
 
     // Fonction de gameplay
 
@@ -340,59 +337,38 @@ class Game {
 	}
 
 	Cell played = this.grid.getNextEmptyCellAt(column);
-
 	if (played.getToken() != Token.emptyToken) {
 	    System.out.println("La colonne est pleine");
 	    return false;
 	}
-
 	played.setToken(requireNonNull(token));
-
 	if (played.getNeighbor(Direction.UP) != Cell.outOfBoundCell) {
 	    this.grid.UpToNextEmptyCellAt(column);
 	}
-
-	this.lastCellPlayed = played;
-
+	this.lastMove = column;
 	return true;
     }
 
     // Fonction de test de fin de partie
 
-    private boolean isPat() {
-	return this.iteration == this.grid.getWidth()*this.grid.getHeight();
-    }
+    private boolean isTie() {return this.iteration == this.grid.getSize();}
 
     private boolean hasWin() {
-	EnumMap<Direction, Direction> diagonales = Direction.getDiagonales();
-
-	for (Direction d: Direction.values()) {
-	    if (this.lastCellPlayed.numberOfSameNeighbor(d, 1) >= this.numberOfTokenToWin) {
-		return true;
-	    }
-	    if (this.lastCellPlayed.numberOfSameNeighbor(d, diagonales.get(d), 1) >=
-		this.numberOfTokenToWin) {
-		System.out.println("text 2");
-		return true;
-	    }
-	}
-	return false;
+	Cell lastCellPlayed = this.grid.getNextEmptyCellAt(this.lastMove);
+	if (lastCellPlayed.getToken() != Token.emptyToken);
+	else lastCellPlayed = lastCellPlayed.getNeighbor(Direction.DOWN);
+	return lastCellPlayed.check();
     }
 
-    private void isEnd() {
-	// Test egality
-	if (this.isPat()) this.end = true;
+    private void isEnd() {if (this.isTie() || this.hasWin()) this.end = true;}
 
-	// Test Win in 8 directions
-	if (this.hasWin()) this.end = true;
-    }
-
+    // toString()
+    
     @Override
     public String toString() {
-	return arrayPlayer[0].toString() +
-	    " " +
-	    arrayPlayer[1].toString() +
-	    " " +
-	    optionGame.toString();
+	return this.grid.toString() + "&"
+	    + this.getPlayerFromId(0).toString() + "&"
+	    + this.getPlayerFromId(1).toString() + "&"
+	    + String.valueOf(this.currentPlayerId);
     }
 }

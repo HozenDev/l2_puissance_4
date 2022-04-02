@@ -4,12 +4,14 @@ class Player {
 
     private final String pseudo;
     private final Token token;
+    private final Entity gameplay;
 
     /* Constructeur */
-    
-    public Player(String pseudo, int indexPlayer) {
+
+    public Player(String pseudo, int indexPlayer, Entity og) {
 	this.token = initToken(validePlayer(indexPlayer));
         this.pseudo = pseudo;
+	this.gameplay = og;
     }
 
     /* Initialisation du jeton */
@@ -33,6 +35,10 @@ class Player {
 
     /* Accesseurs */
 
+    public Entity whatIs() {
+	return this.gameplay;
+    }
+
     public Color getColor() {
 	return this.token.getColor();
     }
@@ -49,6 +55,9 @@ class Player {
 
     @Override
     public String toString(){
-	return String.format("%s (%s)", this.pseudo, this.getColor());
+	return String.format("%s %s (%s)",
+			     this.gameplay.toString(),
+			     this.pseudo,
+			     this.getColor());
     }
 }
