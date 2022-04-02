@@ -2,20 +2,20 @@ import static java.util.Objects.requireNonNull;
 import java.util.EnumMap;
 
 class Grid {
-    private static final String ANSI_RED    = "\u001B[31m";     // RED
-    private static final String ANSI_YELLOW = "\u001B[33m";  // YELLOW
-    private static final String ANSI_WHITE  = "\u001B[37m";   // WHITE
-    private static final String ANSI_BLUE   = "\u001B[36m";
-    private static final String ANSI_GREEN  = "\u001B[32m";
     
     private static final int WIDTH = 7;
     private static final int HEIGHT = 6;
-    private Cell[] arrayNextEmptyCell; // contient la référance vers la prochaine cellule vide de chaque colonne
 
+    private Cell[] arrayNextEmptyCell; /* contient la référance vers la prochaine cellule
+					  vide de chaque colonne */
+    /* Constructeurs */
+    
     public Grid(){
-        this.arrayNextEmptyCell = new Cell[WIDTH];
+        this.arrayNextEmptyCell = new Cell[this.getWidth()];
 	this.initGrid();
     }
+
+    /* Accesseurs */
 
     public int getWidth() {
 	return this.WIDTH;
@@ -31,39 +31,38 @@ class Grid {
 
     public void initGrid(){
 	
-	Cell[][] tempGrid2D = new Cell[HEIGHT][WIDTH];
+	Cell[][] tempGrid2D = new Cell[this.getHeight()][this.getWidth()];
 	
-	for(int i = 0; i < HEIGHT; i++) {
-	    for(int j = 0; j < WIDTH; ++j) {
+	for(int i = 0; i < this.getHeight(); i++) {
+	    for(int j = 0; j < this.getWidth(); ++j) {
 		tempGrid2D[i][j] = new Cell(Token.emptyToken);
 	    }
 	}
-
 	
-	for(int i = 0; i < HEIGHT; i++) {
-	    for(int j = 0; j < WIDTH; ++j) {
+	for(int i = 0; i < this.getHeight(); i++) {
+	    for(int j = 0; j < this.getWidth(); ++j) {
 		if (i > 0) {
 		    tempGrid2D[i][j].setNeighbor(tempGrid2D[i-1][j], Direction.UP);
 		}
-		if (i < HEIGHT-1) {
+		if (i < this.getHeight()-1) {
 		    tempGrid2D[i][j].setNeighbor(tempGrid2D[i+1][j], Direction.DOWN);
 		}
 		if (j > 0) {
 		    tempGrid2D[i][j].setNeighbor(tempGrid2D[i][j-1], Direction.LEFT);		    
 		}
-		if (j < WIDTH-1) {
+		if (j < this.getWidth()-1) {
 		    tempGrid2D[i][j].setNeighbor(tempGrid2D[i][j+1], Direction.RIGHT);
 		}
 	    }
 	}
 
-	for(int j = 0; j<WIDTH ; ++j) {
-	    this.arrayNextEmptyCell[j] = tempGrid2D[HEIGHT-1][j] ;
+	for(int j = 0; j<this.getWidth() ; ++j) {
+	    this.arrayNextEmptyCell[j] = tempGrid2D[this.getHeight()-1][j] ;
 	}
     }
 
     public int valideColumn(int column) {
-	if (column < 0 || column >= WIDTH) {
+	if (column < 0 || column >= this.getWidth()) {
 	    throw new IllegalArgumentException("column outOfBound");
 	}
 	return column;
@@ -89,9 +88,9 @@ class Grid {
 
     private void printGrid() {
 
-	char[][] tempArray = new char[HEIGHT][WIDTH];
+	char[][] tempArray = new char[this.getHeight()][this.getWidth()];
 
-	for(int i=0; i < WIDTH; ++i) {
+	for(int i=0; i < this.getWidth(); ++i) {
 	    Cell cellTemp = this.arrayNextEmptyCell[i];
 
 	    cellTemp = this.getTopCellAt(i);
@@ -113,20 +112,24 @@ class Grid {
 	    }
 	}
 
-	System.out.print(ANSI_BLUE);
+	System.out.print(Color.ansiColorOf("BLUE"));
 	
-	for(int i=0; i<HEIGHT; ++i) {
-	    for(int j=0; j<WIDTH; ++j) {
+	for(int i=0; i<this.getHeight(); ++i) {
+	    for(int j=0; j<this.getWidth(); ++j) {
 		System.out.print("+---");
 	    }
 	    System.out.println("+");
 	    System.out.print("|");
-	    for(int j=0; j<WIDTH; ++j) {
+	    for(int j=0; j<this.getWidth(); ++j) {
 		if(tempArray[i][j] == 'r') {
-		    System.out.print(ANSI_RED + " O " + ANSI_BLUE);
+		    System.out.print(Color.ansiColorOf("RED") +
+				     " O " +
+				     Color.ansiColorOf("BLUE"));
 		}
 		else if (tempArray[i][j] == 'y') {
-		    System.out.print(ANSI_YELLOW + " O " + ANSI_BLUE);
+		    System.out.print(Color.ansiColorOf("YELLOW") +
+				     " O " +
+				     Color.ansiColorOf("BLUE"));
 		}
 		else {
 		    System.out.print("   ");
@@ -135,35 +138,38 @@ class Grid {
 	    }
 	    System.out.println();	    
 	}
-	for(int j=0; j<WIDTH; ++j) {
+	for(int j=0; j<this.getWidth(); ++j) {
 	    System.out.print("+---");
 	}
-	System.out.println("+" + ANSI_WHITE);
+	System.out.println("+" + Color.ansiColorOf("WHITE"));
     }
 
     private void printAvailableColumn() {
 
-	System.out.print(ANSI_BLUE);
+	System.out.print(Color.ansiColorOf("BLUE"));
 
-	for(int j=0; j<WIDTH; ++j) {
+	for(int j=0; j<this.getWidth(); ++j) {
 	    System.out.print("+-^-");
 	}
 	System.out.println("+");
 	
-	for(int j=0; j<WIDTH; ++j) {
+	for(int j=0; j<this.getWidth(); ++j) {
 	    if (this.getNextEmptyCellAt(j).getColor() != Color.EMPTY) {
 		System.out.print("| X ");
 	    }
 	    else {
-		System.out.print("| " + ANSI_GREEN + (j+1) + ANSI_BLUE + " ");		
+		System.out.print("| "
+				 + Color.ansiColorOf("GREEN")
+				 + (j+1) + Color.ansiColorOf("BLUE")
+				 + " ");		
 	    }
 	}
 	System.out.println("|");
 
-	for(int j=0; j<WIDTH; ++j) {
+	for(int j=0; j<this.getWidth(); ++j) {
 	    System.out.print("+---");
 	}
-	System.out.println("+" + ANSI_WHITE);
+	System.out.println("+" + Color.ansiColorOf("WHITE"));
     }
 
     public void print() {
@@ -183,16 +189,13 @@ class Grid {
 
 	Cell c;
 	
-	for (int i=0; i<WIDTH; i++) {
+	for (int i=0; i<this.getWidth(); i++) {
 	    c = this.getTopCellAt(i);
-
-	    for(int j=0; j<HEIGHT; j++) {
-		
+	    for(int j=0; j<this.getHeight(); j++) {	
 		s.append(c.toString()+";");
 		c = c.getNeighbor(Direction.DOWN);		
 	    }
 	}
-
 	return s.toString();
     }
 
@@ -204,12 +207,12 @@ class Grid {
 
 	String[] cells = schema.split(";");
 
-	for (int i=0; i<WIDTH; i++) {
+	for (int i=0; i<this.getWidth(); i++) {
 	    current = this.getTopCellAt(i);
 
-	    for (int j=0; j<HEIGHT; j++) {
+	    for (int j=0; j<this.getHeight(); j++) {
 		for (int k=0; k<Color.values().length; k++) {
-		    if (tokenOfPlayers[k].getColor() == Color.colorOf(cells[j+i*HEIGHT]))
+		    if (tokenOfPlayers[k].getColor() == Color.colorOf(cells[j+i*this.getHeight()]))
 		    {
 			current.setToken(tokenOfPlayers[k]);
 			if (tokenOfPlayers[k] != Token.emptyToken) this.UpToNextEmptyCellAt(i);

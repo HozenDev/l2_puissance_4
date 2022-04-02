@@ -1,18 +1,37 @@
-class Player{
+class Player {
+
+    private static final int MAX_PLAYERS = 2;
+
     private final String pseudo;
     private final Token token;
 
-    public Player(String pseudo, int indexPlayer) {// indexPlayer == 0 alors premier joueur donc color RED
-        if      (1 == indexPlayer) this.token = new Token(Color.RED);
-        else if (0 == indexPlayer) this.token = new Token(Color.YELLOW);
-        else throw new IllegalArgumentException("indexPlayer must equal 0 if first  player else 1.");
-
+    /* Constructeur */
+    
+    public Player(String pseudo, int indexPlayer) {
+	this.token = initToken(validePlayer(indexPlayer));
         this.pseudo = pseudo;
     }
-    @Override
-    public String toString(){
-        return String.format("%s (%s)", this.pseudo, this.getColor());
+
+    /* Initialisation du jeton */
+
+    private Token initToken(int id) {
+	switch (id) {
+	case 0: return new Token(Color.RED);
+	case 1: return new Token(Color.YELLOW);
+	}
+	return Token.emptyToken;
     }
+
+    /* Vérificateurs */
+
+    private int validePlayer(int id) {
+	if (id < 0 || id >= this.MAX_PLAYERS) {
+	    throw new IllegalArgumentException("indexPlayer must equal 0 if first  player else 1.");
+	}
+	return id;
+    }
+
+    /* Accesseurs */
 
     public Color getColor() {
 	return this.token.getColor();
@@ -24,5 +43,12 @@ class Player{
 
     public String getUsername() {
 	return this.pseudo;
+    }
+
+    /* toString */
+
+    @Override
+    public String toString(){
+	return String.format("%s (%s)", this.pseudo, this.getColor());
     }
 }

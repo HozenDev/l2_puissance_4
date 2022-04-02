@@ -6,9 +6,6 @@ import java.lang.Math;
 
 class Game {
 
-    private static final String ANSI_WHITE  = "\u001B[37m";   // WHITE
-    private static final String ANSI_RED    = "\u001B[31m";     // RED    
-
     private OptionGame optionGame;
     private Player[] arrayPlayer;
     private Grid grid;
@@ -24,28 +21,28 @@ class Game {
 
     private int currentPlayerId;
     private Cell lastCellPlayed;
-    
+
     private Game() {
 	this.welcomeMessage();
-	
+
 	this.arrayPlayer = new Player[numberOfPlayers];
 
 	//************************//
 	// Init Grid //
-	//************************//	
+	//************************//
 
 	this.lastCellPlayed = Cell.outOfBoundCell;
 	this.grid = new Grid();
-	
+
 	//************************//
 	// Init Save //
 	//************************//
 
 	this.currentPlayerId = (int) Math.round(Math.random());
 
-	this.save = new Save("../sauv");	
+	this.save = new Save("../sauv");
 	this.askForLoadSave();
-	
+
 	//************************//
 	// Init Game State //
 	//************************//
@@ -56,25 +53,31 @@ class Game {
 
     private void askForLoadSave() {
 	if (!this.save.isEmpty()) {
-	    System.out.println("Une sauvegarde est existante, voulez-vous la charger ?");
-	    System.out.println("[1:Oui][2:Non][3:Supprimer]");
-	    Scanner input = (new Scanner(System.in));
-	    try {
-		switch (input.nextInt()) {
-		case 1:
-		    this.loadSave(this.save.read());		
-		    break;
-		case 3:
-		    this.save.delete();
-		    break;
-		default:
-		    this.setOptionGame();	    
-		    this.askForPlayers();
-		    break;
+	    boolean done = false;
+	    while (!done) {
+		System.out.println("Une sauvegarde est existante, voulez-vous la charger ?");
+		System.out.println("[1:Oui][2:Non][3:Supprimer]");
+		Scanner input = (new Scanner(System.in));
+		try {
+		    switch (input.nextInt()) {
+		    case 1:
+			this.loadSave(this.save.read());
+			break;
+		    case 3:
+			this.save.delete();
+			this.setOptionGame();
+			this.askForPlayers();
+			break;
+		    default:
+			this.setOptionGame();
+			this.askForPlayers();
+			break;
+		    }
+		    done = true;
 		}
-	    }
-	    catch (InputMismatchException e) {
-		System.out.println("Ce choix n'existe pas");
+		catch (InputMismatchException e) {
+		    System.out.println("Ce choix n'existe pas");
+		}
 	    }
 	}
 	else {
@@ -86,9 +89,9 @@ class Game {
     private void askForPlayers() {
 	this.initPlayer(0) ;  // premier joueur toujours humain
 	if(this.optionGame == OptionGame.LOCAL) initPlayer(1);
-	else createPlayer("Ordinateur", 1);	    	
+	else createPlayer("Ordinateur", 1);
     }
-    
+
     private void loadSave(String s) {
 
 	String[] sSplit = s.split("&");
@@ -97,18 +100,18 @@ class Game {
 	    this.save.delete();
 	    throw new IllegalArgumentException("Sauvegarde corrompue");
 	}
-	
+
 	// Initialise the players //
-	
+
 	for (int i=0; i<this.numberOfPlayers; i++) {
 	    String playerName = sSplit[i+1].split(" ")[0];
 	    this.createPlayer(playerName, i);
 	}
-	
+
 	// Initialise the current player //
 
 	this.currentPlayerId = Integer.parseInt(sSplit[this.numberOfPlayers+1]);
-	
+
 	// Initialise the grid //
 
 	Token[] tokenArray = new Token[Color.values().length];
@@ -116,9 +119,9 @@ class Game {
 	for (int i=0; i<this.numberOfPlayers; i++) {
 	    tokenArray[i] = this.getPlayerFromId(i).getToken();
 	}
-	
+
 	tokenArray[Color.values().length-1] = Token.emptyToken;
-	
+
 	this.grid.loadGrid(sSplit[0], tokenArray);
     }
 
@@ -131,7 +134,7 @@ class Game {
     // fonction pour l'affichage début partie dans le constructeur  //
     //								    //
     //**************************************************************//
-    
+
     private void welcomeMessage() {
 	System.out.println("Bienvenu au jeu du puissance 4.\n");
     }
@@ -139,7 +142,9 @@ class Game {
     private void endMessage() {
 	// Print game ended
 	System.out.println("*****************************");
-	System.out.println("*" + ANSI_RED + "         Game Ended        " + ANSI_WHITE + "*");
+	System.out.println("*" + Color.ansiColorOf("RED") +
+			   "         Game Ended        "
+			   + Color.ansiColorOf("WHITE") + "*");
 	System.out.println("*****************************");
 
 	// Print the winner or if pat
@@ -150,7 +155,7 @@ class Game {
 	else if (this.hasWin()) {
 	    this.save.delete();
 	    System.out.println("Le gagnant est : " + this.getPlayerFromId(this.currentPlayerId));
-	}	
+	}
     }
 
     private void printPartyChoice() {
@@ -165,7 +170,7 @@ class Game {
 	printPartyChoice();
 	System.out.println("A quel mode de jeu voulez-vous jouer ? ");
 	option = input.nextInt();
-	if ( option != 1 && option != 2) 
+	if ( option != 1 && option != 2)
 	    throw new IllegalArgumentException();
 	else {
 	    if (option == 1)  {
@@ -178,7 +183,7 @@ class Game {
     }
 
     private void setOptionGame() {
-		
+
 	while (true) {
 	    try {
 		correctInput();
@@ -186,7 +191,7 @@ class Game {
 	    }
 	    catch (IllegalArgumentException e) {
 		System.out.println("Erreur lors de la saisie, veuillez saisir l'entier '1' ou '2'\n");
-	    }		
+	    }
 	    catch (InputMismatchException e) {
 		System.out.println("Erreur lors de la saisie, veuillez saisir l'entier '1' ou '2'\n");
 	    }
@@ -201,7 +206,7 @@ class Game {
     }
 
     // Fonction de démarrage
-		
+
     public static void run() {
     	Game game = new Game();
 	game.play();
@@ -221,22 +226,29 @@ class Game {
 	return this.getPlayerFromId(this.currentPlayerId);
     }
 
+    private void printCurrentPlayer() {
+	System.out.println(Color.ansiColorOf(this.getPlayerFromId(this.currentPlayerId).getColor())
+			   + "["
+			   + this.getPlayerFromId(this.currentPlayerId) + "]"
+			   + Color.ansiColorOf("WHITE"));
+    }
+
     // Fonction pricipale
 
     private void play() {
 
 	boolean playerHasPlay;
 	Player currentPlayer = this.getPlayerFromId(this.currentPlayerId);
-	
-	while (!this.end) {	    
+
+	while (!this.end) {
 
 	    this.iteration += 1;
 	    this.grid.print();
-	    playerHasPlay = false;;
-	    
+	    playerHasPlay = false;
+
 	    while (!playerHasPlay) {
-		System.out.println(ANSI_RED + "[" +  currentPlayer + "]" + ANSI_WHITE);
-		System.out.println("[m: Menu]");		
+		this.printCurrentPlayer();
+		System.out.println("[m: Menu]");
 		int columnChosen = this.askForInput();
 		if (this.end) break;
 		playerHasPlay = this.playAToken(currentPlayer.getToken(),
@@ -275,7 +287,7 @@ class Game {
 		    break;
 		case 3:
 		    done = true;
-		    this.end = true;		
+		    this.end = true;
 		    break;
 		default:
 		    done = true;
@@ -300,12 +312,12 @@ class Game {
 	    String sInput = input.nextLine();
 	    if (sInput.equals("m")) {
 		this.menu();
-		if (this.end) break;		
+		if (this.end) break;
 	    }
 	    else {
 		try {
 		    column = valideColumn(Integer.parseInt(sInput)-1);
-		    break;		    
+		    break;
 		}
 		catch (Exception e) {
 		    System.out.println("Colonne invalide, un entier en 1 et " +
@@ -313,7 +325,7 @@ class Game {
 		}
 	    }
 	}
-	return column;	
+	return column;
     }
 
     private int valideColumn(int column) {
@@ -321,23 +333,23 @@ class Game {
     }
 
     // Fonction de gameplay
-    
+
     public boolean playAToken(Token token, int column) {
 	if (token == Token.emptyToken) {
 	    throw new IllegalArgumentException("You can't play an empty Token");
-	}	
+	}
 
 	Cell played = this.grid.getNextEmptyCellAt(column);
-	
+
 	if (played.getToken() != Token.emptyToken) {
 	    System.out.println("La colonne est pleine");
 	    return false;
 	}
 
 	played.setToken(requireNonNull(token));
-	
+
 	if (played.getNeighbor(Direction.UP) != Cell.outOfBoundCell) {
-	    this.grid.UpToNextEmptyCellAt(column);     
+	    this.grid.UpToNextEmptyCellAt(column);
 	}
 
 	this.lastCellPlayed = played;
@@ -353,7 +365,7 @@ class Game {
 
     private boolean hasWin() {
 	EnumMap<Direction, Direction> diagonales = Direction.getDiagonales();
-	
+
 	for (Direction d: Direction.values()) {
 	    if (this.lastCellPlayed.numberOfSameNeighbor(d, 1) >= this.numberOfTokenToWin) {
 		return true;
@@ -382,5 +394,5 @@ class Game {
 	    arrayPlayer[1].toString() +
 	    " " +
 	    optionGame.toString();
-    }    
+    }
 }
