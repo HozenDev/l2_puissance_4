@@ -1,0 +1,7 @@
+<map id="Cell" name="Cell">
+<area shape="rect" id="node1" title="Logical representation of a case in the grid of the Game of Puissance 4." alt="" coords="192,199,239,225"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,102,161,129"/>
+<area shape="rect" id="node3" href="$class_token.html" title="Represent a Token of Puissance 4." alt="" coords="186,102,245,129"/>
+<area shape="rect" id="node4" href="$enum_color.html" title="Represent colors globally." alt="" coords="187,5,243,32"/>
+<area shape="rect" id="node5" title=" " alt="" coords="377,95,542,136"/>
+</map>

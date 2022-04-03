@@ -1,8 +1,20 @@
+/**
+ * Represent colors globally
+ * @author Durel Enzo
+ * @author Villepreux Thibault
+ * @version 1.0
+ */
 public enum Color {
 
     RED, YELLOW, EMPTY;
 
     public static Color colorOf(String colorString) {
+	/**
+	 * Give the color for a specify String
+	 *
+	 * @param colorString the color String representation you need
+	 * @return the Color of the colorString
+	 */
 	switch (colorString) {
 	case "RED":
 	    return Color.RED;
@@ -13,6 +25,12 @@ public enum Color {
     }
 
     public static String ansiColorOf(Color c) {
+	/**
+	 * Give the ansi color corresponding to a Color given
+	 *
+	 * @param c Color source
+	 * @return String ansi representation
+	 */
 	switch (c) {
 	case RED :
 	    return ansiColorOf("RED");
@@ -23,6 +41,12 @@ public enum Color {
     }
 
     public static String ansiColorOf(String c) {
+	/**
+	 * Give the ansi color corresponding of a String given
+	 *
+	 * @param c String color source
+	 * @return String ansi representation
+	 */
 	switch (c) {
 	case "RED":
 	    return "\u001B[31m"; // RED

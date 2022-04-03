@@ -1,0 +1,10 @@
+<map id="Game.chooseAColumn" name="Game.chooseAColumn">
+<area shape="rect" id="node1" title=" " alt="" coords="5,76,176,103"/>
+<area shape="rect" id="node2" href="$class_game.html#a4b9ede2d998ac221aaf06f6d91c7c00c" title=" " alt="" coords="239,51,381,77"/>
+<area shape="rect" id="node8" href="$class_game.html#a9ac715bf1c887b4389761d13b647fd8b" title=" " alt="" coords="224,101,396,128"/>
+<area shape="rect" id="node3" href="$class_grid.html#aa5b9429d74541d53b35d9f838c9e80db" title=" " alt="" coords="837,39,949,65"/>
+<area shape="rect" id="node4" href="$class_game.html#afcf6834542dfc4881945698a3f65c225" title=" " alt="" coords="470,51,573,77"/>
+<area shape="rect" id="node6" href="$class_game.html#af7f44b14b916ef59d43031811601c8ee" title=" " alt="" coords="444,101,599,128"/>
+<area shape="rect" id="node5" href="$class_save.html#a44631a0aa32e1659c1898ab2ac34d33c" title=" " alt="" coords="673,51,763,77"/>
+<area shape="rect" id="node7" href="$class_grid.html#a67ed01cf51500ff62088eb7f3f948068" title=" " alt="" coords="647,101,789,128"/>
+</map>

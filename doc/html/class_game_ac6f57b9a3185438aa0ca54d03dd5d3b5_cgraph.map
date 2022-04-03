@@ -1,0 +1,12 @@
+<map id="Game.hasWin" name="Game.hasWin">
+<area shape="rect" id="node1" title=" " alt="" coords="5,207,119,233"/>
+<area shape="rect" id="node2" href="$class_cell.html#ad03ad111fdf4eff6a3572deee55e0d1f" title=" " alt="" coords="215,93,305,120"/>
+<area shape="rect" id="node6" href="$class_cell.html#a40d6c378d52ac80e926df71b35d75f4f" title=" " alt="" coords="661,144,792,171"/>
+<area shape="rect" id="node7" href="$class_cell.html#adecb03aa9121532ac4d3a565cae961be" title=" " alt="" coords="672,207,781,233"/>
+<area shape="rect" id="node8" href="$class_grid.html#afebd807863b80c631a1296ee320d09de" title=" " alt="" coords="167,283,353,309"/>
+<area shape="rect" id="node3" href="$enum_direction.html#a90af6d869b1f403ca1341109a9fe9551" title=" " alt="" coords="418,5,597,32"/>
+<area shape="rect" id="node4" href="$enum_direction.html#abd24d2971a38ea0b81045f408870f597" title=" " alt="" coords="425,56,589,83"/>
+<area shape="rect" id="node5" href="$class_cell.html#ad216ba5a781cebff400fa2895e235dc0" title=" " alt="" coords="401,131,613,157"/>
+<area shape="rect" id="node9" href="$class_grid.html#a67ed01cf51500ff62088eb7f3f948068" title=" " alt="" coords="436,283,579,309"/>
+<area shape="rect" id="node10" href="$class_grid.html#aa5b9429d74541d53b35d9f838c9e80db" title=" " alt="" coords="671,283,783,309"/>
+</map>

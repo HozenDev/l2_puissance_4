@@ -1,7 +1,13 @@
 import static java.util.Objects.requireNonNull;
 import java.util.EnumMap;
 
-class Grid {
+/**
+ * Logical representation of a board of the Game of Puissance 4
+ * @author Durel Enzo
+ * @author Villepreux Thibault
+ * @version 1.0
+ */
+public class Grid {
 
     private static final int WIDTH = 7;
     private static final int HEIGHT = 6;
@@ -10,12 +16,13 @@ class Grid {
 					  vide de chaque colonne */
     /* Constructeurs */
 
-    public Grid(){
+    public Grid() {
+	/**
+	 * Grid constructor
+	 */
         this.arrayNextEmptyCell = new Cell[this.getWidth()];
 	this.initGrid();
     }
-
-    /* Accesseurs */
 
     public int getWidth() {return this.WIDTH;}
 
@@ -23,16 +30,16 @@ class Grid {
 
     public int getSize() {return this.getWidth()*this.getHeight();}
 
-    public void initGrid(){
-
+    public void initGrid() {
+	/**
+	 * Initialisation of Cell of the Grid with their 4 neighbor
+	 */
 	Cell[][] tempGrid2D = new Cell[this.getHeight()][this.getWidth()];
-
 	for(int i = 0; i < this.getHeight(); i++) {
 	    for(int j = 0; j < this.getWidth(); ++j) {
 		tempGrid2D[i][j] = new Cell(Token.emptyToken);
 	    }
 	}
-
 	for(int i = 0; i < this.getHeight(); i++) {
 	    for(int j = 0; j < this.getWidth(); ++j) {
 		if (i > 0) {
@@ -49,13 +56,19 @@ class Grid {
 		}
 	    }
 	}
-
 	for(int j = 0; j<this.getWidth() ; ++j) {
 	    this.arrayNextEmptyCell[j] = tempGrid2D[this.getHeight()-1][j] ;
 	}
     }
 
     public int valideColumn(int column) {
+	/**
+	 * Verify the validity of a column (range of width)
+	 *
+	 * @param column the column to verify
+	 * @exception IllegalArgumentException
+	 * @return the valide column
+	 */
 	if (column < 0 || column >= this.getWidth()) {
 	    throw new IllegalArgumentException("column outOfBound");
 	}
@@ -63,15 +76,33 @@ class Grid {
     }
 
     public Cell getNextEmptyCellAt(int column) {
+	/**
+	 * Return the next empty cell in the specify column, if the column is full, return
+	 * the top Cell of the column in the grid
+	 * 
+	 * @param column the column of the Grid where is the Cell
+	 * @return the Cell corresponding to the given column
+	 */
 	return this.arrayNextEmptyCell[valideColumn(column)];
     }
 
     public void UpToNextEmptyCellAt(int column) {
+	/**
+	 * Update the next EMPTY Cell in the column
+	 *
+	 * @param column the column of the Grid where is the Cell
+	 */
 	this.arrayNextEmptyCell[valideColumn(column)] =
 	    this.getNextEmptyCellAt(column).getNeighbor(Direction.UP);
     }
 
     public Cell getTopCellAt(int column) {
+	/**
+	 * Return the top Cell in the specify column
+	 *
+	 * @param column the column to get the top Cell
+	 * @result the top Cell of the column
+	 */
 	// Parcours jusqu'à la dernière cellule haute de la colonne i
 	Cell top = this.getNextEmptyCellAt(column);
 	while (top.getNeighbor(Direction.UP) != Cell.outOfBoundCell){
@@ -81,14 +112,13 @@ class Grid {
     }
 
     private void printGrid() {
-
+	/**
+	 * Pretty print of the grid with ansi color corresponding to the tokens in it
+	 */
 	char[][] tempArray = new char[this.getHeight()][this.getWidth()];
-
 	for(int i=0; i < this.getWidth(); ++i) {
 	    Cell cellTemp = this.arrayNextEmptyCell[i];
-
 	    cellTemp = this.getTopCellAt(i);
-
 	    int j = 0;
 	    // Parcours jusqu'à la dernière cellule basse de la colonne i
 	    while (cellTemp != Cell.outOfBoundCell) {
@@ -139,14 +169,15 @@ class Grid {
     }
 
     private void printAvailableColumn() {
-
+	/**
+	 * Pretty print of the column available to put a token in, print a 'X' when the 
+	 * column is full of Token
+	 */
 	System.out.print(Color.ansiColorOf("BLUE"));
-
 	for(int j=0; j<this.getWidth(); ++j) {
 	    System.out.print("+-^-");
 	}
 	System.out.println("+");
-
 	for(int j=0; j<this.getWidth(); ++j) {
 	    if (this.getNextEmptyCellAt(j).getColor() != Color.EMPTY) {
 		System.out.print("| X ");
@@ -159,7 +190,6 @@ class Grid {
 	    }
 	}
 	System.out.println("|");
-
 	for(int j=0; j<this.getWidth(); ++j) {
 	    System.out.print("+---");
 	}
@@ -167,7 +197,9 @@ class Grid {
     }
 
     public void print() {
-
+	/**
+	 * Print the pretty print of the grid and column available
+	 */
 	System.out.println();
 	this.printGrid();
 	System.out.println();
@@ -178,11 +210,14 @@ class Grid {
 
     @Override
     public String toString() {
-
+	/**
+	 * Return the String representation of the Grid : the color of each Token of each 
+	 * Cell 
+	 *
+	 * @return the String of Color separated by ';'
+	 */
 	StringBuilder s = new StringBuilder();
-
 	Cell c;
-
 	for (int i=0; i<this.getWidth(); i++) {
 	    c = this.getTopCellAt(i);
 	    for(int j=0; j<this.getHeight(); j++) {
@@ -194,16 +229,17 @@ class Grid {
     }
 
     public void loadGrid(String schema, Token[] tokenOfPlayers) {
-
+	/**
+	 * Load a Grid from a save (based on its own toString() method)
+	 *
+	 * @param schema the grid representation
+	 * @param tokenOfPlayers a tab of Player Token
+	 */
 	this.initGrid();
-
 	Cell current;
-
 	String[] cells = schema.split(";");
-
 	for (int i=0; i<this.getWidth(); i++) {
 	    current = this.getTopCellAt(i);
-
 	    for (int j=0; j<this.getHeight(); j++) {
 		for (int k=0; k<Color.values().length; k++) {
 		    if (tokenOfPlayers[k].getColor() ==

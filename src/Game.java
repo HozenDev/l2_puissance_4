@@ -5,8 +5,14 @@ import static java.util.Objects.requireNonNull;
 import java.util.EnumMap;
 import java.lang.Math;
 
-class Game {
-    // const    
+/**
+ * Represent a Game of Puissance 4
+ * @author Durel Enzo
+ * @author Villepreux Thibault
+ * @version 1.0
+ */
+public class Game {
+    // Const    
     public final static int numberOfPlayers = 2;
     public final static int numberOfTokenToWin = 4;
 
@@ -102,16 +108,13 @@ class Game {
 		 *
 		 * @param saveText  string representing a save
 		 */
-		
 		String[] saveSplit = saveText.split("&");
-
 		if (saveSplit.length < this.numberOfPlayers+2) {
 			this.save.delete();
 			throw new IllegalArgumentException("Sauvegarde corrompue");
 		}
 
 		// Initialise the players //
-
 		for (int i=0; i<this.numberOfPlayers; i++) {
 			Entity og = Entity.of(saveSplit[i+1].split(" ")[0]);
 			String playerName = saveSplit[i+1].split(" ")[1];
@@ -119,25 +122,20 @@ class Game {
 		}
 
 		// Initialise the current player //
-
 		this.currentPlayerId = Integer.parseInt(saveSplit[this.numberOfPlayers+1]);
 
 		// Initialise the grid //
-
 		Token[] tokenArray = new Token[Color.values().length];
-
 		for (int i=0; i<this.numberOfPlayers; i++) {
 			tokenArray[i] = this.getPlayerFromId(i).getToken();
 		}
-
 		tokenArray[Color.values().length-1] = Token.emptyToken;
-
 		this.grid.loadGrid(saveSplit[0], tokenArray);
     }
 
     private void initLocalPlayer(int position) {
 		/**
-		 * Initialisation of a Player by his id
+		 * Initialisation of a LOCAL Player, ask his username
 		 *
 		 * @param position player position in his physical representation
 		 */
@@ -148,7 +146,7 @@ class Game {
 
     private void createPlayer(String name, int id, Entity og) {
 		/**
-		 * Create a player
+		 * Create a player by call Player constructor
 		 *
 		 * @param name name of the player
 		 * @param id index of the player
@@ -157,22 +155,16 @@ class Game {
 		this.arrayPlayer[id] = new Player(name, id, og);
     }
 
-    //**************************************************************//
-    //								    //
-    // fonction pour l'affichage début partie dans le constructeur  //
-    //								    //
-    //**************************************************************//
-
     private void welcomeMessage() {
 		/**
-		 * Welcome Message
+		 * Print a welcome message
 		 */
 		System.out.println("Bienvenu au jeu du puissance 4.\n");
     }
 
     private void endMessage() {
 		/**
-		 * End Message
+		 * Print an end message
 		 */
 		// Print game ended
 		System.out.println("*****************************");
@@ -202,14 +194,12 @@ class Game {
 		System.out.println("-[2] 1 VS 1 contre une IA\n");
     }
 
-    // Gameplay initialisation
-
     private int valideGameOption(int option) {
 		/**
 		 * Validation of game option
 		 *
 		 * @param option game option to validate
-		 * @exception if not a valide game option
+		 * @exception IllegalArgumentException
 		 * @return valide game option
 		 */
 		if (option <= 0 || option > 2) throw new IllegalArgumentException();
@@ -217,6 +207,9 @@ class Game {
     }
 
     private void setOptionGame() {
+		/**
+		 * Ask the player to choose a Game Option (LOCAL or IA)
+		 */
 		while (true) {
 			try {
 				printPartyChoice();
@@ -236,16 +229,21 @@ class Game {
 		}
     }
 
-    // Fonction de démarrage
-
     public static void run() {
+		/**
+		 * Run a game of puissance 4
+		 */
     	Game game = new Game();
 		game.play();
     }
 
-    // Fonction de gestions des joueurs
-
     private Player getPlayerFromId(int id) {
+		/**
+		 * Get a player for a specific id
+		 *
+		 * @param id index of the Player
+		 * @return the Player corresponding to the index
+		 */
 		if (id < 0 || id > this.numberOfPlayers) {
 			throw new IllegalArgumentException("Bad player id");
 		}
@@ -253,11 +251,21 @@ class Game {
     }
 
     private Player nextPlayer(Player current) {
+		/**
+		 * Update the currentPlayerId by set the next in the physical 
+		 * representation
+		 * 
+		 * @param current the last Player who have played
+		 * @return the next player to play
+		 */
 		this.currentPlayerId = (this.currentPlayerId+1)%this.numberOfPlayers;
 		return this.getPlayerFromId(this.currentPlayerId);
     }
 
     private void printCurrentPlayer() {
+		/**
+		 * Print the toString() method in his personnal token color with ANSI
+		 */
 		System.out.println(
 			Color.ansiColorOf(this.getPlayerFromId(this.currentPlayerId).getColor())
 			+ "["
@@ -265,10 +273,10 @@ class Game {
 			+ Color.ansiColorOf("WHITE"));
     }
 
-    // Fonction pricipale
-
     private void play() {
-
+		/**
+		 * Game loop, end when game finish (Tie or Win or Quit)
+		 */
 		boolean playerHasPlay;
 		Player currentPlayer = this.getPlayerFromId(this.currentPlayerId);
 
@@ -297,9 +305,12 @@ class Game {
 		this.endMessage();
     }
 
-    // fonction du menu
-
     private int chooseAColumn() {
+		/**
+		 * Choose a column depending if it's local or ia player
+		 *
+		 * @return An int corresponding to the choosen column
+		 */
 		if (this.getPlayerFromId(this.numberOfPlayers-1).whatIs() == Entity.IA) {
 			if (this.currentPlayerId == this.numberOfPlayers-1) {
 				return (new Random()).nextInt(7);		
@@ -309,6 +320,9 @@ class Game {
     }
 
     private void menu() {
+		/**
+		 * Game menu (play, save, quit) loop.
+		 */
 		boolean done = false;
 		while (!done) {
 			System.out.println("[1:Continuer][2:Sauvegarder][3:Quitter le jeu]");
@@ -337,9 +351,12 @@ class Game {
 		}
     }
 
-    // Fonctions de demande de saisi
-
     private int askForInput() {
+		/**
+		 * If the player is LOCAL ask what he want to do (play, menu).
+		 *
+		 * @return the column choosen.
+		 */
 		int column = 0;
 		while (true) {
 			System.out.print("Choisissez une colonne : ");
@@ -363,11 +380,24 @@ class Game {
 		return column;
     }
 
-    private int valideColumn(int column) {return this.grid.valideColumn(column);}
+    private int valideColumn(int column) {
+		/**
+		 * Delegation on valideColumn Grid function
+		 *
+		 * @param column column to validate
+		 * @return the valide column
+		 */
+		return this.grid.valideColumn(column);
+	}
 
-    // Fonction de gameplay
-
-    public boolean playAToken(Token token, int column) {
+    private boolean playAToken(Token token, int column) {
+		/**
+		 * The player play a token to a given column
+		 *
+		 * @param token The token to play
+		 * @param column The column where to play
+		 * @return a boolean if the play is a success or not
+		 */
 		if (token == Token.emptyToken) {
 			throw new IllegalArgumentException("You can't play an empty Token");
 		}
@@ -385,23 +415,43 @@ class Game {
 		return true;
     }
 
-    // Fonction de test de fin de partie
-
-    private boolean isTie() {return this.iteration == this.grid.getSize();}
+    private boolean isTie() {
+		/**
+		 * Tie function : if the number of play is equal to the size of the 
+		 * grid
+		 *
+		 * @return boolean corresponding if it's a tie or not
+		 */
+		return this.iteration == this.grid.getSize();
+	}
 
     private boolean hasWin() {
+		/**
+		 * Win condition function: call check cell function on the last move
+		 *
+		 * @return a boolean corresponding if it's a win or not
+		 */
 		Cell lastCellPlayed = this.grid.getNextEmptyCellAt(this.lastMove);
 		if (lastCellPlayed.getToken() != Token.emptyToken);
 		else lastCellPlayed = lastCellPlayed.getNeighbor(Direction.DOWN);
 		return lastCellPlayed.check();
     }
 
-    private void isEnd() {if (this.isTie() || this.hasWin()) this.end = true;}
-
-    // toString()
+    private void isEnd() {
+		/**
+		 * End condition : if it's a tie or a win it makes the game to end
+		 */
+		if (this.isTie() || this.hasWin()) this.end = true;
+	}
     
     @Override
     public String toString() {
+		/**
+		 * Representing color of grid cells, players informations and the next 
+		 * player who will play
+		 *
+		 * @return the String representation
+		 */
 		return this.grid.toString() + "&"
 			+ this.getPlayerFromId(0).toString() + "&"
 			+ this.getPlayerFromId(1).toString() + "&"

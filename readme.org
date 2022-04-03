@@ -1,0 +1,56 @@
+* Puissance 4
+** Pour commencer
+*** Pré-requis :
+
+**** Java : =java=
+
+***** Linux:
+
+      [[https://www.java.com/fr/download/help/linux_install.html][Installer Java sur Linux]]
+
+***** Windows:
+
+      [[https://www.java.com/fr/download/help/windows_manual_download.html][Installer Java sur Windows]]
+    
+*** Installation
+
+    Assurer vous d'avoir la dernière version compilée :
+
+    =cd projet-java=
+    =make=
+
+** Démarrage
+
+*** Linux
+
+    =cd projet-java=
+    =./exec=
+
+** Outils
+
+   - Emacs
+   - Doxygen / Doxywizard
+   - 
+
+** Versions
+
+   *Dernière version stable :* 1.0
+
+   *Dernière version :* 1.0
+
+   [[https://gitlab.isima.fr/endurel/projet-java/tags][Liste des versions]]
+
+** Auteurs
+
+*** Responsable de projet
+
+    - LOISEAU Yannick
+
+*** Equipe de développement
+      
+   - DUREL Enzo
+   - VILLEPREUX Thibault
+
+** Licence
+
+   Le projet est *open-source*

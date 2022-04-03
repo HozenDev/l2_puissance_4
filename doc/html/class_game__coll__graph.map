@@ -1,0 +1,12 @@
+<map id="Game" name="Game">
+<area shape="rect" id="node1" title="Represent a Game of Puissance 4." alt="" coords="434,377,495,404"/>
+<area shape="rect" id="node2" href="$class_player.html" title="Represent a Player of a Game using Token." alt="" coords="447,199,509,225"/>
+<area shape="rect" id="node3" href="$class_token.html" title="Represent a Token of Puissance 4." alt="" coords="375,102,434,129"/>
+<area shape="rect" id="node7" href="$class_cell.html" title="Logical representation of a case in the grid of the Game of Puissance 4." alt="" coords="245,199,292,225"/>
+<area shape="rect" id="node4" href="$enum_color.html" title="Represent colors globally." alt="" coords="377,5,433,32"/>
+<area shape="rect" id="node5" href="$enum_entity.html" title="Logical representation of a Player (IA, LOCAL(human))" alt="" coords="567,102,627,129"/>
+<area shape="rect" id="node6" href="$class_grid.html" title="Logical representation of a board of the Game of Puissance 4." alt="" coords="319,288,368,315"/>
+<area shape="rect" id="node8" title=" " alt="" coords="5,102,161,129"/>
+<area shape="rect" id="node9" title=" " alt="" coords="186,95,351,136"/>
+<area shape="rect" id="node10" href="$class_save.html" title="Represent a global Save class." alt="" coords="569,288,624,315"/>
+</map>

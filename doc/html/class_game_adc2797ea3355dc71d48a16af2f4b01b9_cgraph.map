@@ -1,0 +1,11 @@
+<map id="Game.playAToken" name="Game.playAToken">
+<area shape="rect" id="node1" title=" " alt="" coords="5,107,144,133"/>
+<area shape="rect" id="node2" href="$class_cell.html#a40d6c378d52ac80e926df71b35d75f4f" title=" " alt="" coords="465,5,596,32"/>
+<area shape="rect" id="node3" href="$class_grid.html#afebd807863b80c631a1296ee320d09de" title=" " alt="" coords="437,107,624,133"/>
+<area shape="rect" id="node6" href="$class_cell.html#adecb03aa9121532ac4d3a565cae961be" title=" " alt="" coords="236,107,345,133"/>
+<area shape="rect" id="node7" href="$class_cell.html#af374a82c16117328158167f9767cc984" title=" " alt="" coords="237,208,345,235"/>
+<area shape="rect" id="node9" href="$class_grid.html#a42995be492ec8858fcd8359538a2705c" title=" " alt="" coords="192,56,389,83"/>
+<area shape="rect" id="node4" href="$class_grid.html#a67ed01cf51500ff62088eb7f3f948068" title=" " alt="" coords="672,81,815,108"/>
+<area shape="rect" id="node5" href="$class_grid.html#aa5b9429d74541d53b35d9f838c9e80db" title=" " alt="" coords="863,81,975,108"/>
+<area shape="rect" id="node8" href="$class_token.html#a6c048b05545b149b802b4ca44b885180" title=" " alt="" coords="471,208,590,235"/>
+</map>

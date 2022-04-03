@@ -1,0 +1,4 @@
+<map id="Cell" name="Cell">
+<area shape="rect" id="node1" title="Logical representation of a case in the grid of the Game of Puissance 4." alt="" coords="60,80,107,107"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,161,32"/>
+</map>
