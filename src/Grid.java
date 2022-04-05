@@ -92,8 +92,11 @@ public class Grid {
 	 *
 	 * @param column the column of the Grid where is the Cell
 	 */
-	this.arrayNextEmptyCell[valideColumn(column)] =
-	    this.getNextEmptyCellAt(column).getNeighbor(Direction.UP);
+	if (this.getNextEmptyCellAt(valideColumn(column)).getNeighbor(Direction.UP)
+	    != Cell.outOfBoundCell) {
+	    this.arrayNextEmptyCell[column] =
+		this.getNextEmptyCellAt(column).getNeighbor(Direction.UP);	    
+	}
     }
 
     public Cell getTopCellAt(int column) {
@@ -235,20 +238,21 @@ public class Grid {
 	 * @param schema the grid representation
 	 * @param tokenOfPlayers a tab of Player Token
 	 */
-	this.initGrid();
 	Cell current;
 	String[] cells = schema.split(";");
+	
 	for (int i=0; i<this.getWidth(); i++) {
 	    current = this.getTopCellAt(i);
 	    for (int j=0; j<this.getHeight(); j++) {
-		for (int k=0; k<Color.values().length; k++) {
+		for (int k=0; k<Game.numberOfPlayers; k++) {
 		    if (tokenOfPlayers[k].getColor() ==
 			Color.colorOf(cells[j+i*this.getHeight()]))
 		    {
+			if (tokenOfPlayers[k].getColor() == Color.EMPTY) {
+			    throw new IllegalArgumentException("A player token can't be empty");
+			}
 			current.setToken(tokenOfPlayers[k]);
-			if (tokenOfPlayers[k] != Token.emptyToken)
-			    this.UpToNextEmptyCellAt(i);
-			break;
+			this.UpToNextEmptyCellAt(i);
 		    }
 		}
 		current = current.getNeighbor(Direction.DOWN);

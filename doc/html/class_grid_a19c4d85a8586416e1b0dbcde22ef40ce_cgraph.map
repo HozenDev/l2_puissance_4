@@ -1,6 +1,0 @@
-<map id="Grid.initGrid" name="Grid.initGrid">
-<area shape="rect" id="node1" title=" " alt="" coords="5,56,107,83"/>
-<area shape="rect" id="node2" href="$class_grid.html#a8ab527034cdf71563f9ac57566d97858" title=" " alt="" coords="161,5,279,32"/>
-<area shape="rect" id="node3" href="$class_grid.html#aa5b9429d74541d53b35d9f838c9e80db" title=" " alt="" coords="164,56,276,83"/>
-<area shape="rect" id="node4" href="$class_cell.html#abb3fdb839ab30f0ed572431b50f4fa85" title=" " alt="" coords="155,107,285,133"/>
-</map>

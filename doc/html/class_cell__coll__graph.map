@@ -1,8 +1,0 @@
-<map id="Cell" name="Cell">
-<area shape="rect" id="node1" title="Logical representation of a case in the grid of the Game of Puissance 4." alt="" coords="133,373,341,627"/>
-<area shape="rect" id="node2" href="$class_comparable.html" title=" " alt="" coords="5,219,161,296"/>
-<area shape="rect" id="node3" href="$class_token.html" title="Represent a Token of Puissance 4." alt="" coords="185,204,288,311"/>
-<area shape="rect" id="node4" href="$enum_color.html" title="Represent colors globally." alt="" coords="175,5,298,141"/>
-<area shape="rect" id="node5" title=" " alt="" coords="431,211,597,303"/>
-<area shape="rect" id="node6" title=" " alt="" coords="471,35,557,112"/>
-</map>

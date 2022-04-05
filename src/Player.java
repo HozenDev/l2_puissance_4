@@ -19,6 +19,8 @@ public class Player {
 	 * @param e Entity of the Player (LOCAL or IA)
 	 */
 	this.token = initToken(validePlayer(indexPlayer));
+	System.out.println(this.token.getColor());
+
         this.pseudo = pseudo;
 	this.gameplay = e;
     }

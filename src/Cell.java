@@ -45,7 +45,7 @@ public class Cell implements Comparable<Cell> {
 	Cell get;
 	get = this.neighborhood.get(requireNonNull(d));
 	if (get == null) {
-	    get = this.outOfBoundCell;
+	    get = Cell.outOfBoundCell;
 	}
 	return get;
     }

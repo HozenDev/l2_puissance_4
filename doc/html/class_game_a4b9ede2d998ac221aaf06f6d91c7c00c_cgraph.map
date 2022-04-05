@@ -1,8 +1,0 @@
-<map id="Game.askForInput" name="Game.askForInput">
-<area shape="rect" id="node1" title=" " alt="" coords="5,50,147,77"/>
-<area shape="rect" id="node2" href="$class_grid.html#aa5b9429d74541d53b35d9f838c9e80db" title=" " alt="" coords="588,38,700,65"/>
-<area shape="rect" id="node3" href="$class_game.html#afcf6834542dfc4881945698a3f65c225" title=" " alt="" coords="221,50,323,77"/>
-<area shape="rect" id="node5" href="$class_game.html#af7f44b14b916ef59d43031811601c8ee" title=" " alt="" coords="195,101,349,128"/>
-<area shape="rect" id="node4" href="$class_save.html#a44631a0aa32e1659c1898ab2ac34d33c" title=" " alt="" coords="423,50,514,77"/>
-<area shape="rect" id="node6" href="$class_grid.html#a67ed01cf51500ff62088eb7f3f948068" title=" " alt="" coords="397,101,540,128"/>
-</map>

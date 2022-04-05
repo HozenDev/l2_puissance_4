@@ -1,7 +1,0 @@
-<map id="Grid.Grid" name="Grid.Grid">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,85,57"/>
-<area shape="rect" id="node2" href="$class_grid.html#aa5b9429d74541d53b35d9f838c9e80db" title=" " alt="" coords="292,5,404,32"/>
-<area shape="rect" id="node3" href="$class_grid.html#a19c4d85a8586416e1b0dbcde22ef40ce" title=" " alt="" coords="133,56,235,83"/>
-<area shape="rect" id="node4" href="$class_grid.html#a8ab527034cdf71563f9ac57566d97858" title=" " alt="" coords="289,56,407,83"/>
-<area shape="rect" id="node5" href="$class_cell.html#abb3fdb839ab30f0ed572431b50f4fa85" title=" " alt="" coords="283,107,413,133"/>
-</map>
