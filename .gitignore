@@ -1,4 +1,4 @@
 log.txt
 doc/html/
 doc/latex/
-doc/doxygen-awesome-css/
+!doc/latex/refman.pdf
