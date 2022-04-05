@@ -1,7 +1,7 @@
 var hierarchy =
 [
     [ "Color", "enum_color.html", null ],
-    [ "Comparable", null, [
+    [ "Comparable", "class_comparable.html", [
       [ "Cell", "class_cell.html", null ]
     ] ],
     [ "Direction", "enum_direction.html", null ],

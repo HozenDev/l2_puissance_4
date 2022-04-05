@@ -2,6 +2,7 @@ var annotated_dup =
 [
     [ "Cell", "class_cell.html", "class_cell" ],
     [ "Color", "enum_color.html", "enum_color" ],
+    [ "Comparable", "class_comparable.html", null ],
     [ "Direction", "enum_direction.html", "enum_direction" ],
     [ "Entity", "enum_entity.html", "enum_entity" ],
     [ "Game", "class_game.html", "class_game" ],

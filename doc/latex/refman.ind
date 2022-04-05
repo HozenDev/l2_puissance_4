@@ -1,0 +1,379 @@
+\begin{theindex}
+
+  \item {/home/hozen/cur/projet-\/java/src/Cell.java}, \hyperpage{81}
+  \item {/home/hozen/cur/projet-\/java/src/Color.java}, 
+		\hyperpage{82, 83}
+  \item {/home/hozen/cur/projet-\/java/src/Direction.java}, 
+		\hyperpage{83}
+  \item {/home/hozen/cur/projet-\/java/src/Entity.java}, \hyperpage{84}
+  \item {/home/hozen/cur/projet-\/java/src/Game.java}, 
+		\hyperpage{84, 85}
+  \item {/home/hozen/cur/projet-\/java/src/Grid.java}, \hyperpage{89}
+  \item {/home/hozen/cur/projet-\/java/src/Main.java}, \hyperpage{91}
+  \item {/home/hozen/cur/projet-\/java/src/Player.java}, 
+		\hyperpage{91, 92}
+  \item {/home/hozen/cur/projet-\/java/src/Save.java}, \hyperpage{92}
+  \item {/home/hozen/cur/projet-\/java/src/Token.java}, 
+		\hyperpage{93, 94}
+
+  \indexspace
+
+  \item {ansiColorOf}
+    \subitem {Color}, \hyperpage{20}
+  \item {arrayNextEmptyCell}
+    \subitem {Grid}, \hyperpage{61}
+  \item {arrayPlayer}
+    \subitem {Game}, \hyperpage{47}
+  \item {askForInput}
+    \subitem {Game}, \hyperpage{30}
+  \item {askForLoadSave}
+    \subitem {Game}, \hyperpage{31}
+  \item {askForPlayers}
+    \subitem {Game}, \hyperpage{32}
+
+  \indexspace
+
+  \item {Cell}, \hyperpage{7}
+    \subitem {Cell}, \hyperpage{9}
+    \subitem {check}, \hyperpage{10}
+    \subitem {compareTo}, \hyperpage{10}
+    \subitem {equals}, \hyperpage{11}
+    \subitem {getColor}, \hyperpage{12}
+    \subitem {getNeighbor}, \hyperpage{12}
+    \subitem {getToken}, \hyperpage{13}
+    \subitem {isEmpty}, \hyperpage{13}
+    \subitem {neighborhood}, \hyperpage{18}
+    \subitem {numberOfSameNeighbor}, \hyperpage{14, 15}
+    \subitem {outOfBoundCell}, \hyperpage{18}
+    \subitem {setNeighbor}, \hyperpage{16}
+    \subitem {setToken}, \hyperpage{16}
+    \subitem {token}, \hyperpage{18}
+    \subitem {toString}, \hyperpage{17}
+  \item {check}
+    \subitem {Cell}, \hyperpage{10}
+  \item {chooseAColumn}
+    \subitem {Game}, \hyperpage{32}
+  \item {Color}, \hyperpage{19}
+    \subitem {ansiColorOf}, \hyperpage{20}
+    \subitem {colorOf}, \hyperpage{21}
+    \subitem {EMPTY}, \hyperpage{21}
+    \subitem {RED}, \hyperpage{21}
+    \subitem {YELLOW}, \hyperpage{21}
+  \item {colorOf}
+    \subitem {Color}, \hyperpage{21}
+  \item {colorToken}
+    \subitem {Token}, \hyperpage{80}
+  \item {Comparable}, \hyperpage{22}
+  \item {compareTo}
+    \subitem {Cell}, \hyperpage{10}
+  \item {createPlayer}
+    \subitem {Game}, \hyperpage{33}
+  \item {currentPlayerId}
+    \subitem {Game}, \hyperpage{47}
+
+  \indexspace
+
+  \item {delete}
+    \subitem {Save}, \hyperpage{72}
+  \item {Direction}, \hyperpage{23}
+    \subitem {DOWN}, \hyperpage{25}
+    \subitem {getDiagonales}, \hyperpage{24}
+    \subitem {getOpposite}, \hyperpage{24}
+    \subitem {LEFT}, \hyperpage{25}
+    \subitem {RIGHT}, \hyperpage{25}
+    \subitem {UP}, \hyperpage{25}
+  \item {DOWN}
+    \subitem {Direction}, \hyperpage{25}
+
+  \indexspace
+
+  \item {EMPTY}
+    \subitem {Color}, \hyperpage{21}
+  \item {emptyToken}
+    \subitem {Token}, \hyperpage{80}
+  \item {end}
+    \subitem {Game}, \hyperpage{47}
+  \item {endMessage}
+    \subitem {Game}, \hyperpage{34}
+  \item {Entity}, \hyperpage{26}
+    \subitem {IA}, \hyperpage{27}
+    \subitem {LOCAL}, \hyperpage{27}
+    \subitem {of}, \hyperpage{27}
+  \item {equals}
+    \subitem {Cell}, \hyperpage{11}
+
+  \indexspace
+
+  \item {filename}
+    \subitem {Save}, \hyperpage{77}
+
+  \indexspace
+
+  \item {Game}, \hyperpage{28}
+    \subitem {arrayPlayer}, \hyperpage{47}
+    \subitem {askForInput}, \hyperpage{30}
+    \subitem {askForLoadSave}, \hyperpage{31}
+    \subitem {askForPlayers}, \hyperpage{32}
+    \subitem {chooseAColumn}, \hyperpage{32}
+    \subitem {createPlayer}, \hyperpage{33}
+    \subitem {currentPlayerId}, \hyperpage{47}
+    \subitem {end}, \hyperpage{47}
+    \subitem {endMessage}, \hyperpage{34}
+    \subitem {Game}, \hyperpage{30}
+    \subitem {gameplay}, \hyperpage{48}
+    \subitem {getPlayerFromId}, \hyperpage{34}
+    \subitem {grid}, \hyperpage{48}
+    \subitem {hasWin}, \hyperpage{35}
+    \subitem {initLocalPlayer}, \hyperpage{36}
+    \subitem {isEnd}, \hyperpage{36}
+    \subitem {isTie}, \hyperpage{37}
+    \subitem {iteration}, \hyperpage{48}
+    \subitem {lastMove}, \hyperpage{48}
+    \subitem {loadSave}, \hyperpage{38}
+    \subitem {menu}, \hyperpage{39}
+    \subitem {nextPlayer}, \hyperpage{39}
+    \subitem {numberOfPlayers}, \hyperpage{48}
+    \subitem {numberOfTokenToWin}, \hyperpage{48}
+    \subitem {play}, \hyperpage{40}
+    \subitem {playAToken}, \hyperpage{41}
+    \subitem {printCurrentPlayer}, \hyperpage{42}
+    \subitem {printPartyChoice}, \hyperpage{43}
+    \subitem {run}, \hyperpage{43}
+    \subitem {save}, \hyperpage{49}
+    \subitem {setOptionGame}, \hyperpage{44}
+    \subitem {toString}, \hyperpage{45}
+    \subitem {valideColumn}, \hyperpage{45}
+    \subitem {valideGameOption}, \hyperpage{46}
+    \subitem {welcomeMessage}, \hyperpage{47}
+  \item {gameplay}
+    \subitem {Game}, \hyperpage{48}
+    \subitem {Player}, \hyperpage{69}
+  \item {getColor}
+    \subitem {Cell}, \hyperpage{12}
+    \subitem {Player}, \hyperpage{66}
+    \subitem {Token}, \hyperpage{79}
+  \item {getDiagonales}
+    \subitem {Direction}, \hyperpage{24}
+  \item {getHeight}
+    \subitem {Grid}, \hyperpage{52}
+  \item {getNeighbor}
+    \subitem {Cell}, \hyperpage{12}
+  \item {getNextEmptyCellAt}
+    \subitem {Grid}, \hyperpage{52}
+  \item {getOpposite}
+    \subitem {Direction}, \hyperpage{24}
+  \item {getPlayerFromId}
+    \subitem {Game}, \hyperpage{34}
+  \item {getSize}
+    \subitem {Grid}, \hyperpage{53}
+  \item {getToken}
+    \subitem {Cell}, \hyperpage{13}
+    \subitem {Player}, \hyperpage{66}
+  \item {getTopCellAt}
+    \subitem {Grid}, \hyperpage{54}
+  \item {getUsername}
+    \subitem {Player}, \hyperpage{67}
+  \item {getWidth}
+    \subitem {Grid}, \hyperpage{54}
+  \item {Grid}, \hyperpage{49}
+    \subitem {arrayNextEmptyCell}, \hyperpage{61}
+    \subitem {getHeight}, \hyperpage{52}
+    \subitem {getNextEmptyCellAt}, \hyperpage{52}
+    \subitem {getSize}, \hyperpage{53}
+    \subitem {getTopCellAt}, \hyperpage{54}
+    \subitem {getWidth}, \hyperpage{54}
+    \subitem {Grid}, \hyperpage{51}
+    \subitem {HEIGHT}, \hyperpage{61}
+    \subitem {initGrid}, \hyperpage{55}
+    \subitem {loadGrid}, \hyperpage{55}
+    \subitem {print}, \hyperpage{56}
+    \subitem {printAvailableColumn}, \hyperpage{57}
+    \subitem {printGrid}, \hyperpage{58}
+    \subitem {toString}, \hyperpage{58}
+    \subitem {UpToNextEmptyCellAt}, \hyperpage{59}
+    \subitem {valideColumn}, \hyperpage{60}
+    \subitem {WIDTH}, \hyperpage{61}
+  \item {grid}
+    \subitem {Game}, \hyperpage{48}
+
+  \indexspace
+
+  \item {hasWin}
+    \subitem {Game}, \hyperpage{35}
+  \item {HEIGHT}
+    \subitem {Grid}, \hyperpage{61}
+
+  \indexspace
+
+  \item {IA}
+    \subitem {Entity}, \hyperpage{27}
+  \item {initGrid}
+    \subitem {Grid}, \hyperpage{55}
+  \item {initLocalPlayer}
+    \subitem {Game}, \hyperpage{36}
+  \item {initToken}
+    \subitem {Player}, \hyperpage{67}
+  \item {isEmpty}
+    \subitem {Cell}, \hyperpage{13}
+    \subitem {Save}, \hyperpage{73}
+  \item {isEnd}
+    \subitem {Game}, \hyperpage{36}
+  \item {isTie}
+    \subitem {Game}, \hyperpage{37}
+  \item {iteration}
+    \subitem {Game}, \hyperpage{48}
+
+  \indexspace
+
+  \item {lastMove}
+    \subitem {Game}, \hyperpage{48}
+  \item {LEFT}
+    \subitem {Direction}, \hyperpage{25}
+  \item {loadGrid}
+    \subitem {Grid}, \hyperpage{55}
+  \item {loadSave}
+    \subitem {Game}, \hyperpage{38}
+  \item {LOCAL}
+    \subitem {Entity}, \hyperpage{27}
+
+  \indexspace
+
+  \item {Main}, \hyperpage{62}
+    \subitem {main}, \hyperpage{62}
+  \item {main}
+    \subitem {Main}, \hyperpage{62}
+  \item {menu}
+    \subitem {Game}, \hyperpage{39}
+
+  \indexspace
+
+  \item {neighborhood}
+    \subitem {Cell}, \hyperpage{18}
+  \item {nextPlayer}
+    \subitem {Game}, \hyperpage{39}
+  \item {numberOfPlayers}
+    \subitem {Game}, \hyperpage{48}
+  \item {numberOfSameNeighbor}
+    \subitem {Cell}, \hyperpage{14, 15}
+  \item {numberOfTokenToWin}
+    \subitem {Game}, \hyperpage{48}
+
+  \indexspace
+
+  \item {of}
+    \subitem {Entity}, \hyperpage{27}
+  \item {outOfBoundCell}
+    \subitem {Cell}, \hyperpage{18}
+
+  \indexspace
+
+  \item {play}
+    \subitem {Game}, \hyperpage{40}
+  \item {playAToken}
+    \subitem {Game}, \hyperpage{41}
+  \item {Player}, \hyperpage{63}
+    \subitem {gameplay}, \hyperpage{69}
+    \subitem {getColor}, \hyperpage{66}
+    \subitem {getToken}, \hyperpage{66}
+    \subitem {getUsername}, \hyperpage{67}
+    \subitem {initToken}, \hyperpage{67}
+    \subitem {Player}, \hyperpage{65}
+    \subitem {pseudo}, \hyperpage{69}
+    \subitem {token}, \hyperpage{70}
+    \subitem {toString}, \hyperpage{68}
+    \subitem {validePlayer}, \hyperpage{68}
+    \subitem {whatIs}, \hyperpage{69}
+  \item {print}
+    \subitem {Grid}, \hyperpage{56}
+  \item {printAvailableColumn}
+    \subitem {Grid}, \hyperpage{57}
+  \item {printCurrentPlayer}
+    \subitem {Game}, \hyperpage{42}
+  \item {printGrid}
+    \subitem {Grid}, \hyperpage{58}
+  \item {printPartyChoice}
+    \subitem {Game}, \hyperpage{43}
+  \item {pseudo}
+    \subitem {Player}, \hyperpage{69}
+
+  \indexspace
+
+  \item {read}
+    \subitem {Save}, \hyperpage{73, 74}
+  \item {RED}
+    \subitem {Color}, \hyperpage{21}
+  \item {RIGHT}
+    \subitem {Direction}, \hyperpage{25}
+  \item {run}
+    \subitem {Game}, \hyperpage{43}
+
+  \indexspace
+
+  \item {Save}, \hyperpage{70}
+    \subitem {delete}, \hyperpage{72}
+    \subitem {filename}, \hyperpage{77}
+    \subitem {isEmpty}, \hyperpage{73}
+    \subitem {read}, \hyperpage{73, 74}
+    \subitem {Save}, \hyperpage{71}
+    \subitem {write}, \hyperpage{75}
+  \item {save}
+    \subitem {Game}, \hyperpage{49}
+  \item {setNeighbor}
+    \subitem {Cell}, \hyperpage{16}
+  \item {setOptionGame}
+    \subitem {Game}, \hyperpage{44}
+  \item {setToken}
+    \subitem {Cell}, \hyperpage{16}
+
+  \indexspace
+
+  \item {Token}, \hyperpage{77}
+    \subitem {colorToken}, \hyperpage{80}
+    \subitem {emptyToken}, \hyperpage{80}
+    \subitem {getColor}, \hyperpage{79}
+    \subitem {Token}, \hyperpage{78}
+    \subitem {toString}, \hyperpage{79}
+  \item {token}
+    \subitem {Cell}, \hyperpage{18}
+    \subitem {Player}, \hyperpage{70}
+  \item {toString}
+    \subitem {Cell}, \hyperpage{17}
+    \subitem {Game}, \hyperpage{45}
+    \subitem {Grid}, \hyperpage{58}
+    \subitem {Player}, \hyperpage{68}
+    \subitem {Token}, \hyperpage{79}
+
+  \indexspace
+
+  \item {UP}
+    \subitem {Direction}, \hyperpage{25}
+  \item {UpToNextEmptyCellAt}
+    \subitem {Grid}, \hyperpage{59}
+
+  \indexspace
+
+  \item {valideColumn}
+    \subitem {Game}, \hyperpage{45}
+    \subitem {Grid}, \hyperpage{60}
+  \item {valideGameOption}
+    \subitem {Game}, \hyperpage{46}
+  \item {validePlayer}
+    \subitem {Player}, \hyperpage{68}
+
+  \indexspace
+
+  \item {welcomeMessage}
+    \subitem {Game}, \hyperpage{47}
+  \item {whatIs}
+    \subitem {Player}, \hyperpage{69}
+  \item {WIDTH}
+    \subitem {Grid}, \hyperpage{61}
+  \item {write}
+    \subitem {Save}, \hyperpage{75}
+
+  \indexspace
+
+  \item {YELLOW}
+    \subitem {Color}, \hyperpage{21}
+
+\end{theindex}

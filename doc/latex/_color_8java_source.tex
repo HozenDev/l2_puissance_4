@@ -1,0 +1,48 @@
+\hypertarget{_color_8java_source}{}\doxysection{Color.\+java}
+\label{_color_8java_source}\index{/home/hozen/cur/projet-\/java/src/Color.java@{/home/hozen/cur/projet-\/java/src/Color.java}}
+\mbox{\hyperlink{_color_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00007}\mbox{\hyperlink{enum_color}{00007}} \textcolor{keyword}{public} \textcolor{keyword}{enum} \mbox{\hyperlink{enum_color}{Color}} \{}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00008}00008 }
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00009}\mbox{\hyperlink{enum_color_adfa66339b40bebe263e0fd1f6d932d89}{00009}}     RED, YELLOW, \mbox{\hyperlink{enum_color_adfa66339b40bebe263e0fd1f6d932d89}{EMPTY}};}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00010}00010 }
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00011}\mbox{\hyperlink{enum_color_a711970967f2cdb96f676a8e0caf8a3b0}{00011}}     \textcolor{keyword}{public} \textcolor{keyword}{static} \mbox{\hyperlink{enum_color}{Color}} \mbox{\hyperlink{enum_color_a711970967f2cdb96f676a8e0caf8a3b0}{colorOf}}(String colorString) \{}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00018}00018     \textcolor{keywordflow}{switch} (colorString) \{}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00019}00019     \textcolor{keywordflow}{case} \textcolor{stringliteral}{"{}RED"{}}:}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00020}00020         \textcolor{keywordflow}{return} \mbox{\hyperlink{enum_color}{Color}}.\mbox{\hyperlink{enum_color_a6e9d8ca6253a913f7a36e30bab970384}{RED}};}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00021}00021     \textcolor{keywordflow}{case} \textcolor{stringliteral}{"{}YELLOW"{}}:}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00022}00022         \textcolor{keywordflow}{return} \mbox{\hyperlink{enum_color}{Color}}.\mbox{\hyperlink{enum_color_a64e3f5c4bfa7ca21c5e7a544e0a2f718}{YELLOW}};}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00023}00023     \}}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00024}00024     \textcolor{keywordflow}{return} \mbox{\hyperlink{enum_color}{Color}}.\mbox{\hyperlink{enum_color_adfa66339b40bebe263e0fd1f6d932d89}{EMPTY}};}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00025}00025     \}}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00026}00026 }
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00027}\mbox{\hyperlink{enum_color_a3060c67deba10b95d7753199a328b820}{00027}}     \textcolor{keyword}{public} \textcolor{keyword}{static} String \mbox{\hyperlink{enum_color_a3060c67deba10b95d7753199a328b820}{ansiColorOf}}(\mbox{\hyperlink{enum_color}{Color}} c) \{}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00034}00034     \textcolor{keywordflow}{switch} (c) \{}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00035}00035     \textcolor{keywordflow}{case} RED :}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00036}00036         \textcolor{keywordflow}{return} ansiColorOf(\textcolor{stringliteral}{"{}RED"{}});}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00037}00037     \textcolor{keywordflow}{case} YELLOW :}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00038}00038         \textcolor{keywordflow}{return} ansiColorOf(\textcolor{stringliteral}{"{}YELLOW"{}});}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00039}00039     \}}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00040}00040     \textcolor{keywordflow}{return} ansiColorOf(\textcolor{stringliteral}{"{}WHITE"{}});}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00041}00041     \}}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00042}00042 }
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00043}\mbox{\hyperlink{enum_color_a1439085698a0c84d751dcbbef61456fb}{00043}}     \textcolor{keyword}{public} \textcolor{keyword}{static} String \mbox{\hyperlink{enum_color_a1439085698a0c84d751dcbbef61456fb}{ansiColorOf}}(String c) \{}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00050}00050     \textcolor{keywordflow}{switch} (c) \{}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00051}00051     \textcolor{keywordflow}{case} \textcolor{stringliteral}{"{}RED"{}}:}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00052}00052         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}\(\backslash\)u001B[31m"{}}; \textcolor{comment}{// RED}}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00053}00053     \textcolor{keywordflow}{case} \textcolor{stringliteral}{"{}YELLOW"{}}:}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00054}00054         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}\(\backslash\)u001B[33m"{}}; \textcolor{comment}{// YELLOW}}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00055}00055     \textcolor{keywordflow}{case} \textcolor{stringliteral}{"{}BLUE"{}}:}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00056}00056         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}\(\backslash\)u001B[36m"{}}; \textcolor{comment}{// BLUE}}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00057}00057     \textcolor{keywordflow}{case} \textcolor{stringliteral}{"{}GREEN"{}}:}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00058}00058         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}\(\backslash\)u001B[32m"{}}; \textcolor{comment}{// GREEN}}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00059}00059     \textcolor{keywordflow}{case} \textcolor{stringliteral}{"{}WHITE"{}}:}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00060}00060         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}\(\backslash\)u001B[37m"{}}; \textcolor{comment}{// WHITE}}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00061}00061     \}}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00062}00062     System.out.println(\textcolor{stringliteral}{"{}There is no color corresponding to the argument: white is returning"{}});}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00063}00063     \textcolor{keywordflow}{return} ansiColorOf(\textcolor{stringliteral}{"{}WHITE"{}});}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00064}00064     \}}
+\DoxyCodeLine{\Hypertarget{_color_8java_source_l00065}00065 \}}
+
+\end{DoxyCode}

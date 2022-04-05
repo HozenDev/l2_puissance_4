@@ -1,8 +1,10 @@
 <map id="Grid" name="Grid">
-<area shape="rect" id="node1" title="Logical representation of a board of the Game of Puissance 4." alt="" coords="191,288,240,315"/>
-<area shape="rect" id="node2" href="$class_cell.html" title="Logical representation of a case in the grid of the Game of Puissance 4." alt="" coords="192,199,239,225"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,102,161,129"/>
-<area shape="rect" id="node4" href="$class_token.html" title="Represent a Token of Puissance 4." alt="" coords="186,102,245,129"/>
-<area shape="rect" id="node5" href="$enum_color.html" title="Represent colors globally." alt="" coords="187,5,243,32"/>
-<area shape="rect" id="node6" title=" " alt="" coords="377,95,542,136"/>
+<area shape="rect" id="node1" title="Logical representation of a board of the Game of Puissance 4." alt="" coords="39,704,229,972"/>
+<area shape="rect" id="node2" title=" " alt="" coords="69,461,108,539"/>
+<area shape="rect" id="node3" href="$class_cell.html" title="Logical representation of a case in the grid of the Game of Puissance 4." alt="" coords="133,373,341,627"/>
+<area shape="rect" id="node4" href="$class_comparable.html" title=" " alt="" coords="5,219,161,296"/>
+<area shape="rect" id="node5" href="$class_token.html" title="Represent a Token of Puissance 4." alt="" coords="185,204,288,311"/>
+<area shape="rect" id="node6" href="$enum_color.html" title="Represent colors globally." alt="" coords="175,5,298,141"/>
+<area shape="rect" id="node7" title=" " alt="" coords="431,211,597,303"/>
+<area shape="rect" id="node8" title=" " alt="" coords="471,35,557,112"/>
 </map>

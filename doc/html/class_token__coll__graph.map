@@ -1,4 +1,4 @@
 <map id="Token" name="Token">
-<area shape="rect" id="node1" title="Represent a Token of Puissance 4." alt="" coords="5,95,64,121"/>
-<area shape="rect" id="node2" href="$enum_color.html" title="Represent colors globally." alt="" coords="7,5,63,32"/>
+<area shape="rect" id="node1" title="Represent a Token of Puissance 4." alt="" coords="15,204,118,311"/>
+<area shape="rect" id="node2" href="$enum_color.html" title="Represent colors globally." alt="" coords="5,5,128,141"/>
 </map>

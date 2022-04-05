@@ -1,0 +1,347 @@
+\hypertarget{_game_8java_source}{}\doxysection{Game.\+java}
+\label{_game_8java_source}\index{/home/hozen/cur/projet-\/java/src/Game.java@{/home/hozen/cur/projet-\/java/src/Game.java}}
+\mbox{\hyperlink{_game_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00001}00001 \textcolor{keyword}{import} java.util.Random;}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00002}00002 \textcolor{keyword}{import} java.util.Scanner;}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00003}00003 \textcolor{keyword}{import} java.util.InputMismatchException;}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00004}00004 \textcolor{keyword}{import} \textcolor{keyword}{static} java.util.Objects.requireNonNull;}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00005}00005 \textcolor{keyword}{import} java.util.EnumMap;}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00006}00006 \textcolor{keyword}{import} java.lang.Math;}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00014}\mbox{\hyperlink{class_game}{00014}} \textcolor{keyword}{public} \textcolor{keyword}{class }\mbox{\hyperlink{class_game}{Game}} \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00015}00015     \textcolor{comment}{// Const    }}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00016}\mbox{\hyperlink{class_game_a877b1c2f915be012d8bcb1d39d57201f}{00016}}     \textcolor{keyword}{public} \textcolor{keyword}{final} \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_game_a877b1c2f915be012d8bcb1d39d57201f}{numberOfPlayers}} = 2;}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00017}\mbox{\hyperlink{class_game_a9e2fca1480286cac2c0b6f6661d98417}{00017}}     \textcolor{keyword}{public} \textcolor{keyword}{final} \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_game_a9e2fca1480286cac2c0b6f6661d98417}{numberOfTokenToWin}} = 4;}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00018}00018 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00019}00019     \textcolor{comment}{// Gameplay attributs}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00020}\mbox{\hyperlink{class_game_af36ee9c9820449b763df6de5569c678b}{00020}}     \textcolor{keyword}{private} \mbox{\hyperlink{class_player}{Player}}[] \mbox{\hyperlink{class_game_af36ee9c9820449b763df6de5569c678b}{arrayPlayer}};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00021}\mbox{\hyperlink{class_game_a91ff1f4b82a7cb5b2b592383b808a991}{00021}}     \textcolor{keyword}{private} \mbox{\hyperlink{class_grid}{Grid}} \mbox{\hyperlink{class_game_a91ff1f4b82a7cb5b2b592383b808a991}{grid}};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00022}00022 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00023}00023     \textcolor{comment}{// Save}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00024}\mbox{\hyperlink{class_game_a1e3af024e18b2e21aafe403249b74beb}{00024}}     \textcolor{keyword}{private} \textcolor{keyword}{final} \mbox{\hyperlink{class_save}{Save}} \mbox{\hyperlink{class_game_a1e3af024e18b2e21aafe403249b74beb}{save}};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00025}00025 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00026}00026     \textcolor{comment}{// Game state attributs}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00027}\mbox{\hyperlink{class_game_aad9122898506dda76ae5bf9377688727}{00027}}     \textcolor{keyword}{private} \textcolor{keywordtype}{boolean} \mbox{\hyperlink{class_game_aad9122898506dda76ae5bf9377688727}{end}};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00028}\mbox{\hyperlink{class_game_a9cd11465d0742ac2a84a46e7aa1d3cb5}{00028}}     \textcolor{keyword}{private} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_game_a9cd11465d0742ac2a84a46e7aa1d3cb5}{iteration}};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00029}\mbox{\hyperlink{class_game_a71144d4a063c4751b8d6ba6d79c9234f}{00029}}     \textcolor{keyword}{private} String \mbox{\hyperlink{class_game_a71144d4a063c4751b8d6ba6d79c9234f}{gameplay}}; \textcolor{comment}{// IA or LOCAL    }}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00030}00030     }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00031}\mbox{\hyperlink{class_game_ac0f3465b90291c73e53dbbcc5324b543}{00031}}     \textcolor{keyword}{private} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_game_ac0f3465b90291c73e53dbbcc5324b543}{currentPlayerId}};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00032}\mbox{\hyperlink{class_game_a9330785176fa86c0840c01945e2dd666}{00032}}     \textcolor{keyword}{private} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_game_a9330785176fa86c0840c01945e2dd666}{lastMove}}; \textcolor{comment}{// represent the last column played}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00033}00033 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00034}\mbox{\hyperlink{class_game_a2e034e53e9c032964ecd2a831b29a616}{00034}}     \textcolor{keyword}{private} \mbox{\hyperlink{class_game_a2e034e53e9c032964ecd2a831b29a616}{Game}}() \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00038}00038         this.\mbox{\hyperlink{class_game_ac713c45a58df6bd5ec761c693f75a6f3}{welcomeMessage}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00039}00039 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00040}00040         \textcolor{comment}{// Init Player physical representation}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00041}00041         this.arrayPlayer = \textcolor{keyword}{new} \mbox{\hyperlink{class_player}{Player}}[\mbox{\hyperlink{class_game_a877b1c2f915be012d8bcb1d39d57201f}{numberOfPlayers}}];}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00042}00042 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00043}00043         \textcolor{comment}{// Init Grid}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00044}00044         this.grid = \textcolor{keyword}{new} \mbox{\hyperlink{class_grid}{Grid}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00045}00045 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00046}00046         \textcolor{comment}{// Init random first Player}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00047}00047         this.currentPlayerId = (int) Math.round(Math.random());}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00048}00048 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00049}00049         \textcolor{comment}{// Init Save }}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00050}00050         this.save = \textcolor{keyword}{new} \mbox{\hyperlink{class_save}{Save}}(\textcolor{stringliteral}{"{}../sauv"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00051}00051         this.\mbox{\hyperlink{class_game_afbc0030fe175a6a9af54f84496547734}{askForLoadSave}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00052}00052 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00053}00053         \textcolor{comment}{// Init Game State}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00054}00054         this.end = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00055}00055         this.iteration = 0;}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00056}00056     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00057}00057 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00058}\mbox{\hyperlink{class_game_afbc0030fe175a6a9af54f84496547734}{00058}}     \textcolor{keyword}{private} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_afbc0030fe175a6a9af54f84496547734}{askForLoadSave}}() \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00062}00062         \textcolor{keywordflow}{if} (!this.save.\mbox{\hyperlink{class_save_ae3e132550cbf51351b2c7d9c4635ae1e}{isEmpty}}()) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00063}00063             \textcolor{keywordtype}{boolean} done = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00064}00064             \textcolor{keywordflow}{while} (!done) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00065}00065                 System.out.println(\textcolor{stringliteral}{"{}Sauvegarde est existante, voulez-\/vous la charger ?"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00066}00066                 System.out.println(\textcolor{stringliteral}{"{}[1:Oui][2:Non][3:Supprimer]"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00067}00067                 Scanner input = (\textcolor{keyword}{new} Scanner(System.in));}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00068}00068                 \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00069}00069                     \textcolor{keywordflow}{switch} (input.nextInt()) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00070}00070                     \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00071}00071                         this.\mbox{\hyperlink{class_game_a38042241b5ea2aff199b36f2d5a84d97}{loadSave}}(this.save.\mbox{\hyperlink{class_save_af741dc6b2e1b2d2f3ff816c2a5d1f834}{read}}());}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00072}00072                         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00073}00073                     \textcolor{keywordflow}{case} 3:}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00074}00074                         this.save.\mbox{\hyperlink{class_save_ace3b7d49a915ca215ca39027b1497fed}{delete}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00075}00075                         this.\mbox{\hyperlink{class_game_ad87fed809308137b9773168e57faa10a}{setOptionGame}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00076}00076                         this.\mbox{\hyperlink{class_game_a3f0018ae47d77650701c2bbd25269df4}{askForPlayers}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00077}00077                         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00078}00078                     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00079}00079                         this.\mbox{\hyperlink{class_game_ad87fed809308137b9773168e57faa10a}{setOptionGame}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00080}00080                         this.\mbox{\hyperlink{class_game_a3f0018ae47d77650701c2bbd25269df4}{askForPlayers}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00081}00081                         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00082}00082                     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00083}00083                     done = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00084}00084                 \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00085}00085                 \textcolor{keywordflow}{catch} (InputMismatchException e) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00086}00086                     System.out.println(\textcolor{stringliteral}{"{}Ce choix n'existe pas"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00087}00087                 \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00088}00088             \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00089}00089         \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00090}00090         \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00091}00091             this.\mbox{\hyperlink{class_game_ad87fed809308137b9773168e57faa10a}{setOptionGame}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00092}00092             this.\mbox{\hyperlink{class_game_a3f0018ae47d77650701c2bbd25269df4}{askForPlayers}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00093}00093         \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00094}00094     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00095}00095 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00096}\mbox{\hyperlink{class_game_a3f0018ae47d77650701c2bbd25269df4}{00096}}     \textcolor{keyword}{private} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_a3f0018ae47d77650701c2bbd25269df4}{askForPlayers}}() \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00100}00100         this.\mbox{\hyperlink{class_game_aab9d36e7dd954ff200fdf045ade36cc8}{initLocalPlayer}}(0) ;  \textcolor{comment}{// premier joueur toujours humain}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00101}00101         \textcolor{keywordflow}{if}(this.gameplay.equals(\textcolor{stringliteral}{"{}LOCAL"{}})) \mbox{\hyperlink{class_game_aab9d36e7dd954ff200fdf045ade36cc8}{initLocalPlayer}}(1);}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00102}00102         \textcolor{keywordflow}{else} \mbox{\hyperlink{class_game_a5af669b011467c59b38ddb41c2b7b521}{createPlayer}}(\textcolor{stringliteral}{"{}Ordinateur"{}}, 1, \mbox{\hyperlink{enum_entity}{Entity}}.\mbox{\hyperlink{enum_entity_ad52b5f699762b6678555a0abf872253a}{IA}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00103}00103     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00104}00104 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00105}\mbox{\hyperlink{class_game_a38042241b5ea2aff199b36f2d5a84d97}{00105}}     \textcolor{keyword}{private} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_a38042241b5ea2aff199b36f2d5a84d97}{loadSave}}(String saveText) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00111}00111         String[] saveSplit = saveText.split(\textcolor{stringliteral}{"{}\&"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00112}00112         \textcolor{keywordflow}{if} (saveSplit.length < \textcolor{keyword}{this}.numberOfPlayers+2) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00113}00113             this.save.\mbox{\hyperlink{class_save_ace3b7d49a915ca215ca39027b1497fed}{delete}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00114}00114             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} IllegalArgumentException(\textcolor{stringliteral}{"{}Sauvegarde corrompue"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00115}00115         \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00116}00116 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00117}00117         \textcolor{comment}{// Initialise the players //}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00118}00118         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<this.\mbox{\hyperlink{class_game_a877b1c2f915be012d8bcb1d39d57201f}{numberOfPlayers}}; i++) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00119}00119             \mbox{\hyperlink{enum_entity}{Entity}} og = \mbox{\hyperlink{enum_entity}{Entity}}.\mbox{\hyperlink{enum_entity_af7f416eac71f567110fbfa5b9590ef4d}{of}}(saveSplit[i+1].split(\textcolor{stringliteral}{"{} "{}})[0]);}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00120}00120             String playerName = saveSplit[i+1].split(\textcolor{stringliteral}{"{} "{}})[1];}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00121}00121             this.\mbox{\hyperlink{class_game_a5af669b011467c59b38ddb41c2b7b521}{createPlayer}}(playerName, i, og);}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00122}00122         \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00123}00123 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00124}00124         \textcolor{comment}{// Initialise the current player //}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00125}00125         this.currentPlayerId = Integer.parseInt(saveSplit[this.numberOfPlayers+1]);}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00126}00126 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00127}00127         \textcolor{comment}{// Initialise the grid //}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00128}00128         \mbox{\hyperlink{class_token}{Token}}[] tokenArray = \textcolor{keyword}{new} \mbox{\hyperlink{class_token}{Token}}[\mbox{\hyperlink{enum_color}{Color}}.values().length];}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00129}00129         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<this.\mbox{\hyperlink{class_game_a877b1c2f915be012d8bcb1d39d57201f}{numberOfPlayers}}; i++) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00130}00130             tokenArray[i] = this.\mbox{\hyperlink{class_game_a9ac715bf1c887b4389761d13b647fd8b}{getPlayerFromId}}(i).\mbox{\hyperlink{class_player_a41fe174feeaf22fedd9bdf3368d4ca13}{getToken}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00131}00131         \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00132}00132         tokenArray[\mbox{\hyperlink{enum_color}{Color}}.values().length-\/1] = \mbox{\hyperlink{class_token}{Token}}.\mbox{\hyperlink{class_token_ab87fa3a1880c2706c6d8cf4eee18bb37}{emptyToken}};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00133}00133         this.grid.\mbox{\hyperlink{class_grid_ac5c22e855cdb16a15035f8f929ac90da}{loadGrid}}(saveSplit[0], tokenArray);}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00134}00134     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00135}00135 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00136}\mbox{\hyperlink{class_game_aab9d36e7dd954ff200fdf045ade36cc8}{00136}}     \textcolor{keyword}{private} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_aab9d36e7dd954ff200fdf045ade36cc8}{initLocalPlayer}}(\textcolor{keywordtype}{int} position) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00142}00142         System.out.println(\textcolor{stringliteral}{"{}Veuillez saisir le pseudo du joueur "{}} + position + \textcolor{stringliteral}{"{} :"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00143}00143         String username = (\textcolor{keyword}{new} Scanner(System.in)).nextLine();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00144}00144         this.\mbox{\hyperlink{class_game_a5af669b011467c59b38ddb41c2b7b521}{createPlayer}}(username, position, \mbox{\hyperlink{enum_entity}{Entity}}.\mbox{\hyperlink{enum_entity_ac0656625b5020e55a8f985bc8ee19a85}{LOCAL}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00145}00145     \}    }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00146}00146 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00147}\mbox{\hyperlink{class_game_a5af669b011467c59b38ddb41c2b7b521}{00147}}     \textcolor{keyword}{private} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_a5af669b011467c59b38ddb41c2b7b521}{createPlayer}}(String name, \textcolor{keywordtype}{int} \textcolor{keywordtype}{id}, \mbox{\hyperlink{enum_entity}{Entity}} og) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00155}00155         this.arrayPlayer[id] = \textcolor{keyword}{new} \mbox{\hyperlink{class_player}{Player}}(name, \textcolor{keywordtype}{id}, og);}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00156}00156     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00157}00157 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00158}\mbox{\hyperlink{class_game_ac713c45a58df6bd5ec761c693f75a6f3}{00158}}     \textcolor{keyword}{private} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_ac713c45a58df6bd5ec761c693f75a6f3}{welcomeMessage}}() \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00162}00162         System.out.println(\textcolor{stringliteral}{"{}Bienvenu au jeu du puissance 4.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00163}00163     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00164}00164 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00165}\mbox{\hyperlink{class_game_a86d9423e752ef54139f46e3a0b7db155}{00165}}     \textcolor{keyword}{private} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_a86d9423e752ef54139f46e3a0b7db155}{endMessage}}() \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00169}00169         \textcolor{comment}{// Print game ended}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00170}00170         System.out.println(\textcolor{stringliteral}{"{}*****************************"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00171}00171         System.out.println(\textcolor{stringliteral}{"{}*"{}} + \mbox{\hyperlink{enum_color}{Color}}.\mbox{\hyperlink{enum_color_a3060c67deba10b95d7753199a328b820}{ansiColorOf}}(\textcolor{stringliteral}{"{}RED"{}}) +}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00172}00172                            \textcolor{stringliteral}{"{}         Game Ended        "{}}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00173}00173                            + \mbox{\hyperlink{enum_color}{Color}}.\mbox{\hyperlink{enum_color_a3060c67deba10b95d7753199a328b820}{ansiColorOf}}(\textcolor{stringliteral}{"{}WHITE"{}}) + \textcolor{stringliteral}{"{}*"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00174}00174         System.out.println(\textcolor{stringliteral}{"{}*****************************"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00175}00175 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00176}00176         \textcolor{comment}{// Print the winner or if pat}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00177}00177         \textcolor{keywordflow}{if} (this.\mbox{\hyperlink{class_game_a019583b1c7288eb5eaf25dc13065c519}{isTie}}()) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00178}00178             this.save.\mbox{\hyperlink{class_save_ace3b7d49a915ca215ca39027b1497fed}{delete}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00179}00179             System.out.println(\textcolor{stringliteral}{"{}Egalité"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00180}00180         \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00181}00181         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (this.\mbox{\hyperlink{class_game_ac6f57b9a3185438aa0ca54d03dd5d3b5}{hasWin}}()) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00182}00182             this.save.\mbox{\hyperlink{class_save_ace3b7d49a915ca215ca39027b1497fed}{delete}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00183}00183             System.out.println(\textcolor{stringliteral}{"{}Le gagnant est : "{}} +}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00184}00184                                this.\mbox{\hyperlink{class_game_a9ac715bf1c887b4389761d13b647fd8b}{getPlayerFromId}}(this.currentPlayerId));}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00185}00185         \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00186}00186     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00187}00187 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00188}\mbox{\hyperlink{class_game_ab8b3f48e08eaf689af7af4dff126862f}{00188}}     \textcolor{keyword}{private} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_ab8b3f48e08eaf689af7af4dff126862f}{printPartyChoice}}() \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00192}00192         System.out.println(\textcolor{stringliteral}{"{}Vous avec 2 options de jeu :"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00193}00193         System.out.println(\textcolor{stringliteral}{"{}-\/[1] 1 VS 1 avec 2 joueurs en local"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00194}00194         System.out.println(\textcolor{stringliteral}{"{}-\/[2] 1 VS 1 contre une IA\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00195}00195     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00196}00196 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00197}\mbox{\hyperlink{class_game_abd2a59fef3232e57341ebd575b57bb3b}{00197}}     \textcolor{keyword}{private} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_game_abd2a59fef3232e57341ebd575b57bb3b}{valideGameOption}}(\textcolor{keywordtype}{int} option) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00205}00205         \textcolor{keywordflow}{if} (option <= 0 || option > 2) \textcolor{keywordflow}{throw} \textcolor{keyword}{new} IllegalArgumentException();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00206}00206         \textcolor{keywordflow}{return} option;}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00207}00207     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00208}00208 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00209}\mbox{\hyperlink{class_game_ad87fed809308137b9773168e57faa10a}{00209}}     \textcolor{keyword}{private} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_ad87fed809308137b9773168e57faa10a}{setOptionGame}}() \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00213}00213         \textcolor{keywordflow}{while} (\textcolor{keyword}{true}) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00214}00214             \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00215}00215                 \mbox{\hyperlink{class_game_ab8b3f48e08eaf689af7af4dff126862f}{printPartyChoice}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00216}00216                 System.out.println(\textcolor{stringliteral}{"{}A quel mode de jeu voulez-\/vous jouer ? "{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00217}00217                 \textcolor{keywordtype}{int} option = \mbox{\hyperlink{class_game_abd2a59fef3232e57341ebd575b57bb3b}{valideGameOption}}((\textcolor{keyword}{new} Scanner(System.in)).nextInt());}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00218}00218                 \textcolor{keywordflow}{if} (option == 1) this.gameplay = \textcolor{stringliteral}{"{}LOCAL"{}};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00219}00219                 \textcolor{keywordflow}{else} this.gameplay = \textcolor{stringliteral}{"{}IA"{}};   }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00220}00220                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00221}00221             \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00222}00222             \textcolor{keywordflow}{catch} (IllegalArgumentException e) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00223}00223                 System.out.println(\textcolor{stringliteral}{"{}Ce mode de jeu n'existe pas.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00224}00224             \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00225}00225             \textcolor{keywordflow}{catch} (InputMismatchException e) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00226}00226                 System.out.println(\textcolor{stringliteral}{"{}Erreur lors de la saisie,"{}} +}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00227}00227                                    \textcolor{stringliteral}{"{}veuillez saisir l'entier '1' ou '2'\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00228}00228             \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00229}00229         \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00230}00230     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00231}00231 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00232}\mbox{\hyperlink{class_game_a4a877f0ff99fad119cfdabbb374269f1}{00232}}     \textcolor{keyword}{public} \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_a4a877f0ff99fad119cfdabbb374269f1}{run}}() \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00236}00236         \mbox{\hyperlink{class_game}{Game}} game = \textcolor{keyword}{new} \mbox{\hyperlink{class_game_a2e034e53e9c032964ecd2a831b29a616}{Game}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00237}00237         game.\mbox{\hyperlink{class_game_afeae4232ad3b23d07dcccc383e14ff08}{play}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00238}00238     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00239}00239 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00240}\mbox{\hyperlink{class_game_a9ac715bf1c887b4389761d13b647fd8b}{00240}}     \textcolor{keyword}{private} \mbox{\hyperlink{class_player}{Player}} \mbox{\hyperlink{class_game_a9ac715bf1c887b4389761d13b647fd8b}{getPlayerFromId}}(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id}) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00247}00247         \textcolor{keywordflow}{if} (id < 0 || id > this.numberOfPlayers) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00248}00248             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} IllegalArgumentException(\textcolor{stringliteral}{"{}Bad player id"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00249}00249         \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00250}00250         \textcolor{keywordflow}{return} this.arrayPlayer[id];}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00251}00251     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00252}00252 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00253}\mbox{\hyperlink{class_game_ab2e650e0495509f02c13626e5dfb8c95}{00253}}     \textcolor{keyword}{private} \mbox{\hyperlink{class_player}{Player}} \mbox{\hyperlink{class_game_ab2e650e0495509f02c13626e5dfb8c95}{nextPlayer}}(\mbox{\hyperlink{class_player}{Player}} current) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00261}00261         this.currentPlayerId = (this.currentPlayerId+1)\%this.numberOfPlayers;}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00262}00262         \textcolor{keywordflow}{return} this.\mbox{\hyperlink{class_game_a9ac715bf1c887b4389761d13b647fd8b}{getPlayerFromId}}(this.currentPlayerId);}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00263}00263     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00264}00264 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00265}\mbox{\hyperlink{class_game_a83f393ba5337ee47115f2426e2e996a4}{00265}}     \textcolor{keyword}{private} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_a83f393ba5337ee47115f2426e2e996a4}{printCurrentPlayer}}() \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00269}00269         System.out.println(}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00270}00270             \mbox{\hyperlink{enum_color}{Color}}.\mbox{\hyperlink{enum_color_a3060c67deba10b95d7753199a328b820}{ansiColorOf}}(\textcolor{keyword}{this}.getPlayerFromId(\textcolor{keyword}{this}.currentPlayerId).getColor())}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00271}00271             + \textcolor{stringliteral}{"{}["{}}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00272}00272             + \textcolor{keyword}{this}.getPlayerFromId(\textcolor{keyword}{this}.currentPlayerId) + \textcolor{stringliteral}{"{}]"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00273}00273             + \mbox{\hyperlink{enum_color}{Color}}.\mbox{\hyperlink{enum_color_a3060c67deba10b95d7753199a328b820}{ansiColorOf}}(\textcolor{stringliteral}{"{}WHITE"{}}));}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00274}00274     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00275}00275 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00276}\mbox{\hyperlink{class_game_afeae4232ad3b23d07dcccc383e14ff08}{00276}}     \textcolor{keyword}{private} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_afeae4232ad3b23d07dcccc383e14ff08}{play}}() \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00280}00280         \textcolor{keywordtype}{boolean} playerHasPlay;}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00281}00281         \mbox{\hyperlink{class_player}{Player}} currentPlayer = this.\mbox{\hyperlink{class_game_a9ac715bf1c887b4389761d13b647fd8b}{getPlayerFromId}}(this.currentPlayerId);}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00282}00282 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00283}00283         \textcolor{keywordflow}{while} (!this.end) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00284}00284 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00285}00285             this.iteration += 1;}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00286}00286             this.grid.\mbox{\hyperlink{class_grid_aa75a9df6bb0aa6d4a9d4f01c7f9e9eb6}{print}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00287}00287             playerHasPlay = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00288}00288 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00289}00289             \textcolor{keywordflow}{while} (!playerHasPlay) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00290}00290                 this.\mbox{\hyperlink{class_game_a83f393ba5337ee47115f2426e2e996a4}{printCurrentPlayer}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00291}00291                 System.out.println(\textcolor{stringliteral}{"{}[m: Menu]"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00292}00292                 \textcolor{keywordtype}{int} columnChosen = \mbox{\hyperlink{class_game_a87d28afbba57a91e2069017654333660}{chooseAColumn}}(); }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00293}00293                 \textcolor{keywordflow}{if} (this.end) \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00294}00294                 playerHasPlay = this.\mbox{\hyperlink{class_game_adc2797ea3355dc71d48a16af2f4b01b9}{playAToken}}(currentPlayer.\mbox{\hyperlink{class_player_a41fe174feeaf22fedd9bdf3368d4ca13}{getToken}}(),}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00295}00295                                                 columnChosen);}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00296}00296             \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00297}00297 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00298}00298             this.\mbox{\hyperlink{class_game_a5c66ca4fdb45b9d057fb42441bf3d4fb}{isEnd}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00299}00299 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00300}00300             \textcolor{keywordflow}{if} (!this.end) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00301}00301                 currentPlayer = \mbox{\hyperlink{class_game_ab2e650e0495509f02c13626e5dfb8c95}{nextPlayer}}(currentPlayer);}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00302}00302             \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00303}00303         \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00304}00304         this.grid.\mbox{\hyperlink{class_grid_aa75a9df6bb0aa6d4a9d4f01c7f9e9eb6}{print}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00305}00305         this.\mbox{\hyperlink{class_game_a86d9423e752ef54139f46e3a0b7db155}{endMessage}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00306}00306     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00307}00307 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00308}\mbox{\hyperlink{class_game_a87d28afbba57a91e2069017654333660}{00308}}     \textcolor{keyword}{private} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_game_a87d28afbba57a91e2069017654333660}{chooseAColumn}}() \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00314}00314         \textcolor{keywordflow}{if} (this.\mbox{\hyperlink{class_game_a9ac715bf1c887b4389761d13b647fd8b}{getPlayerFromId}}(this.numberOfPlayers-\/1).whatIs() == \mbox{\hyperlink{enum_entity}{Entity}}.\mbox{\hyperlink{enum_entity_ad52b5f699762b6678555a0abf872253a}{IA}}) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00315}00315             \textcolor{keywordflow}{if} (this.currentPlayerId == this.numberOfPlayers-\/1) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00316}00316                 \textcolor{keywordflow}{return} (\textcolor{keyword}{new} Random()).nextInt(7);       }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00317}00317             \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00318}00318         \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00319}00319         \textcolor{keywordflow}{return} this.\mbox{\hyperlink{class_game_a4b9ede2d998ac221aaf06f6d91c7c00c}{askForInput}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00320}00320     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00321}00321 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00322}\mbox{\hyperlink{class_game_afcf6834542dfc4881945698a3f65c225}{00322}}     \textcolor{keyword}{private} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_afcf6834542dfc4881945698a3f65c225}{menu}}() \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00326}00326         \textcolor{keywordtype}{boolean} done = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00327}00327         \textcolor{keywordflow}{while} (!done) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00328}00328             System.out.println(\textcolor{stringliteral}{"{}[1:Continuer][2:Sauvegarder][3:Quitter le jeu]"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00329}00329             System.out.print(\textcolor{stringliteral}{"{}Choississez une option : "{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00330}00330             Scanner input = \textcolor{keyword}{new} Scanner(System.in);}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00331}00331             \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00332}00332                 \textcolor{keywordflow}{switch} (input.nextInt()) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00333}00333                 \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00334}00334                     done = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00335}00335                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00336}00336                 \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00337}00337                     this.save.\mbox{\hyperlink{class_save_a44631a0aa32e1659c1898ab2ac34d33c}{write}}(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00338}00338                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00339}00339                 \textcolor{keywordflow}{case} 3:}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00340}00340                     done = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00341}00341                     this.end = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00342}00342                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00343}00343                 \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00344}00344                     done = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00345}00345                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00346}00346                 \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00347}00347             \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00348}00348             \textcolor{keywordflow}{catch} (InputMismatchException e) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00349}00349                 System.out.println(\textcolor{stringliteral}{"{}Ce choix n'existe pas."{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00350}00350             \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00351}00351         \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00352}00352     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00353}00353 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00354}\mbox{\hyperlink{class_game_a4b9ede2d998ac221aaf06f6d91c7c00c}{00354}}     \textcolor{keyword}{private} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_game_a4b9ede2d998ac221aaf06f6d91c7c00c}{askForInput}}() \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00360}00360         \textcolor{keywordtype}{int} column = 0;}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00361}00361         \textcolor{keywordflow}{while} (\textcolor{keyword}{true}) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00362}00362             System.out.print(\textcolor{stringliteral}{"{}Choisissez une colonne : "{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00363}00363             Scanner input = \textcolor{keyword}{new} Scanner(System.in);}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00364}00364             String sInput = input.nextLine();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00365}00365             \textcolor{keywordflow}{if} (sInput.equals(\textcolor{stringliteral}{"{}m"{}})) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00366}00366                 this.\mbox{\hyperlink{class_game_afcf6834542dfc4881945698a3f65c225}{menu}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00367}00367                 \textcolor{keywordflow}{if} (this.end) \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00368}00368             \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00369}00369             \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00370}00370                 \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00371}00371                     column = \mbox{\hyperlink{class_game_af7f44b14b916ef59d43031811601c8ee}{valideColumn}}(Integer.parseInt(sInput)-\/1);}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00372}00372                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00373}00373                 \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00374}00374                 \textcolor{keywordflow}{catch} (IllegalArgumentException e) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00375}00375                     System.out.println(\textcolor{stringliteral}{"{}Colonne invalide, un entier en 1 et "{}} +}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00376}00376                                        this.grid.\mbox{\hyperlink{class_grid_aa5b9429d74541d53b35d9f838c9e80db}{getWidth}}());}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00377}00377                 \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00378}00378             \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00379}00379         \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00380}00380         \textcolor{keywordflow}{return} column;}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00381}00381     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00382}00382 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00383}\mbox{\hyperlink{class_game_af7f44b14b916ef59d43031811601c8ee}{00383}}     \textcolor{keyword}{private} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_game_af7f44b14b916ef59d43031811601c8ee}{valideColumn}}(\textcolor{keywordtype}{int} column) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00390}00390         \textcolor{keywordflow}{return} this.grid.\mbox{\hyperlink{class_grid_a67ed01cf51500ff62088eb7f3f948068}{valideColumn}}(column);}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00391}00391     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00392}00392 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00393}\mbox{\hyperlink{class_game_adc2797ea3355dc71d48a16af2f4b01b9}{00393}}     \textcolor{keyword}{private} \textcolor{keywordtype}{boolean} \mbox{\hyperlink{class_game_adc2797ea3355dc71d48a16af2f4b01b9}{playAToken}}(\mbox{\hyperlink{class_token}{Token}} token, \textcolor{keywordtype}{int} column) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00401}00401         \textcolor{keywordflow}{if} (token == \mbox{\hyperlink{class_token}{Token}}.\mbox{\hyperlink{class_token_ab87fa3a1880c2706c6d8cf4eee18bb37}{emptyToken}}) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00402}00402             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} IllegalArgumentException(\textcolor{stringliteral}{"{}You can't play an empty Token"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00403}00403         \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00404}00404 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00405}00405         \mbox{\hyperlink{class_cell}{Cell}} played = this.grid.\mbox{\hyperlink{class_grid_afebd807863b80c631a1296ee320d09de}{getNextEmptyCellAt}}(column);}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00406}00406         \textcolor{keywordflow}{if} (played.\mbox{\hyperlink{class_cell_adecb03aa9121532ac4d3a565cae961be}{getToken}}() != \mbox{\hyperlink{class_token}{Token}}.\mbox{\hyperlink{class_token_ab87fa3a1880c2706c6d8cf4eee18bb37}{emptyToken}}) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00407}00407             System.out.println(\textcolor{stringliteral}{"{}La colonne est pleine"{}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00408}00408             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00409}00409         \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00410}00410         played.\mbox{\hyperlink{class_cell_af374a82c16117328158167f9767cc984}{setToken}}(requireNonNull(token));}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00411}00411         \textcolor{keywordflow}{if} (played.\mbox{\hyperlink{class_cell_a40d6c378d52ac80e926df71b35d75f4f}{getNeighbor}}(\mbox{\hyperlink{enum_direction}{Direction}}.\mbox{\hyperlink{enum_direction_a25d823747e2dcd7c3b5facd54a4f9432}{UP}}) != \mbox{\hyperlink{class_cell}{Cell}}.\mbox{\hyperlink{class_cell_a548dcccb0795431474288ec3c62bc666}{outOfBoundCell}}) \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00412}00412             this.grid.\mbox{\hyperlink{class_grid_a42995be492ec8858fcd8359538a2705c}{UpToNextEmptyCellAt}}(column);}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00413}00413         \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00414}00414         this.lastMove = column;}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00415}00415         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00416}00416     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00417}00417 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00418}\mbox{\hyperlink{class_game_a019583b1c7288eb5eaf25dc13065c519}{00418}}     \textcolor{keyword}{private} \textcolor{keywordtype}{boolean} \mbox{\hyperlink{class_game_a019583b1c7288eb5eaf25dc13065c519}{isTie}}() \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00425}00425         \textcolor{keywordflow}{return} this.iteration == this.grid.\mbox{\hyperlink{class_grid_abf397fa41aa3d7441209f7d6d7f7f8d5}{getSize}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00426}00426     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00427}00427 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00428}\mbox{\hyperlink{class_game_ac6f57b9a3185438aa0ca54d03dd5d3b5}{00428}}     \textcolor{keyword}{private} \textcolor{keywordtype}{boolean} \mbox{\hyperlink{class_game_ac6f57b9a3185438aa0ca54d03dd5d3b5}{hasWin}}() \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00434}00434         \mbox{\hyperlink{class_cell}{Cell}} lastCellPlayed = this.grid.\mbox{\hyperlink{class_grid_afebd807863b80c631a1296ee320d09de}{getNextEmptyCellAt}}(this.lastMove);}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00435}00435         \textcolor{keywordflow}{if} (lastCellPlayed.\mbox{\hyperlink{class_cell_adecb03aa9121532ac4d3a565cae961be}{getToken}}() != \mbox{\hyperlink{class_token}{Token}}.\mbox{\hyperlink{class_token_ab87fa3a1880c2706c6d8cf4eee18bb37}{emptyToken}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00436}00436         \textcolor{keywordflow}{else} lastCellPlayed = lastCellPlayed.\mbox{\hyperlink{class_cell_a40d6c378d52ac80e926df71b35d75f4f}{getNeighbor}}(\mbox{\hyperlink{enum_direction}{Direction}}.\mbox{\hyperlink{enum_direction_a5192cc3bd94767b1de8e40b630f0b913}{DOWN}});}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00437}00437         \textcolor{keywordflow}{return} lastCellPlayed.\mbox{\hyperlink{class_cell_ad03ad111fdf4eff6a3572deee55e0d1f}{check}}();}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00438}00438     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00439}00439 }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00440}\mbox{\hyperlink{class_game_a5c66ca4fdb45b9d057fb42441bf3d4fb}{00440}}     \textcolor{keyword}{private} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_a5c66ca4fdb45b9d057fb42441bf3d4fb}{isEnd}}() \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00444}00444         \textcolor{keywordflow}{if} (this.\mbox{\hyperlink{class_game_a019583b1c7288eb5eaf25dc13065c519}{isTie}}() || this.\mbox{\hyperlink{class_game_ac6f57b9a3185438aa0ca54d03dd5d3b5}{hasWin}}()) this.end = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00445}00445     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00446}00446     }
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00447}00447     @Override}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00448}\mbox{\hyperlink{class_game_a34fc129a3d7d9ce8fbd927255836e599}{00448}}     \textcolor{keyword}{public} String \mbox{\hyperlink{class_game_a34fc129a3d7d9ce8fbd927255836e599}{toString}}() \{}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00455}00455         \textcolor{keywordflow}{return} this.grid.\mbox{\hyperlink{class_grid_adb5dd271dcd96c7016080aabcc41f5d2}{toString}}() + \textcolor{stringliteral}{"{}\&"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00456}00456             + this.\mbox{\hyperlink{class_game_a9ac715bf1c887b4389761d13b647fd8b}{getPlayerFromId}}(0).\mbox{\hyperlink{class_player_aa9e1a689ebd0700ec2453d31007e86bb}{toString}}() + \textcolor{stringliteral}{"{}\&"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00457}00457             + this.\mbox{\hyperlink{class_game_a9ac715bf1c887b4389761d13b647fd8b}{getPlayerFromId}}(1).\mbox{\hyperlink{class_player_aa9e1a689ebd0700ec2453d31007e86bb}{toString}}() + \textcolor{stringliteral}{"{}\&"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00458}00458             + String.valueOf(this.currentPlayerId);}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00459}00459     \}}
+\DoxyCodeLine{\Hypertarget{_game_8java_source_l00460}00460 \}}
+
+\end{DoxyCode}

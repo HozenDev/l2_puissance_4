@@ -1,0 +1,520 @@
+\hypertarget{class_grid}{}\doxysection{Grid Class Reference}
+\label{class_grid}\index{Grid@{Grid}}
+
+
+Logical representation of a board of the \mbox{\hyperlink{class_game}{Game}} of Puissance 4.  
+
+
+
+
+Collaboration diagram for Grid\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_grid_aba154eaba6f107849eb6cf2460b3f4bf}{Grid}} ()
+\item 
+int \mbox{\hyperlink{class_grid_aa5b9429d74541d53b35d9f838c9e80db}{get\+Width}} ()
+\item 
+int \mbox{\hyperlink{class_grid_a8ab527034cdf71563f9ac57566d97858}{get\+Height}} ()
+\item 
+int \mbox{\hyperlink{class_grid_abf397fa41aa3d7441209f7d6d7f7f8d5}{get\+Size}} ()
+\item 
+void \mbox{\hyperlink{class_grid_a19c4d85a8586416e1b0dbcde22ef40ce}{init\+Grid}} ()
+\item 
+int \mbox{\hyperlink{class_grid_a67ed01cf51500ff62088eb7f3f948068}{valide\+Column}} (int column)
+\item 
+\mbox{\hyperlink{class_cell}{Cell}} \mbox{\hyperlink{class_grid_afebd807863b80c631a1296ee320d09de}{get\+Next\+Empty\+Cell\+At}} (int column)
+\item 
+void \mbox{\hyperlink{class_grid_a42995be492ec8858fcd8359538a2705c}{Up\+To\+Next\+Empty\+Cell\+At}} (int column)
+\item 
+\mbox{\hyperlink{class_cell}{Cell}} \mbox{\hyperlink{class_grid_a25e9d9ca8a96506e8ae143545a1a0859}{get\+Top\+Cell\+At}} (int column)
+\item 
+void \mbox{\hyperlink{class_grid_aa75a9df6bb0aa6d4a9d4f01c7f9e9eb6}{print}} ()
+\item 
+String \mbox{\hyperlink{class_grid_adb5dd271dcd96c7016080aabcc41f5d2}{to\+String}} ()
+\item 
+void \mbox{\hyperlink{class_grid_ac5c22e855cdb16a15035f8f929ac90da}{load\+Grid}} (String schema, \mbox{\hyperlink{class_token}{Token}}\mbox{[}$\,$\mbox{]} token\+Of\+Players)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_grid_abf6d9b4a0f54ba181ca7868aa7cbeea4}{print\+Grid}} ()
+\item 
+void \mbox{\hyperlink{class_grid_a97a69b0fb9e763b8cad342f088ababea}{print\+Available\+Column}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_cell}{Cell}}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_grid_a2033ca887cd51854182cbd8035819ca8}{array\+Next\+Empty\+Cell}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final int \mbox{\hyperlink{class_grid_a606e838246398f6c08f8241bd2fad26d}{WIDTH}} = 7
+\item 
+static final int \mbox{\hyperlink{class_grid_a155967f5f69c24431958f26817a000a0}{HEIGHT}} = 6
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Logical representation of a board of the \mbox{\hyperlink{class_game}{Game}} of Puissance 4. 
+
+\begin{DoxyAuthor}{Author}
+Durel Enzo 
+
+Villepreux Thibault 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+
+
+Definition at line \mbox{\hyperlink{_grid_8java_source_l00010}{10}} of file \mbox{\hyperlink{_grid_8java_source}{Grid.\+java}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_grid_aba154eaba6f107849eb6cf2460b3f4bf}\label{class_grid_aba154eaba6f107849eb6cf2460b3f4bf}} 
+\index{Grid@{Grid}!Grid@{Grid}}
+\index{Grid@{Grid}!Grid@{Grid}}
+\doxysubsubsection{\texorpdfstring{Grid()}{Grid()}}
+{\footnotesize\ttfamily Grid.\+Grid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{class_grid}{Grid}} constructor
+
+Definition at line \mbox{\hyperlink{_grid_8java_source_l00019}{19}} of file \mbox{\hyperlink{_grid_8java_source}{Grid.\+java}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_aba154eaba6f107849eb6cf2460b3f4bf_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_grid_a8ab527034cdf71563f9ac57566d97858}\label{class_grid_a8ab527034cdf71563f9ac57566d97858}} 
+\index{Grid@{Grid}!getHeight@{getHeight}}
+\index{getHeight@{getHeight}!Grid@{Grid}}
+\doxysubsubsection{\texorpdfstring{getHeight()}{getHeight()}}
+{\footnotesize\ttfamily int Grid.\+get\+Height (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_grid_8java_source_l00029}{29}} of file \mbox{\hyperlink{_grid_8java_source}{Grid.\+java}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_a8ab527034cdf71563f9ac57566d97858_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_grid_afebd807863b80c631a1296ee320d09de}\label{class_grid_afebd807863b80c631a1296ee320d09de}} 
+\index{Grid@{Grid}!getNextEmptyCellAt@{getNextEmptyCellAt}}
+\index{getNextEmptyCellAt@{getNextEmptyCellAt}!Grid@{Grid}}
+\doxysubsubsection{\texorpdfstring{getNextEmptyCellAt()}{getNextEmptyCellAt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_cell}{Cell}} Grid.\+get\+Next\+Empty\+Cell\+At (\begin{DoxyParamCaption}\item[{int}]{column }\end{DoxyParamCaption})}
+
+Return the next empty cell in the specify column, if the column is full, return the top \mbox{\hyperlink{class_cell}{Cell}} of the column in the grid
+
+
+\begin{DoxyParams}{Parameters}
+{\em column} & the column of the \mbox{\hyperlink{class_grid}{Grid}} where is the \mbox{\hyperlink{class_cell}{Cell}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the \mbox{\hyperlink{class_cell}{Cell}} corresponding to the given column
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_grid_8java_source_l00078}{78}} of file \mbox{\hyperlink{_grid_8java_source}{Grid.\+java}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_afebd807863b80c631a1296ee320d09de_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_afebd807863b80c631a1296ee320d09de_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_grid_abf397fa41aa3d7441209f7d6d7f7f8d5}\label{class_grid_abf397fa41aa3d7441209f7d6d7f7f8d5}} 
+\index{Grid@{Grid}!getSize@{getSize}}
+\index{getSize@{getSize}!Grid@{Grid}}
+\doxysubsubsection{\texorpdfstring{getSize()}{getSize()}}
+{\footnotesize\ttfamily int Grid.\+get\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_grid_8java_source_l00031}{31}} of file \mbox{\hyperlink{_grid_8java_source}{Grid.\+java}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=280pt]{class_grid_abf397fa41aa3d7441209f7d6d7f7f8d5_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_abf397fa41aa3d7441209f7d6d7f7f8d5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_grid_a25e9d9ca8a96506e8ae143545a1a0859}\label{class_grid_a25e9d9ca8a96506e8ae143545a1a0859}} 
+\index{Grid@{Grid}!getTopCellAt@{getTopCellAt}}
+\index{getTopCellAt@{getTopCellAt}!Grid@{Grid}}
+\doxysubsubsection{\texorpdfstring{getTopCellAt()}{getTopCellAt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_cell}{Cell}} Grid.\+get\+Top\+Cell\+At (\begin{DoxyParamCaption}\item[{int}]{column }\end{DoxyParamCaption})}
+
+Return the top \mbox{\hyperlink{class_cell}{Cell}} in the specify column
+
+
+\begin{DoxyParams}{Parameters}
+{\em column} & the column to get the top \mbox{\hyperlink{class_cell}{Cell}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the top \mbox{\hyperlink{class_cell}{Cell}} of the column
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_grid_8java_source_l00099}{99}} of file \mbox{\hyperlink{_grid_8java_source}{Grid.\+java}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_a25e9d9ca8a96506e8ae143545a1a0859_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_a25e9d9ca8a96506e8ae143545a1a0859_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_grid_aa5b9429d74541d53b35d9f838c9e80db}\label{class_grid_aa5b9429d74541d53b35d9f838c9e80db}} 
+\index{Grid@{Grid}!getWidth@{getWidth}}
+\index{getWidth@{getWidth}!Grid@{Grid}}
+\doxysubsubsection{\texorpdfstring{getWidth()}{getWidth()}}
+{\footnotesize\ttfamily int Grid.\+get\+Width (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_grid_8java_source_l00027}{27}} of file \mbox{\hyperlink{_grid_8java_source}{Grid.\+java}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_aa5b9429d74541d53b35d9f838c9e80db_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_grid_a19c4d85a8586416e1b0dbcde22ef40ce}\label{class_grid_a19c4d85a8586416e1b0dbcde22ef40ce}} 
+\index{Grid@{Grid}!initGrid@{initGrid}}
+\index{initGrid@{initGrid}!Grid@{Grid}}
+\doxysubsubsection{\texorpdfstring{initGrid()}{initGrid()}}
+{\footnotesize\ttfamily void Grid.\+init\+Grid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Initialisation of \mbox{\hyperlink{class_cell}{Cell}} of the \mbox{\hyperlink{class_grid}{Grid}} with their 4 neighbor
+
+Definition at line \mbox{\hyperlink{_grid_8java_source_l00033}{33}} of file \mbox{\hyperlink{_grid_8java_source}{Grid.\+java}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=290pt]{class_grid_a19c4d85a8586416e1b0dbcde22ef40ce_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_a19c4d85a8586416e1b0dbcde22ef40ce_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_grid_ac5c22e855cdb16a15035f8f929ac90da}\label{class_grid_ac5c22e855cdb16a15035f8f929ac90da}} 
+\index{Grid@{Grid}!loadGrid@{loadGrid}}
+\index{loadGrid@{loadGrid}!Grid@{Grid}}
+\doxysubsubsection{\texorpdfstring{loadGrid()}{loadGrid()}}
+{\footnotesize\ttfamily void Grid.\+load\+Grid (\begin{DoxyParamCaption}\item[{String}]{schema,  }\item[{\mbox{\hyperlink{class_token}{Token}}\mbox{[}$\,$\mbox{]}}]{token\+Of\+Players }\end{DoxyParamCaption})}
+
+Load a \mbox{\hyperlink{class_grid}{Grid}} from a save (based on its own \mbox{\hyperlink{class_grid_adb5dd271dcd96c7016080aabcc41f5d2}{to\+String()}} method)
+
+
+\begin{DoxyParams}{Parameters}
+{\em schema} & the grid representation \\
+\hline
+{\em token\+Of\+Players} & a tab of \mbox{\hyperlink{class_player}{Player}} \mbox{\hyperlink{class_token}{Token}}\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_grid_8java_source_l00231}{231}} of file \mbox{\hyperlink{_grid_8java_source}{Grid.\+java}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_ac5c22e855cdb16a15035f8f929ac90da_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_ac5c22e855cdb16a15035f8f929ac90da_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_grid_aa75a9df6bb0aa6d4a9d4f01c7f9e9eb6}\label{class_grid_aa75a9df6bb0aa6d4a9d4f01c7f9e9eb6}} 
+\index{Grid@{Grid}!print@{print}}
+\index{print@{print}!Grid@{Grid}}
+\doxysubsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily void Grid.\+print (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Print the pretty print of the grid and column available
+
+Definition at line \mbox{\hyperlink{_grid_8java_source_l00199}{199}} of file \mbox{\hyperlink{_grid_8java_source}{Grid.\+java}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_aa75a9df6bb0aa6d4a9d4f01c7f9e9eb6_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_aa75a9df6bb0aa6d4a9d4f01c7f9e9eb6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_grid_a97a69b0fb9e763b8cad342f088ababea}\label{class_grid_a97a69b0fb9e763b8cad342f088ababea}} 
+\index{Grid@{Grid}!printAvailableColumn@{printAvailableColumn}}
+\index{printAvailableColumn@{printAvailableColumn}!Grid@{Grid}}
+\doxysubsubsection{\texorpdfstring{printAvailableColumn()}{printAvailableColumn()}}
+{\footnotesize\ttfamily void Grid.\+print\+Available\+Column (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Pretty print of the column available to put a token in, print a \textquotesingle{}X\textquotesingle{} when the column is full of \mbox{\hyperlink{class_token}{Token}}
+
+Definition at line \mbox{\hyperlink{_grid_8java_source_l00171}{171}} of file \mbox{\hyperlink{_grid_8java_source}{Grid.\+java}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_a97a69b0fb9e763b8cad342f088ababea_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_a97a69b0fb9e763b8cad342f088ababea_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_grid_abf6d9b4a0f54ba181ca7868aa7cbeea4}\label{class_grid_abf6d9b4a0f54ba181ca7868aa7cbeea4}} 
+\index{Grid@{Grid}!printGrid@{printGrid}}
+\index{printGrid@{printGrid}!Grid@{Grid}}
+\doxysubsubsection{\texorpdfstring{printGrid()}{printGrid()}}
+{\footnotesize\ttfamily void Grid.\+print\+Grid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Pretty print of the grid with ansi color corresponding to the tokens in it
+
+Definition at line \mbox{\hyperlink{_grid_8java_source_l00114}{114}} of file \mbox{\hyperlink{_grid_8java_source}{Grid.\+java}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_abf6d9b4a0f54ba181ca7868aa7cbeea4_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_abf6d9b4a0f54ba181ca7868aa7cbeea4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_grid_adb5dd271dcd96c7016080aabcc41f5d2}\label{class_grid_adb5dd271dcd96c7016080aabcc41f5d2}} 
+\index{Grid@{Grid}!toString@{toString}}
+\index{toString@{toString}!Grid@{Grid}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily String Grid.\+to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Return the String representation of the \mbox{\hyperlink{class_grid}{Grid}} \+: the color of each \mbox{\hyperlink{class_token}{Token}} of each \mbox{\hyperlink{class_cell}{Cell}}
+
+\begin{DoxyReturn}{Returns}
+the String of \mbox{\hyperlink{enum_color}{Color}} separated by \textquotesingle{};\textquotesingle{}
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_grid_8java_source_l00212}{212}} of file \mbox{\hyperlink{_grid_8java_source}{Grid.\+java}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_adb5dd271dcd96c7016080aabcc41f5d2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=281pt]{class_grid_adb5dd271dcd96c7016080aabcc41f5d2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_grid_a42995be492ec8858fcd8359538a2705c}\label{class_grid_a42995be492ec8858fcd8359538a2705c}} 
+\index{Grid@{Grid}!UpToNextEmptyCellAt@{UpToNextEmptyCellAt}}
+\index{UpToNextEmptyCellAt@{UpToNextEmptyCellAt}!Grid@{Grid}}
+\doxysubsubsection{\texorpdfstring{UpToNextEmptyCellAt()}{UpToNextEmptyCellAt()}}
+{\footnotesize\ttfamily void Grid.\+Up\+To\+Next\+Empty\+Cell\+At (\begin{DoxyParamCaption}\item[{int}]{column }\end{DoxyParamCaption})}
+
+Update the next EMPTY \mbox{\hyperlink{class_cell}{Cell}} in the column
+
+
+\begin{DoxyParams}{Parameters}
+{\em column} & the column of the \mbox{\hyperlink{class_grid}{Grid}} where is the \mbox{\hyperlink{class_cell}{Cell}}\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_grid_8java_source_l00089}{89}} of file \mbox{\hyperlink{_grid_8java_source}{Grid.\+java}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_a42995be492ec8858fcd8359538a2705c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_a42995be492ec8858fcd8359538a2705c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_grid_a67ed01cf51500ff62088eb7f3f948068}\label{class_grid_a67ed01cf51500ff62088eb7f3f948068}} 
+\index{Grid@{Grid}!valideColumn@{valideColumn}}
+\index{valideColumn@{valideColumn}!Grid@{Grid}}
+\doxysubsubsection{\texorpdfstring{valideColumn()}{valideColumn()}}
+{\footnotesize\ttfamily int Grid.\+valide\+Column (\begin{DoxyParamCaption}\item[{int}]{column }\end{DoxyParamCaption})}
+
+Verify the validity of a column (range of width)
+
+
+\begin{DoxyParams}{Parameters}
+{\em column} & the column to verify \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Illegal\+Argument\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+the valide column
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_grid_8java_source_l00064}{64}} of file \mbox{\hyperlink{_grid_8java_source}{Grid.\+java}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=307pt]{class_grid_a67ed01cf51500ff62088eb7f3f948068_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_a67ed01cf51500ff62088eb7f3f948068_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_grid_a2033ca887cd51854182cbd8035819ca8}\label{class_grid_a2033ca887cd51854182cbd8035819ca8}} 
+\index{Grid@{Grid}!arrayNextEmptyCell@{arrayNextEmptyCell}}
+\index{arrayNextEmptyCell@{arrayNextEmptyCell}!Grid@{Grid}}
+\doxysubsubsection{\texorpdfstring{arrayNextEmptyCell}{arrayNextEmptyCell}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_cell}{Cell}} \mbox{[}$\,$\mbox{]} Grid.\+array\+Next\+Empty\+Cell\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{_grid_8java_source_l00015}{15}} of file \mbox{\hyperlink{_grid_8java_source}{Grid.\+java}}.
+
+\mbox{\Hypertarget{class_grid_a155967f5f69c24431958f26817a000a0}\label{class_grid_a155967f5f69c24431958f26817a000a0}} 
+\index{Grid@{Grid}!HEIGHT@{HEIGHT}}
+\index{HEIGHT@{HEIGHT}!Grid@{Grid}}
+\doxysubsubsection{\texorpdfstring{HEIGHT}{HEIGHT}}
+{\footnotesize\ttfamily final int Grid.\+HEIGHT = 6\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{_grid_8java_source_l00013}{13}} of file \mbox{\hyperlink{_grid_8java_source}{Grid.\+java}}.
+
+\mbox{\Hypertarget{class_grid_a606e838246398f6c08f8241bd2fad26d}\label{class_grid_a606e838246398f6c08f8241bd2fad26d}} 
+\index{Grid@{Grid}!WIDTH@{WIDTH}}
+\index{WIDTH@{WIDTH}!Grid@{Grid}}
+\doxysubsubsection{\texorpdfstring{WIDTH}{WIDTH}}
+{\footnotesize\ttfamily final int Grid.\+WIDTH = 7\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{_grid_8java_source_l00012}{12}} of file \mbox{\hyperlink{_grid_8java_source}{Grid.\+java}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/hozen/cur/projet-\/java/src/\mbox{\hyperlink{_grid_8java}{Grid.\+java}}\end{DoxyCompactItemize}
