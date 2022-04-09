@@ -17,11 +17,11 @@
 
 % With fcolorbox (current)
 
-#+LATEX_HEADER: \fboxsep=0mm
-#+LATEX_HEADER: \fboxrule=1pt
-#+LATEX_HEADER: \usepackage{letltxmacro}
-#+LATEX_HEADER: \LetLtxMacro\latexincludegraphics\includegraphics % save the function
-#+LATEX_HEADER: \renewcommand{\includegraphics}[2][]{\fcolorbox{black}{white}{\latexincludegraphics[#1]{#2}}}
+# #+LATEX_HEADER: \fboxsep=0mm
+# #+LATEX_HEADER: \fboxrule=1pt
+# #+LATEX_HEADER: \usepackage{letltxmacro}
+# #+LATEX_HEADER: \LetLtxMacro\latexincludegraphics\includegraphics % save the function
+# #+LATEX_HEADER: \renewcommand{\includegraphics}[2][]{\fcolorbox{black}{white}{\latexincludegraphics[#1]{#2}}}
 
 % --------------------------------------
 % Marge
@@ -75,6 +75,10 @@
 
 # #+LATEX_HEADER: \pagenumbering{gobble}
 
+% Disable indent for multiple paragraphs
+
+#+LATEX_HEADER: \setlength{\parindent}{0pt}
+
 % Taille Image par défaut
 
 #+LATEX_HEADER: \usepackage{graphicx}
@@ -85,6 +89,7 @@
 % List spacing
 #+LATEX_HEADER: \usepackage{enumitem}
 #+LATEX_HEADER: \setlist{noitemsep}
+#+LATEX_HEADER: \setlist[itemize]{noitemsep}
 # #+LATEX_HEADER: \setlist{itemsep=-2pt}
 
 % name of ToC
