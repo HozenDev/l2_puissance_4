@@ -56,8 +56,8 @@
   
 ** Classe Cell<<cell>>
 
-   Nous allons maintenant présenter la classe qui représente *le plateau de jeu* du
-   puissance 4. Il s'agit de =public class Cell=.
+   Nous allons maintenant présenter la classe qui représente une *case* du
+   plateau de jeu du puissance 4. Il s'agit de =public class Cell=.
 
 *** Attributs
 
@@ -172,25 +172,120 @@
 
 ** Classe Player<<player>>
 *** Attributs
+
+	La classe comporte trois attributs :
+	- Le pseudo du joueur: String
+	- Le jeton du joueur: Token
+	- La nature du joueur: Entity (LOCAL ou IA)
+
+	Remarquons qu'un joueur est défini par son jeton et non pas par sa couleur.
+
 *** Méthodes
 **** =initToken: int -> Token=
+
+	 Cette méthode initialise la couleur du jeton par rapport à un entier donné, les
+	 entiers données sont les index du joueur dans la tableau de joueur du jeu dans la
+	 classe Game.
+
 ** Classe Game<<game>>
+
+   La classe représente le fonctionnement du jeu du Puissance 4, globalement
+   elle regroupe 4 types de méthodes:
+   - Les méthodes d'initialisation (Joueur, Plateau).
+   - Les méthodes de gameplay (Choisir la colonne, Jouer le jeton, Le joueur
+   gagne).
+   - Les méthodes d'affichages (Grille, joueur, menu...).
+   - La sauvegarde du jeu.
+
 *** Attributs
+
+	La classe comporte 2 attributs final static :
+	- Le nombre de joueur au jeu : ici 2.
+	- Le nombre de jeton aligné pour remporter une partie: ici 4.
+
+	Les attributs de gameplay :
+	- Un tableau de joueur. (Un tableau car nombre fixe de joueur).
+	- La grille/plateau ([[grid][Grid]]) de jeu.
+	  
+	Les attributs d'état du jeu:
+	- Un boolean indiquant si le jeu est terminé.
+	- Le nombre d'itération du jeu (pour tester l'égalité)
+	- Le mode de jeu (IA ou LOCAL) 
+	- L'index du dernier joueur qui a joué.
+	- La dernière colonne jouée.
 
 *** Méthodes
 **** =loadSave: String -> ()=
+
+	 Cette méthode prend en paramètre une String qui est la représentation du
+	 contenu du fichier de sauvegarde.
+
+	 Il s'agit seulement d'une sérialisation de contenu.
+
 **** =play: () -> ()=
-**** =chooseAColumn: () -> int=
+
+	 Cette méthode est la boucle principale du jeu. Elle s'arrête quand le jeu
+	 s'arrête : =this.end = true=.
+
+	 Elle exécute les actions de la boucle dans cette ordre:
+	 - Affichage de la grille.
+	 - Demande au joueur de jouer tant que son coup n'est pas valide ou qu'il ne
+	 quitte pas le jeu entre-temps.
+	 - Test si après le coup, le jeu est fini (égalié ou victoire)
+
 **** =playAToken: Token*int -> boolean=
+
+	 Cette méthode est la méthode qui permet d'ajouter le pion dans une grille
+	 si le coup du joueur est valide.
+
+	 Elle renvoie un boolean signifiant si le coup a été correct et donc joué ou
+	 si le coup a été incorrect et donc non joué.
+
+	 Elle prend la prochaine cellule vide de la grille, regarde si cette cellule
+	 est la cellule invalide, si non, joue le jeton et actualise la dernière
+	 colonne jouée.
+
 **** =isEnd: () -> ()=
+
+	 Cette méthode teste si le jeu est terminée (victoire ou égalité), elle
+	 actualise par effet de bord l'attribut: =this.end=.
+
 ***** =hasWin(): () -> boolean=
+	  
+	  Cette méthode teste si il y a un gagnant.
+
+	  Pour cela elle appelle la méthode =check()= de la classe [[cell][Cell]] sur la
+	  dernière cellule modifiée: càd la dernière cellules correspondant à la
+	  dernière colonne jouée.
+
 ***** =isTie: () -> boolean=
 
-** Classe Save<<save>> 
+	  Cette méthode teste l'égalité du jeu: elle retourne la comparaison entre
+	  le nombre itération du jeu et le nombre de case disponible dans la grille
+
+** Classe Save<<save>>
+
+  Cette classe a été écrite pour être indépendant du jeu puissance 4, cette
+  classe comporte juste deux méthode, lire et écrire dans un fichier. 
+
 *** Attribut
+
+	Cette classe comporte un seul attribut représentant le fichier par son chemin
+	d'accès représenté par une String.
+
 *** Méthodes
 **** write: Object -> ()
+
+	 
+
+	 Cette méthode écrit dans le fichier l'appelle à la méthode toString() de
+	 l'objet en paramètre.
+
 **** read: () -> String
+
+	 Cette méthode lit dans le fichier et renvoie sa représentation sous la
+	 forme d'une chaîne de caractères.
+
 ** Enumérations
 *** Color<<color>>
 *** Direction<<direction>>
