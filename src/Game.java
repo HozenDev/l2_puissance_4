@@ -272,7 +272,7 @@ public class Game {
 	    + this.getPlayerFromId(this.currentPlayerId) + "]"
 	    + Color.ansiColorOf("WHITE"));
     }
-
+    
     private void play() {
 	/**
 	 * Game loop, end when game finish (Tie or Win or Quit)
@@ -305,6 +305,7 @@ public class Game {
 	this.endMessage();
     }
 
+
     private int chooseAColumn() {
 	/**
 	 * Choose a column depending if it's local or ia player
@@ -313,7 +314,10 @@ public class Game {
 	 */
 	if (this.getPlayerFromId(this.numberOfPlayers-1).whatIs() == Entity.IA) {
 	    if (this.currentPlayerId == this.numberOfPlayers-1) {
-		return (new Random()).nextInt(7);		
+	    	char color = (this.getPlayerFromId(1).getColor() == Color.RED ) ? 'r' : 'y';
+	    	System.out.println("L'ordinateur est en train de réfléchir ...");
+			return MinMax.bestColumn(this.grid.copieGrid(), color, 7);
+
 	    }
 	}
 	return this.askForInput();

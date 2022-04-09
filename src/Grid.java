@@ -259,4 +259,30 @@ public class Grid {
 	    }
 	}
     }
+
+
+    public char[][] copieGrid() {
+	char[][] array = new char[this.getHeight()][this.getWidth()];
+	for(int i=0; i < this.getWidth(); ++i) {
+	    Cell cellTemp = this.arrayNextEmptyCell[i];
+	    cellTemp = this.getTopCellAt(i);
+	    int j = 0;
+	    // Parcours jusqu'à la dernière cellule basse de la colonne i
+	    while (cellTemp != Cell.outOfBoundCell) {
+		if (cellTemp.getToken().getColor() == Color.RED) {
+		    array[j][i] = 'r';
+		}
+		else if (cellTemp.getToken().getColor() == Color.YELLOW) {
+		    array[j][i] = 'y';
+		}
+		else if (cellTemp.getToken().getColor() == Color.EMPTY) {
+		    array[j][i] = '0';
+		}
+		++j;
+		cellTemp = cellTemp.getNeighbor(Direction.DOWN);
+	    }
+	}
+	return array;
+}
+
 }
