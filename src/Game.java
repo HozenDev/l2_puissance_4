@@ -128,7 +128,6 @@ public class Game {
 	Token[] tokenArray = new Token[Color.values().length];
 	for (int i=0; i<this.numberOfPlayers; i++) {
 	    tokenArray[i] = this.getPlayerFromId(i).getToken();
-	    System.out.println(tokenArray[i]);
 	}
 	this.grid.loadGrid(saveSplit[0], tokenArray);
     }
