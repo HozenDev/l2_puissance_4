@@ -1,10 +1,15 @@
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.List;
- 
-class MinMax {
-	public static int INF = 100;
 
+/**
+ * MinMax algorithm for Puissance 4
+ * @author Durel Enzo
+ * @author Villepreux Thibault
+ * @version 1.0
+ */
+public class MinMax {
+	public static int INF = 100;
 	
 	/**
 	 * Return a list of integers corresponding to the playable columns

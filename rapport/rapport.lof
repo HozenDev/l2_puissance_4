@@ -1,0 +1,9 @@
+\contentsline {figure}{\numberline {1}{\ignorespaces UML du Puissance 4\relax }}{3}{figure.caption.2}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Graph d'appels de Cell.check()\relax }}{5}{figure.caption.3}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Graph d'appels de Grid.initGrid()\relax }}{6}{figure.caption.4}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Graph d'appels de Grid.getNextEmptyCellAt()\relax }}{7}{figure.caption.5}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Graph d'appels de Grid.UpToNextEmptyCellAt()\relax }}{7}{figure.caption.6}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Graph d'appels de Grid.loadGrid()\relax }}{8}{figure.caption.7}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Graph d'appels de Game.play()\relax }}{9}{figure.caption.8}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Graph d'appels de Game.hasWin()\relax }}{10}{figure.caption.9}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Graph d'appels de Game.isTie()\relax }}{10}{figure.caption.10}%

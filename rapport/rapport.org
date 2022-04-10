@@ -398,6 +398,55 @@
 	directions primaires et les valeurs une direction formant la
 	diagonale. La fonction est prévu pour assurer l'unicité des diagonales.
 
+** MinMax
+
+   La classe regroupe les méthodes permettant de faire fonctionner notre
+   IA. Comme son nom l'indique, nous avons fait un min-max.\\
+
+   Notre minmax n'est pas le plus performant, il s'arrête à une profondeur de 8
+   et il ne gagne pas tout le temps. Effectivement, nous évaluons uniquement
+   lorsqu'il y a une victoire ou une défaite. En cas de victoire le noeud vaut
+   100, de défaite -100 et autres 0.\\
+
+   Il arrive qu'au bout d'une prévision de 8, il n'y ait pas de victoire donc
+   l'algorithme choisie une colonne aléatoirement. Sauf s'il y a la colonne du
+   milieu dans la liste des possibilités. Alors on joue celle-ci car on peut
+   faire plus chose avec. Cette optimisation est par exemple evitée lorsque
+   l'on a une meilleure fonction heuristique (fonction qui évalue la grille).\\
+
+   Mais la plupart du temps, notre IA gagne, surtout quand elle joue en
+   première.\\
+
+*** Méthodes 
+
+**** =bestColumn : (Grid*Color*Depth) -> Column=
+
+    Cette méthode permet de connaître sur quelle colonne jouée. 
+    Elle réalise une liste de coup possible grâce à getValidLoacation.
+    Puis nous calculons l'ensemble des possibilités de jeu d'une profondeur de
+    "Depth". 
+    Pour chaque coup nous regardons sa valeur/note. Et on joue sur la colonne
+    ayant la meilleure note. Si plusieurs colonnes ont le même score alors nous
+    choisissons aléatoirement la colonne.\\
+
+**** =minimax : (Grid*Color*Depth*IA) -> Column=
+
+    Cette méthode permet de réaliser l'arbre des possibilités. Cet arbre qui
+    n'est en réalité pas stockées mais seulement construit récursivement. Le
+    but de cette fonction est d'arrivée à la fin de l'arbre. La fin est
+    atteinte soit grâce à la variable depth ou soit à une victoire d'un des
+    joueurs.\\
+
+    Une fois que l'on a atteint une feuille, nous devons remonter la valeur
+    avec comme contrainte :
+    - si le noeud appartient à l'IA alors il faut récupérer le score maximal,
+    - si le noeud n'appartient pas à l'IA alors il faut le score minimal.\\
+
+    Cet algorithme s'appuie sur l'hypothèse que le  joueur adverse va à chaque
+    fois jouer le meilleur coup pour lui, donc le pire pour l'IA. Mais en
+    réalité, il peut y avoir des meilleurs coups théoriques pour l'IA que l'on
+    ne joue pas.\\
+
 * Documentation<<doc>>
 
   La documentation est entièrement disponible dans le dossier *doc/*. La
@@ -414,7 +463,7 @@
 
 * Git<<git>>
 
-  Le projet est disponible et hébergé sur le [[https://gitlab.isima.fr][GitLab de l'ISIMA]]
+  Le projet est disponible et hébergé sur le [[https://gitlab.isima.fr/endurel/projet-java][GitLab de l'ISIMA]]
 
   #+LATEX: \newpage
   #+LATEX: \listoffigures

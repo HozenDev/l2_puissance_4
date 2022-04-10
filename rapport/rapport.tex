@@ -1,4 +1,4 @@
-% Created 2022-04-09 sam. 15:57
+% Created 2022-04-10 dim. 10:05
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -92,15 +92,15 @@ numbersep=5pt,
 \newpage
 
 \section{Introduction}
-\label{sec:org0d4356b}
+\label{sec:org143b73b}
 
 \subsection{Compilation}
-\label{sec:org0208f85}
+\label{sec:org4faf27e}
 
 Lancez le Makefile avec la commande \texttt{make} dans le dossier \texttt{cd projet-java}.
 
 \subsection{Exécution}
-\label{sec:org230b547}
+\label{sec:org243681d}
 
 Exécuter le script bash \textbf{exec} qui lance le programme \textbf{Main} dans le dossier
 \textbf{projet-java/build}.
@@ -109,7 +109,7 @@ Si une erreur survient lors du programme, elle est écrite dans le fichier
 \textbf{log.txt}. 
 
 \subsection{Puissance 4}
-\label{sec:org77dc623}
+\label{sec:org81c36db}
 
 Le principe est simple : insérer un pion chacun son tour dans la grille
 verticale. Le gagnant est le premier à avoir aligné 4 pions de la même
@@ -119,7 +119,7 @@ partie réside dans la stratégie adoptée pour mettre l'adversaire en échec.
 \newpage
 
 \section{UML du Puissance 4}
-\label{sec:orgd9aa359}
+\label{sec:orgd0021d4}
 
 \begin{figure}[htbp]
 \centering
@@ -128,26 +128,26 @@ partie réside dans la stratégie adoptée pour mettre l'adversaire en échec.
 \end{figure}
 
 \section{Explication de code}
-\label{sec:org4440d4f}
+\label{sec:orge7fd821}
 \subsection{Introduction}
-\label{sec:org61115cd}
+\label{sec:org86bc8a7}
 
 La documentation étant entièrement disponible, nous allons nous attarder
 uniquement sur les principales classes de notre logiciel ainsi que leur
 fonctionnement global.\\
 
 Pour cela nous nous appuirons sur le diagramme de la classe ainsi que
-certaines fonctions jugées principales qui sont expliquées avec leurs \hyperref[org29fdec9]{graphes
+certaines fonctions jugées principales qui sont expliquées avec leurs \hyperref[orgd9ec182]{graphes
 respectifs}. 
 
-\subsection{Classe Cell\label{org0ebae20}}
-\label{sec:org05b22ae}
+\subsection{Classe Cell\label{orgd7e507a}}
+\label{sec:org5cbb84e}
 
 Nous allons maintenant présenter la classe qui représente une \textbf{case} du
 plateau de jeu du puissance 4. Il s'agit de \texttt{public class Cell}.
 
 \subsubsection{Attributs}
-\label{sec:orgd8dea29}
+\label{sec:org9bd60b8}
 
 Nous avons redéfini la cellule \texttt{null}, celle-ci s'appelle outOfBoundCell et
 est renvoyé lorsque qu'on accès à une cellule qui n'existe pas. Nous avons
@@ -156,39 +156,39 @@ null qui se promène dans notre code. Cet attribut est statique donc
 toujours de même référence.\\
 
 Chaque cellule possède un jeton (Token) qui est ici juste un objet
-possédant une certaine couleur (\hyperref[orgc449396]{Color}).\\
+possédant une certaine couleur (\hyperref[orgab5322d]{Color}).\\
 
 Chaque cellule possède aussi 4 voisins directes (\textbf{UP}, \textbf{DOWN}, \textbf{RIGHT},
 \textbf{LEFT}) représenté ici par une EnumMap où les clés sont une direction
-(\hyperref[org149a95e]{Direction}) donnée et les valeurs la référence à sa cellule voisine dans la
+(\hyperref[org64cb1eb]{Direction}) donnée et les valeurs la référence à sa cellule voisine dans la
 direction.\\
 
 \subsubsection{Méthodes}
-\label{sec:org969792b}
+\label{sec:orgce04630}
 
 \begin{enumerate}
-\item \texttt{setNeighbor: Cell*Direction -> ()} \label{org11ccfe8}
-\label{sec:orge3e5f26}
+\item \texttt{setNeighbor: Cell*Direction -> ()} \label{org7bc7794}
+\label{sec:orgb72a217}
 
-Cette méthode prend en paramètre une cellule (\hyperref[org0ebae20]{Cell}) et une direction
-(\hyperref[org149a95e]{Direction}) où la cellule représente la cellule voisine a attribue dans la
+Cette méthode prend en paramètre une cellule (\hyperref[orgd7e507a]{Cell}) et une direction
+(\hyperref[org64cb1eb]{Direction}) où la cellule représente la cellule voisine a attribue dans la
 direction par rapport à la cellule dont la méthode est appelée.\\
 
 Elle actualise l'EnumMap représentant les voisins d'une cellule dont la
 clé est la direction donnée. La cellule doit être non \texttt{null}, la direction
 doit être non \texttt{null}.\\
 
-\item \texttt{getNeighbor: Direction -> Cell} \label{org7edf579}
-\label{sec:org781b4c6}
+\item \texttt{getNeighbor: Direction -> Cell} \label{org9d996f1}
+\label{sec:org9a227b2}
 
-Cette méthode prend en paramètre une direction (\hyperref[org149a95e]{Direction}) et renvoie la
+Cette méthode prend en paramètre une direction (\hyperref[org64cb1eb]{Direction}) et renvoie la
 cellule voisine dans la direction de la cellule qui appelle la méthode.\\
 
 Dans le cas où la cellule voisine est null, la cellule invalide
 outOfBoundCell est renvoyée. La direction doit être non nulle.\\
 
 \item \texttt{check: () -> boolean}
-\label{sec:orgbe5d63b}
+\label{sec:org92e826b}
 
 La fonction check vérifie si la cellule qui appelle la méthode satisfait
 les conditions d'arrêt du jeu: ici si 4 jeton (Token) de suite, sont de la
@@ -208,7 +208,7 @@ La deuxième prend en paramètre deux directions qui définiront le comptage
 en diagonale. En effet, une diagonale n'est juste composé de 2 directions
 primitives.\\
 
-Les diagonales sont récupérées dans l'Enum (\hyperref[org149a95e]{Direction}) par la méthode
+Les diagonales sont récupérées dans l'Enum (\hyperref[org64cb1eb]{Direction}) par la méthode
 \texttt{getDiagonales} et sont renvoyé sous la forme d'une EnumMap où les clés
 sont les directions primitives et les valeurs une direction associée
 formant une diagonales. Les diagonales renvoyées sont uniques.\\
@@ -216,7 +216,7 @@ formant une diagonales. Les diagonales renvoyées sont uniques.\\
 Le nombre de voisin est définit par la somme des même cellules à partir de
 la cellule courante dans la direction donnée et dans sa direction opposé
 qui est récupéré grâce à la fonction \texttt{getOpposite} dans l'Enum
-(\hyperref[org149a95e]{Direction}).\\
+(\hyperref[org64cb1eb]{Direction}).\\
 
 \begin{figure}[htbp]
 \centering
@@ -226,7 +226,7 @@ qui est récupéré grâce à la fonction \texttt{getOpposite} dans l'Enum
 
 \begin{enumerate}
 \item \texttt{numberOfSameNeighbor: Direction -> int}
-\label{sec:org0e3b6b6}
+\label{sec:org96ed378}
 
 Cette méthode prend en paramètre une direction et compte dans cette
 direction et à partir de la cellule le nombre de jetons similaires.\\
@@ -238,7 +238,7 @@ renvoie 1 + appel de cette méthode sur la cellule suivant dans la
 direction donnée.\\
 
 \item \texttt{numberOfSameNeighbor: Direction*Direction -> int}
-\label{sec:orge2dd661}
+\label{sec:org5e15b10}
 
 Cette méthode est similaire à la précédente, la prochaine cellule est la
 cellule suivant les deux directions données. La condition d'arrêt est la
@@ -246,16 +246,16 @@ même, l'appel récursif est le même.\\
 \end{enumerate}
 \end{enumerate}
 
-\subsection{Classe Grid\label{org8ee15bf}}
-\label{sec:org5ca9b44}
+\subsection{Classe Grid\label{orgabd99a1}}
+\label{sec:org386fa81}
 
 Nous allons maintenant présenter la classe qui représente \textbf{le plateau de
 jeu} du puissance 4. Il s'agit de \texttt{public class Grid}.\\
 
 \subsubsection{Attributs}
-\label{sec:org18fdbf3}
+\label{sec:orgdcd0781}
 
-La classe \hyperref[org8ee15bf]{Grid} est composé d'un tableau de cellules (\hyperref[org0ebae20]{Cell}) contenant les
+La classe \hyperref[orgabd99a1]{Grid} est composé d'un tableau de cellules (\hyperref[orgd7e507a]{Cell}) contenant les
 prochaines cellules vides de chaque colonnes. Lorsque la colonne est
 pleine, la prochaine cellule vide est la cellule située la plus haute dans
 la grille.\\
@@ -268,19 +268,19 @@ La classe comporte également deux attributs static représentant
 respectivement la largeur \textbf{WIDTH} et la hauteur \textbf{HEIGHT}.\\
 
 \subsubsection{Méthodes}
-\label{sec:orgfe5522e}
+\label{sec:org910dbfa}
 
 Nous allons vous présenter maintenant quelques fonctions principales de
 cette classe.\\
 
 \begin{enumerate}
 \item \texttt{initGrid: () -> ()}
-\label{sec:orgcb28ef3}
+\label{sec:orgfec906a}
 
 Voici la fonction d'initialisation de la grille. Elle crée un tableau 2D
-de cellules (\hyperref[org0ebae20]{Cell}), elle assigne à chaque cellule leurs voisins respectifs
-(\textbf{UP}, \textbf{DOWN}, \textbf{RIGHT}, \textbf{LEFT}) grâce à la fonction \hyperref[org11ccfe8]{setNeighbor: Cell *
-Direciton ->()} de (\hyperref[org0ebae20]{Cell}).\\
+de cellules (\hyperref[orgd7e507a]{Cell}), elle assigne à chaque cellule leurs voisins respectifs
+(\textbf{UP}, \textbf{DOWN}, \textbf{RIGHT}, \textbf{LEFT}) grâce à la fonction \hyperref[org7bc7794]{setNeighbor: Cell *
+Direciton ->()} de (\hyperref[orgd7e507a]{Cell}).\\
 
 Nous remplissons ensuite le tableau des prochaines cellules vides définis
 précédement en prenant comme première cellule la cellule situé la plus en
@@ -293,7 +293,7 @@ bas de chaque colonnes (car grille initialisé à vide).\\
 \end{figure}
 
 \item \texttt{getNextEmptyCellAt: int -> Cell}
-\label{sec:org346831b}
+\label{sec:org3bfdb70}
 Cette méthode permet de nous renvoyer la prochaine cellule à remplir pour
 une colonne donnée en paramêtre.\\
 
@@ -312,7 +312,7 @@ IllegalArgumentException : "column outOfBound".\\
 \end{figure}
 
 \item \texttt{UpToNextEmptyCellAt: int -> ()}
-\label{sec:org9eb5b4a}
+\label{sec:orgd9e0159}
 Cette méthode permet de mettre à jour notre tableau de cellule
 "arrayNextEmptyCell" avec comme indice le numéro de la colonne passé en
 paramètre.\\
@@ -332,7 +332,7 @@ Cette méthode fonctionne avec effet de bord.\\
 \end{figure}
 
 \item \texttt{loadGrid: String*Token[] -> ()}
-\label{sec:orgcee8de1}
+\label{sec:org143ce35}
 Cette méthode comme son nom l'indique, permet de charger la grille
 précédemment lue dans un fichier.
 Grâce à la lecture du fichier, nous obtenons un String et notre objectif
@@ -355,10 +355,10 @@ la grille.\\
 \end{figure}
 \end{enumerate}
 
-\subsection{Classe Player\label{orgfd9bf3b}}
-\label{sec:org19348e7}
+\subsection{Classe Player\label{orgf11fd79}}
+\label{sec:orgd083969}
 \subsubsection{Attributs}
-\label{sec:org436f875}
+\label{sec:orgfcc1a7f}
 
 La classe comporte trois attributs :
 \begin{itemize}
@@ -371,18 +371,18 @@ Remarquons qu'un joueur est défini par son jeton et non pas par sa
 couleur.
 
 \subsubsection{Méthodes}
-\label{sec:orgc27357d}
+\label{sec:org4cbf9ba}
 \begin{enumerate}
 \item \texttt{initToken: int -> Token}
-\label{sec:orgec1318b}
+\label{sec:orgc9de324}
 
 Cette méthode initialise la couleur du jeton par rapport à un entier
 donné, les entiers données sont les index du joueur dans la tableau de
 joueur du jeu dans la classe Game.
 \end{enumerate}
 
-\subsection{Classe Game\label{orge17144a}}
-\label{sec:orgc54e891}
+\subsection{Classe Game\label{org382d869}}
+\label{sec:org6fc0279}
 
 La classe représente le fonctionnement du jeu du Puissance 4, globalement
 elle regroupe 4 types de méthodes:
@@ -394,7 +394,7 @@ elle regroupe 4 types de méthodes:
 \end{itemize}
 
 \subsubsection{Attributs}
-\label{sec:org7f1a209}
+\label{sec:orgaa86ce2}
 
 La classe comporte 2 attributs final static :
 \begin{itemize}
@@ -405,7 +405,7 @@ La classe comporte 2 attributs final static :
 Les attributs de gameplay :
 \begin{itemize}
 \item Un tableau de joueur. (Un tableau car nombre fixe de joueur).
-\item La grille/plateau (\hyperref[org8ee15bf]{Grid}) de jeu.
+\item La grille/plateau (\hyperref[orgabd99a1]{Grid}) de jeu.
 \end{itemize}
 
 Les attributs d'état du jeu:
@@ -418,10 +418,10 @@ Les attributs d'état du jeu:
 \end{itemize}
 
 \subsubsection{Méthodes}
-\label{sec:org4ae7614}
+\label{sec:org09de66e}
 \begin{enumerate}
 \item \texttt{loadSave: String -> ()}
-\label{sec:org8b9549e}
+\label{sec:org00ca3c4}
 
 Cette méthode prend en paramètre une String qui est la représentation
 du contenu du fichier de sauvegarde.
@@ -429,7 +429,7 @@ du contenu du fichier de sauvegarde.
 Il s'agit seulement d'une sérialisation de contenu.\\
 
 \item \texttt{play: () -> ()}
-\label{sec:org6db1808}
+\label{sec:orgac8879a}
 
 Cette méthode est la boucle principale du jeu. Elle s'arrête quand le
 jeu s'arrête : \texttt{this.end = true}.
@@ -445,7 +445,7 @@ qu'il ne quitte pas le jeu entre-temps.
 \end{itemize}
 
 \item \texttt{playAToken: Token*int -> boolean}
-\label{sec:org1d9887b}
+\label{sec:org2e1dd3b}
 
 Cette méthode est la méthode qui permet d'ajouter le pion dans une
 grille si le coup du joueur est valide.
@@ -464,23 +464,23 @@ dernière colonne jouée.\\
 \end{figure}
 
 \item \texttt{isEnd: () -> ()}
-\label{sec:orge0e3cb8}
+\label{sec:org8a56404}
 
 Cette méthode teste si le jeu est terminée (victoire ou égalité), elle
 actualise par effet de bord l'attribut: \texttt{this.end}.
 
 \begin{enumerate}
 \item \texttt{hasWin(): () -> boolean}
-\label{sec:orgd926a0b}
+\label{sec:orgd5f386e}
 
 Cette méthode teste si il y a un gagnant.
 
-Pour cela elle appelle la méthode \texttt{check()} de la classe \hyperref[org0ebae20]{Cell} sur la
+Pour cela elle appelle la méthode \texttt{check()} de la classe \hyperref[orgd7e507a]{Cell} sur la
 dernière cellule modifiée: càd la dernière cellules correspondant à
 la dernière colonne jouée.\\
 
 \item \texttt{isTie: () -> boolean}
-\label{sec:org6216414}
+\label{sec:orgdb08a85}
 
 Cette méthode teste l'égalité du jeu: elle retourne la comparaison
 entre le nombre itération du jeu et le nombre de case disponible dans
@@ -500,41 +500,41 @@ la grille.
 \end{enumerate}
 \end{enumerate}
 
-\subsection{Classe Save\label{orgc3d7ebb}}
-\label{sec:org39e23c7}
+\subsection{Classe Save\label{orgc4702f3}}
+\label{sec:org6833d3d}
 
 Cette classe a été écrite pour être indépendant du jeu puissance 4, cette
 classe comporte juste deux méthode, lire et écrire dans un fichier. 
 
 \subsubsection{Attribut}
-\label{sec:org5736d1b}
+\label{sec:org9b30e19}
 
 Cette classe comporte un seul attribut représentant le fichier par son
 chemin d'accès représenté par une String.
 
 \subsubsection{Méthodes}
-\label{sec:org8f411e6}
+\label{sec:org9801b69}
 \begin{enumerate}
 \item \texttt{write: Object -> ()}
-\label{sec:org23fbb1b}
+\label{sec:orga30ebaf}
 
 Cette méthode écrit dans le fichier l'appelle à la méthode toString()
 de l'objet en paramètre.\\
 
 \item \texttt{read: () -> String}
-\label{sec:org06084db}
+\label{sec:org0ce3cb5}
 
 Cette méthode lit dans le fichier et renvoie sa représentation sous la
 forme d'une chaîne de caractères.
 \end{enumerate}
 
 \subsection{Enumérations}
-\label{sec:org2320895}
+\label{sec:org4885820}
 
 Nous avons implémenté 3 énumérations dans notre logiciel.
 
-\subsubsection{Entity\label{org0316ddb}}
-\label{sec:orgb31bd54}
+\subsubsection{Entity\label{org8f1a2fb}}
+\label{sec:orgd66c23c}
 
 Cette énumération possède 2 attributs: \textbf{LOCAL}, \textbf{IA}. Elle définit la
 nature du joueur: si c'est un joueur humain (\textbf{LOCAL}) ou un ordinateur
@@ -543,8 +543,8 @@ nature du joueur: si c'est un joueur humain (\textbf{LOCAL}) ou un ordinateur
 Elle possède une fonction qui retourne l'Entity correspondant à une
 chaîne de caractères passées en paramètre: \texttt{of: String -> Entity}.
 
-\subsubsection{Color\label{orgc449396}}
-\label{sec:orga264443}
+\subsubsection{Color\label{orgab5322d}}
+\label{sec:org407b627}
 
 Cette enumération possède 3 attributs : RED, YELLOW, EMPTY
 EMPTY désigne la couleur vide pour les cellules initialisées.
@@ -560,8 +560,8 @@ chaine de caractères passée en paramètre.
 chaine de caractère donnée en paramètre.
 \end{itemize}
 
-\subsubsection{Direction\label{org149a95e}}
-\label{sec:orgd2ff209}
+\subsubsection{Direction\label{org64cb1eb}}
+\label{sec:org11af599}
 
 Cette énumération possède 4 attributs qui sont les directions des
 cellules voisines à une cellule: \textbf{UP}, \textbf{DOWN}, \textbf{RIGHT}, \textbf{LEFT}.
@@ -575,8 +575,65 @@ EnumMap:
 directions primaires et les valeurs une direction formant la
 diagonale. La fonction est prévu pour assurer l'unicité des diagonales.
 
-\section{Documentation\label{org29fdec9}}
-\label{sec:org900457b}
+\subsection{MinMax}
+\label{sec:orge350c6b}
+
+La classe regroupe les méthodes permettant de faire fonctionner notre
+IA. Comme son nom l'indique, nous avons fait un min-max.\\
+
+Notre minmax n'est pas le plus performant, il s'arrête à une profondeur de 8
+et il ne gagne pas tout le temps. Effectivement, nous évaluons uniquement
+lorsqu'il y a une victoire ou une défaite. En cas de victoire le noeud vaut
+100, de défaite -100 et autres 0.\\
+
+Il arrive qu'au bout d'une prévision de 8, il n'y ait pas de victoire donc
+l'algorithme choisie une colonne aléatoirement. Sauf s'il y a la colonne du
+milieu dans la liste des possibilités. Alors on joue celle-ci car on peut
+faire plus chose avec. Cette optimisation est par exemple evitée lorsque
+l'on a une meilleure fonction heuristique (fonction qui évalue la grille).\\
+
+Mais la plupart du temps, notre IA gagne, surtout quand elle joue en
+première.\\
+
+\subsubsection{Méthodes}
+\label{sec:orgcb16ecc}
+
+\begin{enumerate}
+\item \texttt{bestColumn : (Grid*Color*Depth) -> Column}
+\label{sec:org0291f70}
+
+Cette méthode permet de connaître sur quelle colonne jouée. 
+Elle réalise une liste de coup possible grâce à getValidLoacation.
+Puis nous calculons l'ensemble des possibilités de jeu d'une profondeur de
+"Depth". 
+Pour chaque coup nous regardons sa valeur/note. Et on joue sur la colonne
+ayant la meilleure note. Si plusieurs colonnes ont le même score alors nous
+choisissons aléatoirement la colonne.\\
+
+\item \texttt{minimax : (Grid*Color*Depth*IA) -> Column}
+\label{sec:orgbfc61b5}
+
+Cette méthode permet de réaliser l'arbre des possibilités. Cet arbre qui
+n'est en réalité pas stockées mais seulement construit récursivement. Le
+but de cette fonction est d'arrivée à la fin de l'arbre. La fin est
+atteinte soit grâce à la variable depth ou soit à une victoire d'un des
+joueurs.\\
+
+Une fois que l'on a atteint une feuille, nous devons remonter la valeur
+avec comme contrainte :
+\begin{itemize}
+\item si le noeud appartient à l'IA alors il faut récupérer le score maximal,
+\item si le noeud n'appartient pas à l'IA alors il faut le score minimal.\\
+\end{itemize}
+
+Cet algorithme s'appuie sur l'hypothèse que le  joueur adverse va à chaque
+fois jouer le meilleur coup pour lui, donc le pire pour l'IA. Mais en
+réalité, il peut y avoir des meilleurs coups théoriques pour l'IA que l'on
+ne joue pas.\\
+\end{enumerate}
+
+\section{Documentation\label{orgd9ec182}}
+\label{sec:orgc34c963}
 
 La documentation est entièrement disponible dans le dossier \textbf{doc/}. La
 documentation a été générer grâce à l'outil DOxyGen (1.9.3). Elle contient le
@@ -590,10 +647,10 @@ Le fichier \textbf{HTML} est disponible \href{/home/hozen/cur/projet-java/doc/ht
 Le fichier \textbf{PDF} compilé à partir du \textbf{\LaTeX{}} est disponible
 \href{/home/hozen/cur/projet-java/doc/latex/refman.pdf}{../doc/latex/refman.pdf}.
 
-\section{Git\label{orgacd542c}}
-\label{sec:orgce425cf}
+\section{Git\label{org1c20dca}}
+\label{sec:orgad5cd5c}
 
-Le projet est disponible et hébergé sur le \href{https://gitlab.isima.fr}{GitLab de l'ISIMA}
+Le projet est disponible et hébergé sur le \href{https://gitlab.isima.fr/endurel/projet-java}{GitLab de l'ISIMA}
 
 \newpage
 \listoffigures
